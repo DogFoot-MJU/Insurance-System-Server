@@ -25,6 +25,8 @@ public class Contract {
     @OneToOne
     private Insurance insurance;
 
+    private Long calculatedPayment;
+
     @OneToMany(mappedBy = "contract")
     private List<Accident> accidentList;
 
