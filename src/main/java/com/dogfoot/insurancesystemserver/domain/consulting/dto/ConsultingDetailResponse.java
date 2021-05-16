@@ -4,7 +4,10 @@ import com.dogfoot.insurancesystemserver.domain.consulting.domain.Consulting;
 import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingStateType;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
@@ -12,22 +15,22 @@ import java.time.LocalDateTime;
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class ConsultingResponse {
+public class ConsultingDetailResponse {
 
     private final Long id;
     private final String title;
+    private final String contents;
     private final String writer;
     private final ConsultingStateType state;
-    private final Long answerId;
     private final LocalDateTime CreationDate;
 
-    public static ConsultingResponse from(Consulting consulting) {
-        return ConsultingResponse.builder()
+    public static ConsultingDetailResponse from(Consulting consulting) {
+        return ConsultingDetailResponse.builder()
                 .id(consulting.getId())
                 .title(consulting.getTitle())
+                .contents(consulting.getContents())
                 .writer(consulting.getUser().getName())
                 .state(consulting.getState())
-                .answerId(consulting.getConsultingAnswer() == null ? -1L : consulting.getConsultingAnswer().getId())
                 .CreationDate(consulting.getCreatedDate().toLocalDateTime())
                 .build();
     }

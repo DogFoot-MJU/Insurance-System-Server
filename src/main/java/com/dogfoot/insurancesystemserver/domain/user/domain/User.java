@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.user.domain;
 
 import com.dogfoot.insurancesystemserver.domain.consulting.domain.Consulting;
+import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingAnswer;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -49,6 +50,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Consulting> consultingList;
 
+    @OneToMany(mappedBy = "user")
+    private List<ConsultingAnswer> consultingAnswerList;
+
     @CreationTimestamp
     private Timestamp createdDate;
 
@@ -68,6 +72,7 @@ public class User {
         this.state = state;
         this.contractList = new ArrayList<>();
         this.consultingList = new ArrayList<>();
+        this.consultingAnswerList = new ArrayList<>();
     }
 
     public void emailVerificationCompleted() {

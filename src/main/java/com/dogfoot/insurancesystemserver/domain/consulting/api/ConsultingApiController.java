@@ -2,7 +2,8 @@ package com.dogfoot.insurancesystemserver.domain.consulting.api;
 
 import com.dogfoot.insurancesystemserver.domain.consulting.constant.ConsultingResponseMessage;
 import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingStateType;
-import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingCreateRequest;
+import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingDetailResponse;
+import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingSaveRequest;
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingResponse;
 import com.dogfoot.insurancesystemserver.domain.consulting.service.ConsultingService;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
@@ -28,10 +29,16 @@ public class ConsultingApiController {
 
     @PostMapping("user/consulting")
     public ResponseEntity<DefaultResponseDto> save(@AuthenticationPrincipal PrincipalDetails principal,
-                                                   @Valid @RequestBody ConsultingCreateRequest dto) {
+                                                   @Valid @RequestBody ConsultingSaveRequest dto) {
         this.consultingService.create(principal, dto);
         return ResponseEntity.ok(DefaultResponseDto.from(
                 ConsultingResponseMessage.CONSULTING_SAVE_SUCCESS_MESSAGE.getMessage()));
+    }
+
+    @GetMapping("user/consulting/{id}")
+    public ResponseEntity<ConsultingDetailResponse> read(@AuthenticationPrincipal PrincipalDetails principal,
+                                                         @PathVariable Long id) {
+        return ResponseEntity.ok(this.consultingService.read(principal, id));
     }
 
     @GetMapping("user/consulting/list")

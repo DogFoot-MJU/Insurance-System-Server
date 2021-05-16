@@ -2,13 +2,19 @@ package com.dogfoot.insurancesystemserver.domain.consulting.dto;
 
 import com.dogfoot.insurancesystemserver.domain.consulting.domain.Consulting;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 
+
 @Getter
-public class ConsultingCreateRequest {
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class ConsultingSaveRequest {
 
     @Length(max = 65, message = "제목은 최대 65자까지 작성 가능합니다.")
     @NotBlank(message = "제목을 입력해주세요.")

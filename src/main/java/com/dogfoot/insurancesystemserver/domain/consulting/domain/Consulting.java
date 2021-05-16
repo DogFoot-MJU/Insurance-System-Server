@@ -29,6 +29,7 @@ public class Consulting {
     @ManyToOne
     private User user;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ConsultingStateType state;
 
