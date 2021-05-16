@@ -1,5 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.consulting.api;
 
+import com.dogfoot.insurancesystemserver.domain.consulting.constant.ConsultingResponseMessage;
+import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingStateType;
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingResponse;
 import com.dogfoot.insurancesystemserver.domain.consulting.service.ConsultingService;
@@ -27,14 +29,23 @@ public class ConsultingApiController {
     @PostMapping("user/consulting")
     public ResponseEntity<DefaultResponseDto> save(@AuthenticationPrincipal PrincipalDetails principal,
                                                    @Valid @RequestBody ConsultingCreateRequest dto) {
-        return this.consultingService.create(principal, dto);
+        this.consultingService.create(principal, dto);
+        return ResponseEntity.ok(DefaultResponseDto.from(
+                ConsultingResponseMessage.CONSULTING_SAVE_SUCCESS_MESSAGE.getMessage()));
     }
 
     @GetMapping("user/consulting/list")
     public ResponseEntity<Pagination<List<ConsultingResponse>>> readAllForUser(
             @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable,
             @AuthenticationPrincipal PrincipalDetails principal) {
-        return this.consultingService.readAllForUser(pageable, principal);
+        return ResponseEntity.ok(this.consultingService.readAllForUser(pageable, principal));
+    }
+
+    @GetMapping("seller/consulting/list")
+    public ResponseEntity<Pagination<List<ConsultingResponse>>> readAllForUw(
+            @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam(defaultValue = "WAIT") ConsultingStateType state) {
+        return ResponseEntity.ok(this.consultingService.readAllForUw(pageable, state));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.consulting.dto;
 
 import com.dogfoot.insurancesystemserver.domain.consulting.domain.Consulting;
+import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingStateType;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
@@ -15,12 +16,14 @@ public class ConsultingResponse {
 
     private final String title;
     private final String writer;
+    private final ConsultingStateType state;
     private final LocalDateTime CreationDate;
 
     public static ConsultingResponse from(Consulting consulting) {
         return ConsultingResponse.builder()
                 .title(consulting.getTitle())
                 .writer(consulting.getUser().getName())
+                .state(consulting.getState())
                 .CreationDate(consulting.getCreatedDate().toLocalDateTime())
                 .build();
     }
