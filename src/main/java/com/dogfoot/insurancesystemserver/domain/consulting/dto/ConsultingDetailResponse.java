@@ -1,0 +1,38 @@
+package com.dogfoot.insurancesystemserver.domain.consulting.dto;
+
+import com.dogfoot.insurancesystemserver.domain.consulting.domain.Consulting;
+import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingStateType;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
+import java.time.LocalDateTime;
+
+@Getter
+@Builder(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class ConsultingDetailResponse {
+
+    private final Long id;
+    private final String title;
+    private final String contents;
+    private final String writer;
+    private final ConsultingStateType state;
+    private final LocalDateTime CreationDate;
+
+    public static ConsultingDetailResponse from(Consulting consulting) {
+        return ConsultingDetailResponse.builder()
+                .id(consulting.getId())
+                .title(consulting.getTitle())
+                .contents(consulting.getContents())
+                .writer(consulting.getUser().getName())
+                .state(consulting.getState())
+                .CreationDate(consulting.getCreatedDate().toLocalDateTime())
+                .build();
+    }
+
+}

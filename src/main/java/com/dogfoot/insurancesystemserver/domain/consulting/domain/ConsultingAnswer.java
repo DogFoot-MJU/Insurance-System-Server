@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Consulting {
+public class ConsultingAnswer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,15 +26,11 @@ public class Consulting {
     @Column(nullable = false)
     private String contents;
 
+    @OneToOne(mappedBy = "consultingAnswer", fetch = FetchType.LAZY)
+    private Consulting consulting;
+
     @ManyToOne
     private User user;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ConsultingStateType state;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private ConsultingAnswer consultingAnswer;
 
     @CreationTimestamp
     private Timestamp createdDate;
@@ -43,16 +39,11 @@ public class Consulting {
     private Timestamp updatedDate;
 
     @Builder
-    public Consulting(String title, String contents, User user) {
+    public ConsultingAnswer(String title, String contents, Consulting consulting, User user) {
         this.title = title;
         this.contents = contents;
+        this.consulting = consulting;
         this.user = user;
-        this.state = ConsultingStateType.WAIT;
-    }
-
-    public void answer(ConsultingAnswer consultingAnswer) {
-        this.state = ConsultingStateType.COMPLETE;
-        this.consultingAnswer = consultingAnswer;
     }
 
 }
