@@ -3,10 +3,15 @@ package com.dogfoot.insurancesystemserver.domain.consulting.domain;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Consulting {
@@ -29,6 +34,12 @@ public class Consulting {
 
     @OneToOne(fetch = FetchType.LAZY)
     private ConsultingAnswer consultingAnswer;
+
+    @CreationTimestamp
+    private Timestamp createdDate;
+
+    @UpdateTimestamp
+    private Timestamp updatedDate;
 
     @Builder
     public Consulting(String title, String contents, User user) {
