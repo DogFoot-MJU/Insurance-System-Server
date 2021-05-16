@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.user.domain;
 
+import com.dogfoot.insurancesystemserver.domain.consulting.domain.Consulting;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class User {
@@ -21,37 +23,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Getter
     private String name;
 
-    @Getter
     @Column(nullable = false)
     private String password;
 
-    @Getter
     private String phoneNumber;
 
-    @Getter
     private String address;
 
-    @Getter
     private String residentRegistrationNumber;
 
-    @Getter
     @Enumerated(EnumType.STRING)
     private UserRoleType role;
 
-    @Getter
     @Enumerated(EnumType.STRING)
     private UserStateType state;
 
-    @Getter
     @OneToMany(mappedBy = "user")
-    private List<Contract> contracts;
+    private List<Contract> contractList;
+
+    @OneToMany(mappedBy = "user")
+    private List<Consulting> consultingList;
 
     @CreationTimestamp
     private Timestamp createdDate;
@@ -70,7 +66,8 @@ public class User {
         this.residentRegistrationNumber = residentRegistrationNumber;
         this.role = role;
         this.state = state;
-        contracts = new ArrayList<>();
+        this.contractList = new ArrayList<>();
+        this.consultingList = new ArrayList<>();
     }
 
     public void emailVerificationCompleted() {

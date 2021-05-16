@@ -55,4 +55,8 @@ public class PrincipalDetails implements UserDetails {
         return user.getState().equals(UserStateType.NORMAL);
     }
 
+    public User toEntity() {
+        return this.user;
+    }
+
 }
