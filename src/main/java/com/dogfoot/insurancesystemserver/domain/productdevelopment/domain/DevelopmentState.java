@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum DevelopmentState {
 
-    PLAN("기획"), DESIGN("설계"), APPROVE("승인");
+    PLAN("기획"), DESIGN("설계"), AUTHORIZE("인가"), APPROVE("승인");
 
     private final String name;
 

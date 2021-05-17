@@ -4,8 +4,11 @@ package com.dogfoot.insurancesystemserver.domain.productdevelopment.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,15 +21,28 @@ public abstract class ProductDevelopment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false)
     private Long payment;
 
+    @Column(nullable = false)
     private DevelopmentState state;
+
+    @CreationTimestamp
+    private Timestamp createdDate;
+
+    @UpdateTimestamp
+    private Timestamp updatedDate;
 
     public ProductDevelopment(String name, Long payment) {
         this.name = name;
         this.payment = payment;
+    }
+
+    protected void changeState(DevelopmentState state) {
+        this.state = state;
     }
 
 }
