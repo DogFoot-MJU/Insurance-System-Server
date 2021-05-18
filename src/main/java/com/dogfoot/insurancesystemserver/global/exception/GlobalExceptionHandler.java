@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -15,7 +16,7 @@ import java.util.NoSuchElementException;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Map<String, String>>> handleValidationExceptions(MethodArgumentNotValidException e){
+    public ResponseEntity<Map<String, Map<String, String>>> handleValidationExceptions(MethodArgumentNotValidException e) {
         Map<String, String> errors = new HashMap<>();
         e.getBindingResult().getAllErrors()
                 .forEach(c -> errors.put(((FieldError) c).getField(), c.getDefaultMessage()));
@@ -24,7 +25,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(responseError);
     }
 
-    @ExceptionHandler({IllegalArgumentException.class, UsernameNotFoundException.class, NoSuchElementException.class})
+    @ExceptionHandler({IllegalArgumentException.class, UsernameNotFoundException.class, NoSuchElementException.class,
+            SQLIntegrityConstraintViolationException.class})
     public ResponseEntity<Map<String, String>> handleEmailDuplicateException(Exception e) {
         Map<String, String> error = new HashMap<>();
         error.put("error-message", e.getMessage());

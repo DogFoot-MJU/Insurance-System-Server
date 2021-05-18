@@ -13,10 +13,11 @@ import java.time.LocalDateTime;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DefaultResponseDto {
 
-    private LocalDateTime responseTime = LocalDateTime.now();
+    private LocalDateTime responseTime;
     private String message;
 
     private DefaultResponseDto(String message) {
+        this.responseTime = LocalDateTime.now();
         this.message = message;
     }
 
