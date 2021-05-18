@@ -51,5 +51,4 @@ public class CarProductDevelopmentApiController {
         return ResponseEntity.ok(carProductDevelopmentService.read(id));
     }
 
-
 }

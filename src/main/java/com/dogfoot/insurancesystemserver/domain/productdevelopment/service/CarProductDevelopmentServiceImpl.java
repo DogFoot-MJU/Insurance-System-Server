@@ -21,13 +21,13 @@ import java.util.stream.Collectors;
 @Service
 public class CarProductDevelopmentServiceImpl implements CarProductDevelopmentService {
 
-    protected final CarProductDevelopmentRepository carProductDevelopmentRepository;
+    private final CarProductDevelopmentRepository carProductDevelopmentRepository;
 
     @Override
     public ProductPlanDevelopmentResponse plan(ProductPlanCreateRequest dto) throws DuplicateInsuranceNameException {
         if (carProductDevelopmentRepository.existsByName(dto.getName()))
             throw new DuplicateInsuranceNameException("이름 중복.");
-        return ProductPlanDevelopmentResponse.from(carProductDevelopmentRepository.save(dto.toEntity()));
+        return ProductPlanDevelopmentResponse.from(carProductDevelopmentRepository.save(dto.toCarProductDevelopmentEntity()));
     }
 
     @Override

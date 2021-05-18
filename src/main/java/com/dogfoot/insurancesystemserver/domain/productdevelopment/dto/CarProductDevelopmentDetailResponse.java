@@ -17,13 +17,13 @@ import java.time.LocalDate;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CarProductDevelopmentDetailResponse {
 
-    private Long id;
-    private String name;
-    private Long payment;
-    private DevelopmentState state;
-    private Long carPrice;
-    private LocalDate carReleaseDate;
-    private Long drivingDistance;
+    private final Long id;
+    private final String name;
+    private final Long payment;
+    private final DevelopmentState state;
+    private final Long carPrice;
+    private final LocalDate carReleaseDate;
+    private final Long drivingDistance;
 
     public static CarProductDevelopmentDetailResponse from(CarProductDevelopment carProductDevelopment) {
         return CarProductDevelopmentDetailResponse.builder()

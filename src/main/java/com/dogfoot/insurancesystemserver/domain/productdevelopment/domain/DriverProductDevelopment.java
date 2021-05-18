@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.domain;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.DriverLicence;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.DriverProductDesignRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,4 +25,14 @@ public class DriverProductDevelopment extends ProductDevelopment {
         this.driverLicence = driverLicence;
     }
 
+    public DriverProductDevelopment design(DriverProductDesignRequest dto) {
+        this.DateOfLicenseAcquisition = dto.getDateOfLicenseAcquisition();
+        this.driverLicence = dto.getDriverLicence();
+        return this;
+    }
+
+    public DriverProductDevelopment authorize() {
+        this.changeState(DevelopmentState.AUTHORIZE);
+        return this;
+    }
 }

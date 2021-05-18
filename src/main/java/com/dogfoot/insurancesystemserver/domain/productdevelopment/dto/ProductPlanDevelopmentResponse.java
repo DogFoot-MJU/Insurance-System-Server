@@ -1,10 +1,12 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.dto;
 
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.CarProductDevelopment;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.*;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 @Getter
 @Builder(access = AccessLevel.PRIVATE)
@@ -18,13 +20,39 @@ public class ProductPlanDevelopmentResponse {
     private Long payment;
     private DevelopmentState state;
 
-    public static ProductPlanDevelopmentResponse from(CarProductDevelopment carProductDevelopment) {
+    public static ProductPlanDevelopmentResponse from(CarProductDevelopment entity) {
         return ProductPlanDevelopmentResponse.builder()
-                .id(carProductDevelopment.getId())
-                .name(carProductDevelopment.getName())
-                .payment(carProductDevelopment.getPayment())
-                .state(carProductDevelopment.getState())
+                .id(entity.getId())
+                .name(entity.getName())
+                .payment(entity.getPayment())
+                .state(entity.getState())
                 .build();
     }
 
+    public static ProductPlanDevelopmentResponse from(DriverProductDevelopment entity) {
+        return ProductPlanDevelopmentResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .payment(entity.getPayment())
+                .state(entity.getState())
+                .build();
+    }
+
+    public static ProductPlanDevelopmentResponse from(ProductDevelopment entity) {
+        return ProductPlanDevelopmentResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .payment(entity.getPayment())
+                .state(entity.getState())
+                .build();
+    }
+
+    public static ProductPlanDevelopmentResponse from(TravelProductDevelopment entity) {
+        return ProductPlanDevelopmentResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .payment(entity.getPayment())
+                .state(entity.getState())
+                .build();
+    }
 }

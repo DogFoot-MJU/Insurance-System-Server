@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.domain;
 
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.FireProductDesignRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,5 +26,18 @@ public class FireProductDevelopment extends ProductDevelopment {
         this.constructionDate = constructionDate;
         this.siteArea = siteArea;
         this.numberOfFloors = numberOfFloors;
+    }
+
+    public FireProductDevelopment design(FireProductDesignRequest dto) {
+        this.buildingPrice = dto.getBuildingPrice();
+        this.constructionDate = dto.getConstructionDate();
+        this.siteArea = dto.getSiteArea();
+        this.numberOfFloors = dto.getNumberOfFloors();
+        return this;
+    }
+
+    public FireProductDevelopment authorize() {
+        this.changeState(DevelopmentState.AUTHORIZE);
+        return this;
     }
 }
