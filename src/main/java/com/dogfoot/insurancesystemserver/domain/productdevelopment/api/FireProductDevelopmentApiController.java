@@ -27,12 +27,12 @@ public class FireProductDevelopmentApiController {
         return ResponseEntity.ok(fireProductDevelopmentService.plan(dto));
     }
 
-    @PostMapping("design")
+    @PutMapping("design")
     public ResponseEntity<FireProductDevelopmentDetailResponse> design(@Valid @RequestBody FireProductDesignRequest dto) {
         return ResponseEntity.ok(fireProductDevelopmentService.design(dto));
     }
 
-    @PostMapping("authorize/{id}")
+    @PutMapping("authorize/{id}")
     public ResponseEntity<FireProductDevelopmentDetailResponse> authorize(@PathVariable Long id) {
         return ResponseEntity.ok(fireProductDevelopmentService.authorize(id));
     }

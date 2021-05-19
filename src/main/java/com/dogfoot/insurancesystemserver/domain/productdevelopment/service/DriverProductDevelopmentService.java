@@ -3,6 +3,7 @@ package com.dogfoot.insurancesystemserver.domain.productdevelopment.service;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.*;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
+import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,9 @@ public interface DriverProductDevelopmentService {
 
     @Transactional
     DriverProductDevelopmentDetailResponse authorize(Long id);
+
+    @Transactional
+    DefaultResponseDto approve(Long id);
 
     Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state);
 

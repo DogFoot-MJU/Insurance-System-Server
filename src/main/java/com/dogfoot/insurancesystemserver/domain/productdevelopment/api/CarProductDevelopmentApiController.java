@@ -30,12 +30,12 @@ public class CarProductDevelopmentApiController {
         return ResponseEntity.ok(carProductDevelopmentService.plan(dto));
     }
 
-    @PostMapping("design")
+    @PutMapping("design")
     public ResponseEntity<CarProductDevelopmentDetailResponse> design(@Valid @RequestBody CarProductDesignRequest dto) {
         return ResponseEntity.ok(carProductDevelopmentService.design(dto));
     }
 
-    @PostMapping("authorize/{id}")
+    @PutMapping("authorize/{id}")
     public ResponseEntity<CarProductDevelopmentDetailResponse> authorize(@PathVariable Long id) {
         return ResponseEntity.ok(carProductDevelopmentService.authorize(id));
     }

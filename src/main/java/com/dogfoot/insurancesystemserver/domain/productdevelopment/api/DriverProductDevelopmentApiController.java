@@ -27,12 +27,12 @@ public class DriverProductDevelopmentApiController {
         return ResponseEntity.ok(driverProductDevelopmentService.plan(dto));
     }
 
-    @PostMapping("design")
+    @PutMapping("design")
     public ResponseEntity<DriverProductDevelopmentDetailResponse> design(@Valid @RequestBody DriverProductDesignRequest dto) {
         return ResponseEntity.ok(driverProductDevelopmentService.design(dto));
     }
 
-    @PostMapping("authorize/{id}")
+    @PutMapping("authorize/{id}")
     public ResponseEntity<DriverProductDevelopmentDetailResponse> authorize(@PathVariable Long id) {
         return ResponseEntity.ok(driverProductDevelopmentService.authorize(id));
     }

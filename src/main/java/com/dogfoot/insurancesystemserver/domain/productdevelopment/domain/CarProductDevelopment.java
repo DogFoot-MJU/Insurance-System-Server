@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.domain;
 
+import com.dogfoot.insurancesystemserver.domain.insurance.domain.CarInsurance;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.CarProductDesignRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -25,20 +26,34 @@ public class CarProductDevelopment extends ProductDevelopment {
         this.carPrice = carPrice;
         this.carReleaseDate = carReleaseDate;
         this.drivingDistance = drivingDistance;
-        this.changeState(DevelopmentState.PLAN);
+        changeState(DevelopmentState.PLAN);
+        changeApproveSate(ApproveState.NONE);
     }
 
     public CarProductDevelopment design(CarProductDesignRequest dto) {
         this.carPrice = dto.getCarPrice();
         this.carReleaseDate = dto.getCarReleaseDate();
         this.drivingDistance = dto.getDrivingDistance();
-        this.changeState(DevelopmentState.DESIGN);
+        changeState(DevelopmentState.DESIGN);
         return this;
     }
 
     public CarProductDevelopment authorize() {
-        this.changeState(DevelopmentState.AUTHORIZE);
+        changeState(DevelopmentState.AUTHORIZE);
+        changeApproveSate(ApproveState.WAIT);
         return this;
+    }
+
+    public CarInsurance approve() {
+        changeState(DevelopmentState.APPROVE);
+        changeApproveSate(ApproveState.APPROVE);
+        return CarInsurance.builder()
+                .name(getName())
+                .payment(getPayment())
+                .carPrice(this.carPrice)
+                .carReleaseDate(this.carReleaseDate)
+                .drivingDistance(this.drivingDistance)
+                .build();
     }
 
 }

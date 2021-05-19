@@ -6,6 +6,7 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.FireProdu
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
+import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,9 @@ public interface FireProductDevelopmentService {
 
     @Transactional
     FireProductDevelopmentDetailResponse authorize(Long id);
+
+    @Transactional
+    DefaultResponseDto approve(Long id);
 
     Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state);
 

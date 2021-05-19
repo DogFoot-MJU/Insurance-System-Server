@@ -27,8 +27,13 @@ public abstract class ProductDevelopment {
     @Column(nullable = false)
     private Long payment;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private DevelopmentState state;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ApproveState approveState;
 
     @CreationTimestamp
     private Timestamp createdDate;
@@ -45,4 +50,7 @@ public abstract class ProductDevelopment {
         this.state = state;
     }
 
+    protected void changeApproveSate(ApproveState approveState) {
+        this.approveState = approveState;
+    }
 }

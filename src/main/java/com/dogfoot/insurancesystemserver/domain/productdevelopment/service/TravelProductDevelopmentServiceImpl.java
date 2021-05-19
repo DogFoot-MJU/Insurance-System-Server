@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.service;
 
+import com.dogfoot.insurancesystemserver.domain.insurance.repository.TravelInsuranceRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.TravelProductDevelopment;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
@@ -8,6 +9,7 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.TravelPro
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.TravelProductDevelopmentDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.TravelProductDevelopmentRepository;
+import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class TravelProductDevelopmentServiceImpl implements TravelProductDevelopmentService {
 
     private final TravelProductDevelopmentRepository travelProductDevelopmentRepository;
+    private final TravelInsuranceRepository travelInsuranceRepository;
 
     @Override
     public ProductPlanDevelopmentResponse plan(ProductPlanCreateRequest dto) throws DuplicateInsuranceNameException {
@@ -42,6 +45,14 @@ public class TravelProductDevelopmentServiceImpl implements TravelProductDevelop
         return TravelProductDevelopmentDetailResponse.from(travelProductDevelopmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."))
                 .authorize());
+    }
+
+    @Override
+    public DefaultResponseDto approve(Long id) {
+        travelInsuranceRepository.save(travelProductDevelopmentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."))
+                .approve());
+        return DefaultResponseDto.from("승인 완료.");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.domain;
 
+import com.dogfoot.insurancesystemserver.domain.insurance.domain.DriverInsurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.DriverLicence;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.DriverProductDesignRequest;
 import lombok.AccessLevel;
@@ -15,24 +16,38 @@ import java.time.LocalDate;
 @Entity
 public class DriverProductDevelopment extends ProductDevelopment {
 
-    private LocalDate DateOfLicenseAcquisition;
+    private LocalDate dateOfLicenseAcquisition;
     private DriverLicence driverLicence;
 
     @Builder
     public DriverProductDevelopment(String name, Long payment, LocalDate dateOfLicenseAcquisition, DriverLicence driverLicence) {
         super(name, payment);
-        DateOfLicenseAcquisition = dateOfLicenseAcquisition;
+        this.dateOfLicenseAcquisition = dateOfLicenseAcquisition;
         this.driverLicence = driverLicence;
+        changeState(DevelopmentState.PLAN);
+        changeApproveSate(ApproveState.NONE);
     }
 
     public DriverProductDevelopment design(DriverProductDesignRequest dto) {
-        this.DateOfLicenseAcquisition = dto.getDateOfLicenseAcquisition();
+        this.dateOfLicenseAcquisition = dto.getDateOfLicenseAcquisition();
         this.driverLicence = dto.getDriverLicence();
+        changeState(DevelopmentState.DESIGN);
         return this;
     }
 
     public DriverProductDevelopment authorize() {
-        this.changeState(DevelopmentState.AUTHORIZE);
+        changeState(DevelopmentState.AUTHORIZE);
         return this;
+    }
+
+    public DriverInsurance approve() {
+        changeState(DevelopmentState.APPROVE);
+        changeApproveSate(ApproveState.APPROVE);
+        return DriverInsurance.builder()
+                .name(getName())
+                .payment(getPayment())
+                .dateOfLicenseAcquisition(this.dateOfLicenseAcquisition)
+                .driverLicence(this.driverLicence)
+                .build();
     }
 }

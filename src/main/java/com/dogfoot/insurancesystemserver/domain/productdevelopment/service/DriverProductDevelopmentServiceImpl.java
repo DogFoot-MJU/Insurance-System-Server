@@ -1,10 +1,12 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.service;
 
+import com.dogfoot.insurancesystemserver.domain.insurance.repository.DriverInsuranceRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DriverProductDevelopment;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.*;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.DriverProductDevelopmentRepository;
+import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 public class DriverProductDevelopmentServiceImpl implements DriverProductDevelopmentService {
 
     private final DriverProductDevelopmentRepository driverProductDevelopmentRepository;
+    private final DriverInsuranceRepository driverInsuranceRepository;
 
     @Override
     public ProductPlanDevelopmentResponse plan(ProductPlanCreateRequest dto) throws DuplicateInsuranceNameException {
@@ -39,6 +42,14 @@ public class DriverProductDevelopmentServiceImpl implements DriverProductDevelop
         return DriverProductDevelopmentDetailResponse.from(driverProductDevelopmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."))
                 .authorize());
+    }
+
+    @Override
+    public DefaultResponseDto approve(Long id) {
+        driverInsuranceRepository.save(driverProductDevelopmentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."))
+                .approve());
+        return DefaultResponseDto.from("승인 완료.");
     }
 
     @Override

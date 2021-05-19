@@ -1,9 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.dto;
 
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.CarProductDevelopment;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DriverProductDevelopment;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.FireProductDevelopment;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.TravelProductDevelopment;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.*;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;

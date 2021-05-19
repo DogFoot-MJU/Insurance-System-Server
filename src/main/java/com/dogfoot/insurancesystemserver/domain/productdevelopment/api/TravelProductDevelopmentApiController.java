@@ -27,12 +27,12 @@ public class TravelProductDevelopmentApiController {
         return ResponseEntity.ok(travelProductDevelopmentService.plan(dto));
     }
 
-    @PostMapping("design")
+    @PutMapping("design")
     public ResponseEntity<TravelProductDevelopmentDetailResponse> design(@Valid @RequestBody TravelProductDesignRequest dto) {
         return ResponseEntity.ok(travelProductDevelopmentService.design(dto));
     }
 
-    @PostMapping("authorize/{id}")
+    @PutMapping("authorize/{id}")
     public ResponseEntity<TravelProductDevelopmentDetailResponse> authorize(@PathVariable Long id) {
         return ResponseEntity.ok(travelProductDevelopmentService.authorize(id));
     }
