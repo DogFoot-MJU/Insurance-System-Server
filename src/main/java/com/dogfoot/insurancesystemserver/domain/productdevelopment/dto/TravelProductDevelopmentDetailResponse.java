@@ -2,7 +2,7 @@ package com.dogfoot.insurancesystemserver.domain.productdevelopment.dto;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.SafetyRank;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.TravelProductDevelopment;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.TravelDevelopment;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
@@ -22,13 +22,13 @@ public class TravelProductDevelopmentDetailResponse {
     private final DevelopmentState state;
     private final SafetyRank safetyRank;
 
-    public static TravelProductDevelopmentDetailResponse from(TravelProductDevelopment travelProductDevelopment) {
+    public static TravelProductDevelopmentDetailResponse from(TravelDevelopment travelDevelopment) {
         return TravelProductDevelopmentDetailResponse.builder()
-                .id(travelProductDevelopment.getId())
-                .name(travelProductDevelopment.getName())
-                .payment(travelProductDevelopment.getPayment())
-                .state(travelProductDevelopment.getState())
-                .safetyRank(travelProductDevelopment.getSafetyRank())
+                .id(travelDevelopment.getId())
+                .name(travelDevelopment.getName())
+                .payment(travelDevelopment.getPayment())
+                .state(travelDevelopment.getState())
+                .safetyRank(travelDevelopment.getSafetyRank())
                 .build();
     }
 }

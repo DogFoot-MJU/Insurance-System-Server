@@ -4,14 +4,20 @@ import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.compensation.domain.Compensation;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@NoArgsConstructor
 @Entity
 public class Contract {
 
@@ -41,4 +47,13 @@ public class Contract {
     @UpdateTimestamp
     private Timestamp updatedDate;
 
+    @Builder
+    public Contract(User user, Insurance insurance, Long calculatedPayment, LocalDate expirationDate) {
+        this.user = user;
+        this.insurance = insurance;
+        this.calculatedPayment = calculatedPayment;
+        this.expirationDate = expirationDate;
+        this.accidentList = new ArrayList<>();
+        this.compensationList = new ArrayList<>();
+    }
 }

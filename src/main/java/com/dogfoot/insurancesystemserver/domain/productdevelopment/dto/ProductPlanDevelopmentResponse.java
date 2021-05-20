@@ -20,7 +20,7 @@ public class ProductPlanDevelopmentResponse {
     private Long payment;
     private DevelopmentState state;
 
-    public static ProductPlanDevelopmentResponse from(CarProductDevelopment entity) {
+    public static ProductPlanDevelopmentResponse from(CarDevelopment entity) {
         return ProductPlanDevelopmentResponse.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -29,7 +29,7 @@ public class ProductPlanDevelopmentResponse {
                 .build();
     }
 
-    public static ProductPlanDevelopmentResponse from(DriverProductDevelopment entity) {
+    public static ProductPlanDevelopmentResponse from(DriverDevelopment entity) {
         return ProductPlanDevelopmentResponse.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -47,7 +47,7 @@ public class ProductPlanDevelopmentResponse {
                 .build();
     }
 
-    public static ProductPlanDevelopmentResponse from(TravelProductDevelopment entity) {
+    public static ProductPlanDevelopmentResponse from(TravelDevelopment entity) {
         return ProductPlanDevelopmentResponse.builder()
                 .id(entity.getId())
                 .name(entity.getName())

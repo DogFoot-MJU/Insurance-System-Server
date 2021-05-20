@@ -21,7 +21,7 @@ public class DriverProductDesignRequest {
     private Long id;
 
     @NotNull
-    private LocalDate DateOfLicenseAcquisition;
+    private LocalDate dateOfLicenseAcquisition;
 
     @NotNull
     private DriverLicence driverLicence;
