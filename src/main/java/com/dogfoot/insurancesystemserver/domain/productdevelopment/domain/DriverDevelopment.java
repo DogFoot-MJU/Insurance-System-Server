@@ -14,13 +14,13 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
-public class DriverProductDevelopment extends ProductDevelopment {
+public class DriverDevelopment extends ProductDevelopment {
 
     private LocalDate dateOfLicenseAcquisition;
     private DriverLicence driverLicence;
 
     @Builder
-    public DriverProductDevelopment(String name, Long payment, LocalDate dateOfLicenseAcquisition, DriverLicence driverLicence) {
+    public DriverDevelopment(String name, Long payment, LocalDate dateOfLicenseAcquisition, DriverLicence driverLicence) {
         super(name, payment);
         this.dateOfLicenseAcquisition = dateOfLicenseAcquisition;
         this.driverLicence = driverLicence;
@@ -28,14 +28,14 @@ public class DriverProductDevelopment extends ProductDevelopment {
         changeApproveSate(ApproveState.NONE);
     }
 
-    public DriverProductDevelopment design(DriverProductDesignRequest dto) {
+    public DriverDevelopment design(DriverProductDesignRequest dto) {
         this.dateOfLicenseAcquisition = dto.getDateOfLicenseAcquisition();
         this.driverLicence = dto.getDriverLicence();
         changeState(DevelopmentState.DESIGN);
         return this;
     }
 
-    public DriverProductDevelopment authorize() {
+    public DriverDevelopment authorize() {
         changeState(DevelopmentState.AUTHORIZE);
         return this;
     }

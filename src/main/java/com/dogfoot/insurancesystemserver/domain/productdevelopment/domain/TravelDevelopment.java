@@ -13,25 +13,25 @@ import javax.persistence.Entity;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
-public class TravelProductDevelopment extends ProductDevelopment {
+public class TravelDevelopment extends ProductDevelopment {
 
     private SafetyRank safetyRank;
 
     @Builder
-    public TravelProductDevelopment(String name, Long payment, SafetyRank safetyRank) {
+    public TravelDevelopment(String name, Long payment, SafetyRank safetyRank) {
         super(name, payment);
         this.safetyRank = safetyRank;
         changeState(DevelopmentState.PLAN);
         changeApproveSate(ApproveState.NONE);
     }
 
-    public TravelProductDevelopment design(TravelProductDesignRequest dto) {
+    public TravelDevelopment design(TravelProductDesignRequest dto) {
         this.safetyRank = dto.getSafetyRank();
         changeState(DevelopmentState.DESIGN);
         return this;
     }
 
-    public TravelProductDevelopment authorize() {
+    public TravelDevelopment authorize() {
         changeState(DevelopmentState.AUTHORIZE);
         return this;
     }

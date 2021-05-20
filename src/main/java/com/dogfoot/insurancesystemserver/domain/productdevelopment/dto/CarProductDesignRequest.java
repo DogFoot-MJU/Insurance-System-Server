@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class CarProductDesignRequest {
+public class CarProductDesignRequest implements DesignRequest {
 
     @NotNull
     private Long id;

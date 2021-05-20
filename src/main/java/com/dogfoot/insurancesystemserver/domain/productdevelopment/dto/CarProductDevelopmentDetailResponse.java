@@ -1,6 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.dto;
 
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.CarProductDevelopment;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.CarDevelopment;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -25,15 +25,15 @@ public class CarProductDevelopmentDetailResponse {
     private final LocalDate carReleaseDate;
     private final Long drivingDistance;
 
-    public static CarProductDevelopmentDetailResponse from(CarProductDevelopment carProductDevelopment) {
+    public static CarProductDevelopmentDetailResponse from(CarDevelopment carDevelopment) {
         return CarProductDevelopmentDetailResponse.builder()
-                .id(carProductDevelopment.getId())
-                .name(carProductDevelopment.getName())
-                .payment(carProductDevelopment.getPayment())
-                .state(carProductDevelopment.getState())
-                .carPrice(carProductDevelopment.getCarPrice())
-                .carReleaseDate(carProductDevelopment.getCarReleaseDate())
-                .drivingDistance(carProductDevelopment.getDrivingDistance())
+                .id(carDevelopment.getId())
+                .name(carDevelopment.getName())
+                .payment(carDevelopment.getPayment())
+                .state(carDevelopment.getState())
+                .carPrice(carDevelopment.getCarPrice())
+                .carReleaseDate(carDevelopment.getCarReleaseDate())
+                .drivingDistance(carDevelopment.getDrivingDistance())
                 .build();
     }
 

@@ -1,7 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.dto;
 
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.FireProductDevelopment;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.FireDevelopment;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
@@ -26,16 +26,16 @@ public class FireProductDevelopmentDetailResponse {
     private final Long siteArea;
     private final Integer numberOfFloors;
 
-    public static FireProductDevelopmentDetailResponse from(FireProductDevelopment fireProductDevelopment) {
+    public static FireProductDevelopmentDetailResponse from(FireDevelopment fireDevelopment) {
         return FireProductDevelopmentDetailResponse.builder()
-                .id(fireProductDevelopment.getId())
-                .name(fireProductDevelopment.getName())
-                .payment(fireProductDevelopment.getPayment())
-                .state(fireProductDevelopment.getState())
-                .buildingPrice(fireProductDevelopment.getBuildingPrice())
-                .constructionDate(fireProductDevelopment.getConstructionDate())
-                .siteArea(fireProductDevelopment.getSiteArea())
-                .numberOfFloors(fireProductDevelopment.getNumberOfFloors())
+                .id(fireDevelopment.getId())
+                .name(fireDevelopment.getName())
+                .payment(fireDevelopment.getPayment())
+                .state(fireDevelopment.getState())
+                .buildingPrice(fireDevelopment.getBuildingPrice())
+                .constructionDate(fireDevelopment.getConstructionDate())
+                .siteArea(fireDevelopment.getSiteArea())
+                .numberOfFloors(fireDevelopment.getNumberOfFloors())
                 .build();
     }
 

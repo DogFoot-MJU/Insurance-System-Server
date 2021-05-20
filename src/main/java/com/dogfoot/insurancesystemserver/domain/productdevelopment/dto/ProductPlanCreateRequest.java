@@ -23,29 +23,39 @@ public class ProductPlanCreateRequest {
     @NotNull
     private Long payment;
 
-    public CarProductDevelopment toCarProductDevelopmentEntity() {
-        return CarProductDevelopment.builder()
+    public <T extends ProductDevelopment> T toEntity(Class<T> clazz) {
+        T t = null;
+        try {
+            t = clazz.getConstructor(String.class, Long.class).newInstance(name, payment);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return t;
+    }
+
+    public CarDevelopment toCarProductDevelopmentEntity() {
+        return CarDevelopment.builder()
                 .name(this.name)
                 .payment(this.payment)
                 .build();
     }
 
-    public DriverProductDevelopment toDriverProductDevelopmentEntity() {
-        return DriverProductDevelopment.builder()
+    public DriverDevelopment toDriverProductDevelopmentEntity() {
+        return DriverDevelopment.builder()
                 .name(this.name)
                 .payment(this.payment)
                 .build();
     }
 
-    public FireProductDevelopment toFireProductDevelopmentEntity() {
-        return FireProductDevelopment.builder()
+    public FireDevelopment toFireProductDevelopmentEntity() {
+        return FireDevelopment.builder()
                 .name(this.name)
                 .payment(this.payment)
                 .build();
     }
 
-    public TravelProductDevelopment toTravelProductDevelopmentEntity() {
-        return TravelProductDevelopment.builder()
+    public TravelDevelopment toTravelProductDevelopmentEntity() {
+        return TravelDevelopment.builder()
                 .name(this.name)
                 .payment(this.payment)
                 .build();
