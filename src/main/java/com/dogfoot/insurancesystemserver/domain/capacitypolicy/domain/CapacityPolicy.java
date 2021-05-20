@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.capacitypolicy.domain;
 
+import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyUpdateRequest;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -44,5 +45,12 @@ public class CapacityPolicy {
         this.physical = physical;
         this.economical = economical;
         this.environmental = environmental;
+    }
+
+    public void update(CapacityPolicyUpdateRequest dto) {
+        this.name = dto.getName();
+        this.physical = dto.getPhysical();
+        this.economical = dto.getEconomical();
+        this.environmental = dto.getEnvironmental();
     }
 }

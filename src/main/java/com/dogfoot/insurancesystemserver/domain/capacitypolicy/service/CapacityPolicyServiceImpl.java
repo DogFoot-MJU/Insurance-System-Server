@@ -4,6 +4,7 @@ import com.dogfoot.insurancesystemserver.domain.capacitypolicy.domain.CapacityPo
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyCreationRequest;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyResponse;
+import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyUpdateRequest;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.repository.CapacityPolicyRepository;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.service.InsuranceService;
@@ -42,6 +43,11 @@ public class CapacityPolicyServiceImpl implements CapacityPolicyService {
     @Override
     public CapacityPolicyDetailResponse read(Long id) {
         return CapacityPolicyDetailResponse.from(findById(id));
+    }
+
+    @Override
+    public void update(CapacityPolicyUpdateRequest dto) {
+        findById(dto.getId()).update(dto);
     }
 
     public CapacityPolicy findById(Long id) {

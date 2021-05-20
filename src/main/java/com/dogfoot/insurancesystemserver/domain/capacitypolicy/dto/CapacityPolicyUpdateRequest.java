@@ -1,6 +1,5 @@
 package com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto;
 
-import com.dogfoot.insurancesystemserver.domain.capacitypolicy.domain.CapacityPolicy;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
@@ -15,10 +14,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class CapacityPolicyCreationRequest {
+public class CapacityPolicyUpdateRequest {
 
     @NotNull
-    private Long insuranceId;
+    private Long id;
 
     @NotEmpty
     private String name;
@@ -31,14 +30,5 @@ public class CapacityPolicyCreationRequest {
 
     @NotEmpty
     private String environmental;
-
-    public CapacityPolicy toEntity() {
-        return CapacityPolicy.builder()
-                .name(this.name)
-                .physical(this.physical)
-                .economical(this.economical)
-                .environmental(this.environmental)
-                .build();
-    }
 
 }
