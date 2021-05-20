@@ -37,4 +37,7 @@ public abstract class Insurance {
         return this.capacityPolicy != null;
     }
 
+    public void removeCapacityPolicy() {
+        this.capacityPolicy = null;
+    }
 }

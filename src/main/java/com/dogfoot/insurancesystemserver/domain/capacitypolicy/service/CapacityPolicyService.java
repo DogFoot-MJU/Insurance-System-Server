@@ -22,4 +22,7 @@ public interface CapacityPolicyService {
     @Transactional
     void update(CapacityPolicyUpdateRequest dto);
 
+    @Transactional
+    void delete(Long id);
+
 }

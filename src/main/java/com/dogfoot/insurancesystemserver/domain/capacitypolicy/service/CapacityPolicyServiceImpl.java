@@ -50,6 +50,11 @@ public class CapacityPolicyServiceImpl implements CapacityPolicyService {
         findById(dto.getId()).update(dto);
     }
 
+    @Override
+    public void delete(Long id) {
+        this.capacityPolicyRepository.delete(findById(id).removeInsurance());
+    }
+
     public CapacityPolicy findById(Long id) {
         return this.capacityPolicyRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 인수 정책이 존재하지 않습니다."));

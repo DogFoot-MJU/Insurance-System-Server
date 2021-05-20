@@ -23,7 +23,7 @@ public class CapacityPolicy {
 
     private String name;
 
-    @OneToOne(mappedBy = "capacityPolicy")
+    @OneToOne(mappedBy = "capacityPolicy", fetch = FetchType.LAZY)
     private Insurance insurance;
 
     private String physical;
@@ -52,5 +52,11 @@ public class CapacityPolicy {
         this.physical = dto.getPhysical();
         this.economical = dto.getEconomical();
         this.environmental = dto.getEnvironmental();
+    }
+
+    public CapacityPolicy removeInsurance() {
+        getInsurance().removeCapacityPolicy();
+        this.insurance = null;
+        return this;
     }
 }

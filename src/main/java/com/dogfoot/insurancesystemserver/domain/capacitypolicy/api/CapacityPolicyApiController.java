@@ -45,4 +45,10 @@ public class CapacityPolicyApiController {
         return ResponseEntity.ok(DefaultResponseDto.from("인수정책 수정 완료"));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<DefaultResponseDto> delete(@PathVariable Long id) {
+        this.capacityPolicyService.delete(id);
+        return ResponseEntity.ok(DefaultResponseDto.from("인수정책 삭제 완료"));
+    }
+
 }
