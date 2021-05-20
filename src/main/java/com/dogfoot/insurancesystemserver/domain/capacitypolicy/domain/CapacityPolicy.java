@@ -20,6 +20,8 @@ public class CapacityPolicy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     @OneToOne(mappedBy = "capacityPolicy")
     private Insurance insurance;
 
@@ -36,7 +38,8 @@ public class CapacityPolicy {
     private Timestamp updatedDate;
 
     @Builder
-    public CapacityPolicy(Insurance insurance, String physical, String economical, String environmental) {
+    public CapacityPolicy(String name, Insurance insurance, String physical, String economical, String environmental) {
+        this.name = name;
         this.insurance = insurance;
         this.physical = physical;
         this.economical = economical;

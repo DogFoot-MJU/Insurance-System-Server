@@ -2,6 +2,7 @@ package com.dogfoot.insurancesystemserver.domain.capacitypolicy.service;
 
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.domain.CapacityPolicy;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyCreationRequest;
+import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.repository.CapacityPolicyRepository;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
@@ -38,4 +39,13 @@ public class CapacityPolicyServiceImpl implements CapacityPolicyService {
         return Pagination.of(page, data);
     }
 
+    @Override
+    public CapacityPolicyDetailResponse read(Long id) {
+        return CapacityPolicyDetailResponse.from(findById(id));
+    }
+
+    public CapacityPolicy findById(Long id) {
+        return this.capacityPolicyRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 인수 정책이 존재하지 않습니다."));
+    }
 }

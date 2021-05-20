@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto;
 
+
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.domain.CapacityPolicy;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -12,17 +13,23 @@ import lombok.Getter;
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class CapacityPolicyResponse {
+public class CapacityPolicyDetailResponse {
 
     private final Long id;
     private final String name;
-    private final String insuranceName;
+    private final String insurance_name;
+    private final String physical;
+    private final String economical;
+    private final String environmental;
 
-    public static CapacityPolicyResponse from(CapacityPolicy capacityPolicy) {
-        return CapacityPolicyResponse.builder()
+    public static CapacityPolicyDetailResponse from(CapacityPolicy capacityPolicy) {
+        return CapacityPolicyDetailResponse.builder()
                 .id(capacityPolicy.getId())
                 .name(capacityPolicy.getName())
-                .insuranceName(capacityPolicy.getInsurance().getName())
+                .insurance_name(capacityPolicy.getInsurance().getName())
+                .physical(capacityPolicy.getPhysical())
+                .economical(capacityPolicy.getEconomical())
+                .environmental(capacityPolicy.getEnvironmental())
                 .build();
     }
 

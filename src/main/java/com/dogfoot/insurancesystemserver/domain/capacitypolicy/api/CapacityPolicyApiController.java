@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.capacitypolicy.api;
 
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyCreationRequest;
+import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.service.CapacityPolicyService;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
@@ -29,6 +30,11 @@ public class CapacityPolicyApiController {
     @GetMapping("list")
     public ResponseEntity<Pagination<List<CapacityPolicyResponse>>> list(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(this.capacityPolicyService.list(pageable));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<CapacityPolicyDetailResponse> read(@PathVariable Long id) {
+        return ResponseEntity.ok(this.capacityPolicyService.read(id));
     }
 
 }

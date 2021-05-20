@@ -15,12 +15,14 @@ import lombok.NoArgsConstructor;
 public class CapacityPolicyCreationRequest {
 
     private Long insuranceId;
+    private String name;
     private String physical;
     private String economical;
     private String environmental;
 
     public CapacityPolicy toEntity() {
         return CapacityPolicy.builder()
+                .name(this.name)
                 .physical(this.physical)
                 .economical(this.economical)
                 .environmental(this.environmental)
