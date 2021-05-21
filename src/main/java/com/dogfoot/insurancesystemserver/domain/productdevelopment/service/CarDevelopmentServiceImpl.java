@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.service;
 
-import com.dogfoot.insurancesystemserver.domain.insurance.repository.CarInsuranceRepository;
+import com.dogfoot.insurancesystemserver.domain.insurance.domain.CarInsurance;
+import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.CarDevelopment;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.CarProductDesignRequest;
@@ -8,7 +9,6 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.CarProduc
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.CarProductDevelopmentRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.ProductDevelopmentRepository;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +23,14 @@ import java.util.stream.Collectors;
 @Service
 public class CarDevelopmentServiceImpl implements DevelopmentService<CarProductDesignRequest, CarProductDevelopmentDetailResponse, CarDevelopment> {
 
-    private final ProductDevelopmentRepository productDevelopmentRepository;
-    private final CarProductDevelopmentRepository carProductDevelopmentRepository;
-    private final CarInsuranceRepository carInsuranceRepository;
+    private final ProductDevelopmentRepository<CarDevelopment> productDevelopmentRepository;
+    private final InsuranceRepository<CarInsurance> carInsuranceRepository;
 
     @Override
     public void plan(ProductPlanCreateRequest dto) {
         if (productDevelopmentRepository.existsByName(dto.getName()))
             throw new DuplicateInsuranceNameException("이름 중복.");
-        carProductDevelopmentRepository.save(dto.toCarProductDevelopmentEntity());
+        productDevelopmentRepository.save(dto.toCarProductDevelopmentEntity());
     }
 
     @Override
@@ -51,7 +50,7 @@ public class CarDevelopmentServiceImpl implements DevelopmentService<CarProductD
 
     @Override
     public Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Page<CarDevelopment> page = carProductDevelopmentRepository.findAllByState(state, pageable);
+        Page<CarDevelopment> page = productDevelopmentRepository.findAllByState(state, pageable);
         List<ProductPlanDevelopmentResponse> list = page.stream()
                 .map(ProductPlanDevelopmentResponse::from)
                 .collect(Collectors.toList());
@@ -65,11 +64,11 @@ public class CarDevelopmentServiceImpl implements DevelopmentService<CarProductD
 
     @Override
     public void delete(Long id) {
-        this.carProductDevelopmentRepository.delete(findById(id));
+        this.productDevelopmentRepository.delete(findById(id));
     }
 
     public CarDevelopment findById(Long id) {
-        return carProductDevelopmentRepository.findById(id)
+        return productDevelopmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."));
     }
 

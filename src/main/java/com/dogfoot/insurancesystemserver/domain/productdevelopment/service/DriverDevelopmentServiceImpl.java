@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.service;
 
-import com.dogfoot.insurancesystemserver.domain.insurance.repository.DriverInsuranceRepository;
+import com.dogfoot.insurancesystemserver.domain.insurance.domain.DriverInsurance;
+import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DriverDevelopment;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.DriverProductDesignRequest;
@@ -8,7 +9,6 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.DriverPro
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.DriverProductDevelopmentRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.ProductDevelopmentRepository;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +23,14 @@ import java.util.stream.Collectors;
 @Service
 public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverProductDesignRequest, DriverProductDevelopmentDetailResponse, DriverDevelopment> {
 
-    private final ProductDevelopmentRepository productDevelopmentRepository;
-    private final DriverProductDevelopmentRepository driverProductDevelopmentRepository;
-    private final DriverInsuranceRepository driverInsuranceRepository;
+    private final ProductDevelopmentRepository<DriverDevelopment> productDevelopmentRepository;
+    private final InsuranceRepository<DriverInsurance> driverInsuranceRepository;
 
     @Override
     public void plan(ProductPlanCreateRequest dto) {
         if (productDevelopmentRepository.existsByName(dto.getName()))
             throw new DuplicateInsuranceNameException("이름 중복.");
-        driverProductDevelopmentRepository.save(dto.toDriverProductDevelopmentEntity());
+        productDevelopmentRepository.save(dto.toDriverProductDevelopmentEntity());
     }
 
     @Override
@@ -51,7 +50,7 @@ public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverPr
 
     @Override
     public Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Page<DriverDevelopment> page = driverProductDevelopmentRepository.findAllByState(state, pageable);
+        Page<DriverDevelopment> page = productDevelopmentRepository.findAllByState(state, pageable);
         List<ProductPlanDevelopmentResponse> list = page.stream().map(ProductPlanDevelopmentResponse::from)
                 .collect(Collectors.toList());
         return Pagination.of(page, list);
@@ -64,12 +63,12 @@ public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverPr
 
     @Override
     public void delete(Long id) {
-        this.driverProductDevelopmentRepository.delete(findById(id));
+        this.productDevelopmentRepository.delete(findById(id));
     }
 
     @Override
     public DriverDevelopment findById(Long id) {
-        return driverProductDevelopmentRepository.findById(id)
+        return productDevelopmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."));
     }
 }

@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.service;
 
-import com.dogfoot.insurancesystemserver.domain.insurance.repository.FireInsuranceRepository;
+import com.dogfoot.insurancesystemserver.domain.insurance.domain.FireInsurance;
+import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.FireDevelopment;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.FireProductDesignRequest;
@@ -8,7 +9,6 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.FireProdu
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.FireProductDevelopmentRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.ProductDevelopmentRepository;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +23,14 @@ import java.util.stream.Collectors;
 @Service
 public class FireDevelopmentServiceImpl implements DevelopmentService<FireProductDesignRequest, FireProductDevelopmentDetailResponse, FireDevelopment> {
 
-    private final ProductDevelopmentRepository productDevelopmentRepository;
-    private final FireProductDevelopmentRepository fireProductDevelopmentRepository;
-    private final FireInsuranceRepository fireInsuranceRepository;
+    private final ProductDevelopmentRepository<FireDevelopment> productDevelopmentRepository;
+    private final InsuranceRepository<FireInsurance> fireInsuranceRepository;
 
     @Override
     public void plan(ProductPlanCreateRequest dto) {
         if (productDevelopmentRepository.existsByName(dto.getName()))
             throw new DuplicateInsuranceNameException("이름 중복.");
-        fireProductDevelopmentRepository.save(dto.toFireProductDevelopmentEntity());
+        productDevelopmentRepository.save(dto.toFireProductDevelopmentEntity());
     }
 
     @Override
@@ -51,7 +50,7 @@ public class FireDevelopmentServiceImpl implements DevelopmentService<FireProduc
 
     @Override
     public Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Page<FireDevelopment> page = fireProductDevelopmentRepository.findAllByState(state, pageable);
+        Page<FireDevelopment> page = productDevelopmentRepository.findAllByState(state, pageable);
         List<ProductPlanDevelopmentResponse> list = page.stream().map(ProductPlanDevelopmentResponse::from)
                 .collect(Collectors.toList());
         return Pagination.of(page, list);
@@ -64,12 +63,12 @@ public class FireDevelopmentServiceImpl implements DevelopmentService<FireProduc
 
     @Override
     public void delete(Long id) {
-        this.fireProductDevelopmentRepository.delete(findById(id));
+        this.productDevelopmentRepository.delete(findById(id));
     }
 
     @Override
     public FireDevelopment findById(Long id) {
-        return fireProductDevelopmentRepository.findById(id)
+        return productDevelopmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."));
     }
 

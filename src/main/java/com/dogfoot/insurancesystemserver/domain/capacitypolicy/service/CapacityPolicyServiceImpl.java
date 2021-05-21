@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class CapacityPolicyServiceImpl implements CapacityPolicyService {
 
     private final CapacityPolicyRepository capacityPolicyRepository;
-    private final InsuranceService insuranceService;
+    private final InsuranceService<Insurance> insuranceService;
 
     @Override
     public void create(CapacityPolicyCreationRequest dto) {

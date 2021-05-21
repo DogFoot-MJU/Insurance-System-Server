@@ -2,7 +2,7 @@ package com.dogfoot.insurancesystemserver.domain.user.domain;
 
 import com.dogfoot.insurancesystemserver.domain.consulting.domain.Consulting;
 import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingAnswer;
-import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
+import com.dogfoot.insurancesystemserver.domain.contract.domain.InsuranceContract;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,7 +45,7 @@ public class User {
     private UserStateType state;
 
     @OneToMany(mappedBy = "user")
-    private List<Contract> contractList;
+    private List<InsuranceContract> insuranceContractList;
 
     @OneToMany(mappedBy = "user")
     private List<Consulting> consultingList;
@@ -70,7 +70,7 @@ public class User {
         this.residentRegistrationNumber = residentRegistrationNumber;
         this.role = role;
         this.state = state;
-        this.contractList = new ArrayList<>();
+        this.insuranceContractList = new ArrayList<>();
         this.consultingList = new ArrayList<>();
         this.consultingAnswerList = new ArrayList<>();
     }

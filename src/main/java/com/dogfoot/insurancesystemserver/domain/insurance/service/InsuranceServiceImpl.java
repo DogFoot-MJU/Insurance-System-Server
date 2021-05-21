@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class InsuranceServiceImpl implements InsuranceService {
+public class InsuranceServiceImpl<T extends Insurance> implements InsuranceService<T> {
 
-    private final InsuranceRepository insuranceRepository;
+    private final InsuranceRepository<T> insuranceRepository;
 
     @Override
-    public Insurance findById(Long id) {
+    public T findById(Long id) {
         return this.insuranceRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 보험 상품을 찾을 수 없습니다."));
     }
