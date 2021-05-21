@@ -9,15 +9,15 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class TravelInsurance extends Insurance {
 
     private SafetyRank safetyRank;
 
     @Builder
-    public TravelInsurance(String name, Long payment, SafetyRank safetyRank) {
-        super(name, payment);
+    public TravelInsurance(String name, Long payment, int expirationDate, SafetyRank safetyRank) {
+        super(name, payment, expirationDate);
         this.safetyRank = safetyRank;
     }
 

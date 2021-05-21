@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class CarInsurance extends Insurance {
 
@@ -18,8 +18,9 @@ public class CarInsurance extends Insurance {
     private Long drivingDistance;
 
     @Builder
-    public CarInsurance(String name, Long payment, Long carPrice, LocalDate carReleaseDate, Long drivingDistance) {
-        super(name, payment);
+    public CarInsurance(String name, Long payment, int expirationDate, Long carPrice,
+                        LocalDate carReleaseDate, Long drivingDistance) {
+        super(name, payment, expirationDate);
         this.carPrice = carPrice;
         this.carReleaseDate = carReleaseDate;
         this.drivingDistance = drivingDistance;

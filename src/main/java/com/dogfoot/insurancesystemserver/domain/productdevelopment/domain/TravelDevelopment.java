@@ -18,8 +18,8 @@ public class TravelDevelopment extends ProductDevelopment {
     private SafetyRank safetyRank;
 
     @Builder
-    public TravelDevelopment(String name, Long payment, SafetyRank safetyRank) {
-        super(name, payment);
+    public TravelDevelopment(String name, Long payment, int expirationDate, SafetyRank safetyRank) {
+        super(name, payment, expirationDate);
         this.safetyRank = safetyRank;
         changeState(DevelopmentState.PLAN);
         changeApproveSate(ApproveState.NONE);

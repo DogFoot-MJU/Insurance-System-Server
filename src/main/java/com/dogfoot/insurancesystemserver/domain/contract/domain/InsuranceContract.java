@@ -4,7 +4,7 @@ import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.compensation.domain.Compensation;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
-import lombok.Builder;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,9 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn
 @Entity
-public class Contract {
+public abstract class InsuranceContract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,12 +33,18 @@ public class Contract {
     @OneToOne
     private Insurance insurance;
 
+    private String customerPhysical;
+
+    private String customerEconomical;
+
+    private String customerEnvironmental;
+
     private Long calculatedPayment;
 
-    @OneToMany(mappedBy = "contract")
+    @OneToMany(mappedBy = "insuranceContract")
     private List<Accident> accidentList;
 
-    @OneToMany(mappedBy = "contract")
+    @OneToMany(mappedBy = "insuranceContract")
     private List<Compensation> compensationList;
 
     private LocalDate expirationDate;
@@ -47,10 +55,13 @@ public class Contract {
     @UpdateTimestamp
     private Timestamp updatedDate;
 
-    @Builder
-    public Contract(User user, Insurance insurance, Long calculatedPayment, LocalDate expirationDate) {
+    public InsuranceContract(User user, Insurance insurance, String customerPhysical, String customerEconomical,
+                             String customerEnvironmental, Long calculatedPayment, LocalDate expirationDate) {
         this.user = user;
         this.insurance = insurance;
+        this.customerPhysical = customerPhysical;
+        this.customerEconomical = customerEconomical;
+        this.customerEnvironmental = customerEnvironmental;
         this.calculatedPayment = calculatedPayment;
         this.expirationDate = expirationDate;
         this.accidentList = new ArrayList<>();

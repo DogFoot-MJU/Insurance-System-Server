@@ -4,7 +4,6 @@ import com.dogfoot.insurancesystemserver.domain.capacitypolicy.domain.CapacityPo
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -24,13 +23,23 @@ public abstract class Insurance {
 
     private Long payment;
 
-    @Setter
+    private int expirationDate;
+
     @OneToOne
     private CapacityPolicy capacityPolicy;
 
-    public Insurance(String name, Long payment) {
+    private boolean isAvailableSale;
+
+    public Insurance(String name, Long payment, int expirationDate) {
         this.name = name;
         this.payment = payment;
+        this.expirationDate = expirationDate;
+        this.isAvailableSale = false;
+    }
+
+    public void setCapacityPolicy(CapacityPolicy capacityPolicy) {
+        this.capacityPolicy = capacityPolicy;
+        this.isAvailableSale = true;
     }
 
     public boolean hasCapacityPolicy() {
@@ -39,5 +48,6 @@ public abstract class Insurance {
 
     public void removeCapacityPolicy() {
         this.capacityPolicy = null;
+        this.isAvailableSale = false;
     }
 }
