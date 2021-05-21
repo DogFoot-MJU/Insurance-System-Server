@@ -27,6 +27,8 @@ public abstract class ProductDevelopment {
     @Column(nullable = false)
     private Long payment;
 
+    private int expirationDate;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private DevelopmentState state;
@@ -41,9 +43,10 @@ public abstract class ProductDevelopment {
     @UpdateTimestamp
     private Timestamp updatedDate;
 
-    public ProductDevelopment(String name, Long payment) {
+    public ProductDevelopment(String name, Long payment, int expirationDate) {
         this.name = name;
         this.payment = payment;
+        this.expirationDate = expirationDate;
     }
 
     protected void changeState(DevelopmentState state) {

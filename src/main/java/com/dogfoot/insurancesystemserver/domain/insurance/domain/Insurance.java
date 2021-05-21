@@ -23,14 +23,17 @@ public abstract class Insurance {
 
     private Long payment;
 
+    private int expirationDate;
+
     @OneToOne
     private CapacityPolicy capacityPolicy;
 
     private boolean isAvailableSale;
 
-    public Insurance(String name, Long payment) {
+    public Insurance(String name, Long payment, int expirationDate) {
         this.name = name;
         this.payment = payment;
+        this.expirationDate = expirationDate;
         this.isAvailableSale = false;
     }
 

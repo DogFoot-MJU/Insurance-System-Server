@@ -21,8 +21,8 @@ public class FireDevelopment extends ProductDevelopment {
     private Integer numberOfFloors;
 
     @Builder
-    public FireDevelopment(String name, Long payment, Long buildingPrice, LocalDate constructionDate, Long siteArea, Integer numberOfFloors) {
-        super(name, payment);
+    public FireDevelopment(String name, Long payment, int expirationDate, Long buildingPrice, LocalDate constructionDate, Long siteArea, Integer numberOfFloors) {
+        super(name, payment, expirationDate);
         this.buildingPrice = buildingPrice;
         this.constructionDate = constructionDate;
         this.siteArea = siteArea;

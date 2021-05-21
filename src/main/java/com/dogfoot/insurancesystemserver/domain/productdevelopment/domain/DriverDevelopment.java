@@ -20,8 +20,8 @@ public class DriverDevelopment extends ProductDevelopment {
     private DriverLicence driverLicence;
 
     @Builder
-    public DriverDevelopment(String name, Long payment, LocalDate dateOfLicenseAcquisition, DriverLicence driverLicence) {
-        super(name, payment);
+    public DriverDevelopment(String name, Long payment, int expirationDate, LocalDate dateOfLicenseAcquisition, DriverLicence driverLicence) {
+        super(name, payment, expirationDate);
         this.dateOfLicenseAcquisition = dateOfLicenseAcquisition;
         this.driverLicence = driverLicence;
         changeState(DevelopmentState.PLAN);

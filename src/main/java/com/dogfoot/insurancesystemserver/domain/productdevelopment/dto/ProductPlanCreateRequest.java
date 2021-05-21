@@ -23,6 +23,9 @@ public class ProductPlanCreateRequest {
     @NotNull
     private Long payment;
 
+    @NotNull
+    private int expirationDate;
+
     public <T extends ProductDevelopment> T toEntity(Class<T> clazz) {
         T t = null;
         try {
@@ -37,6 +40,7 @@ public class ProductPlanCreateRequest {
         return CarDevelopment.builder()
                 .name(this.name)
                 .payment(this.payment)
+                .expirationDate(this.expirationDate)
                 .build();
     }
 
@@ -44,6 +48,7 @@ public class ProductPlanCreateRequest {
         return DriverDevelopment.builder()
                 .name(this.name)
                 .payment(this.payment)
+                .expirationDate(this.expirationDate)
                 .build();
     }
 
@@ -51,6 +56,7 @@ public class ProductPlanCreateRequest {
         return FireDevelopment.builder()
                 .name(this.name)
                 .payment(this.payment)
+                .expirationDate(this.expirationDate)
                 .build();
     }
 
@@ -58,6 +64,7 @@ public class ProductPlanCreateRequest {
         return TravelDevelopment.builder()
                 .name(this.name)
                 .payment(this.payment)
+                .expirationDate(this.expirationDate)
                 .build();
     }
 

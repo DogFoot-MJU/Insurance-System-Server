@@ -21,8 +21,8 @@ public class CarDevelopment extends ProductDevelopment {
     private Long drivingDistance;
 
     @Builder
-    public CarDevelopment(String name, Long payment, Long carPrice, LocalDate carReleaseDate, Long drivingDistance) {
-        super(name, payment);
+    public CarDevelopment(String name, Long payment, int expirationDate, Long carPrice, LocalDate carReleaseDate, Long drivingDistance) {
+        super(name, payment, expirationDate);
         this.carPrice = carPrice;
         this.carReleaseDate = carReleaseDate;
         this.drivingDistance = drivingDistance;
