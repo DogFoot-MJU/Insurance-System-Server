@@ -1,4 +1,9 @@
 package com.dogfoot.insurancesystemserver.domain.contract.api;
 
-public class CarInsuranceApiController {
-}
+//@RequiredArgsConstructor
+//@RestController
+//public class CarInsuranceApiController implements InsuranceApiController {
+//
+//    private final
+//
+//}
