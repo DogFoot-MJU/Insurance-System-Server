@@ -21,7 +21,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
 @Entity
-public abstract class InsuranceContract {
+public abstract class Contract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public abstract class InsuranceContract {
     private User user;
 
     @OneToOne
-    private Insurance insurance;
+    private Insurance<?> insurance;
 
     private String customerPhysical;
 
@@ -41,10 +41,10 @@ public abstract class InsuranceContract {
 
     private Long calculatedPayment;
 
-    @OneToMany(mappedBy = "insuranceContract")
+    @OneToMany(mappedBy = "contract")
     private List<Accident> accidentList;
 
-    @OneToMany(mappedBy = "insuranceContract")
+    @OneToMany(mappedBy = "contract")
     private List<Compensation> compensationList;
 
     private LocalDate expirationDate;
@@ -55,8 +55,8 @@ public abstract class InsuranceContract {
     @UpdateTimestamp
     private Timestamp updatedDate;
 
-    public InsuranceContract(User user, Insurance insurance, String customerPhysical, String customerEconomical,
-                             String customerEnvironmental, Long calculatedPayment, LocalDate expirationDate) {
+    public Contract(User user, Insurance<?> insurance, String customerPhysical, String customerEconomical,
+                    String customerEnvironmental, Long calculatedPayment, LocalDate expirationDate) {
         this.user = user;
         this.insurance = insurance;
         this.customerPhysical = customerPhysical;
@@ -67,4 +67,5 @@ public abstract class InsuranceContract {
         this.accidentList = new ArrayList<>();
         this.compensationList = new ArrayList<>();
     }
+
 }

@@ -3,20 +3,27 @@ package com.dogfoot.insurancesystemserver.domain.productdevelopment.domain;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.DriverInsurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.DriverLicence;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.DriverProductDesignRequest;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.time.LocalDate;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DiscriminatorValue("Driver")
 @Entity
 public class DriverDevelopment extends ProductDevelopment {
 
     private LocalDate dateOfLicenseAcquisition;
+
+    @Enumerated(EnumType.STRING)
     private DriverLicence driverLicence;
 
     @Builder
@@ -50,4 +57,15 @@ public class DriverDevelopment extends ProductDevelopment {
                 .driverLicence(this.driverLicence)
                 .build();
     }
+
+    @Override
+    public ProductPlanDevelopmentResponse toResponse() {
+        return ProductPlanDevelopmentResponse.builder()
+                .id(this.getId())
+                .name(this.getName())
+                .payment(this.getPayment())
+                .state(this.getState())
+                .build();
+    }
+
 }

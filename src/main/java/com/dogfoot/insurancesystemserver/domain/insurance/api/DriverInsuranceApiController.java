@@ -1,8 +1,8 @@
 package com.dogfoot.insurancesystemserver.domain.insurance.api;
 
-import com.dogfoot.insurancesystemserver.domain.insurance.dto.CarInsuranceDetailResponse;
+import com.dogfoot.insurancesystemserver.domain.insurance.dto.DriverInsuranceDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.insurance.dto.InsuranceResponse;
-import com.dogfoot.insurancesystemserver.domain.insurance.service.CarInsuranceService;
+import com.dogfoot.insurancesystemserver.domain.insurance.service.DriverInsuranceService;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -13,25 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("api/v1/user/car")
+@RequestMapping("api/v1/user/driver")
 @RestController
-public class CarInsuranceApiController implements InsuranceApiController<CarInsuranceDetailResponse>{
+public class DriverInsuranceApiController implements InsuranceApiController<DriverInsuranceDetailResponse> {
 
-    private final CarInsuranceService insuranceService;
+    private final DriverInsuranceService insuranceService;
 
     @Override
     public ResponseEntity<Pagination<List<InsuranceResponse>>> listByAvailableSale(Pageable pageable) {
         return ResponseEntity.ok(this.insuranceService.listByAvailableSale(pageable));
     }
 
-//    @GetMapping("user/car/insurance/unavailable/list")
-//    public ResponseEntity<Pagination<List<CarInsuranceResponse>>> listByUnAvailableSale(@PageableDefault Pageable pageable) {
-//            return ResponseEntity.ok(this.carInsuranceService.listByUnAvailableSale(pageable));
-//    }
-
     @Override
-    public ResponseEntity<CarInsuranceDetailResponse> detail(Long id) {
+    public ResponseEntity<DriverInsuranceDetailResponse> detail(Long id) {
         return ResponseEntity.ok(this.insuranceService.read(id));
     }
-
 }

@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Builder(access = AccessLevel.PRIVATE)
@@ -22,7 +22,7 @@ public class ConsultingDetailResponse {
     private final String contents;
     private final String writer;
     private final ConsultingStateType state;
-    private final LocalDateTime CreationDate;
+    private final LocalDate creationDate;
 
     public static ConsultingDetailResponse from(Consulting consulting) {
         return ConsultingDetailResponse.builder()
@@ -31,7 +31,7 @@ public class ConsultingDetailResponse {
                 .contents(consulting.getContents())
                 .writer(consulting.getUser().getName())
                 .state(consulting.getState())
-                .CreationDate(consulting.getCreatedDate().toLocalDateTime())
+                .creationDate(consulting.getCreatedDate().toLocalDateTime().toLocalDate())
                 .build();
     }
 

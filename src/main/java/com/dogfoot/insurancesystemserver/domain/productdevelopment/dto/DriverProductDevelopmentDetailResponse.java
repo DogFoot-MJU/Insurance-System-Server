@@ -21,6 +21,7 @@ public class DriverProductDevelopmentDetailResponse {
     private final Long id;
     private final String name;
     private final Long payment;
+    private final int expirationDate;
     private final DevelopmentState state;
     private final LocalDate DateOfLicenseAcquisition;
     private final DriverLicence driverLicence;
@@ -30,6 +31,7 @@ public class DriverProductDevelopmentDetailResponse {
                 .id(driverDevelopment.getId())
                 .name(driverDevelopment.getName())
                 .payment(driverDevelopment.getPayment())
+                .expirationDate(driverDevelopment.getExpirationDate())
                 .state(driverDevelopment.getState())
                 .DateOfLicenseAcquisition(driverDevelopment.getDateOfLicenseAcquisition())
                 .driverLicence(driverDevelopment.getDriverLicence())

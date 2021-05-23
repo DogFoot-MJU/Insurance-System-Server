@@ -1,17 +1,20 @@
 package com.dogfoot.insurancesystemserver.domain.insurance.domain;
 
 
+import com.dogfoot.insurancesystemserver.domain.insurance.dto.TravelInsuranceDetailResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DiscriminatorValue("Travel")
 @Entity
-public class TravelInsurance extends Insurance {
+public class TravelInsurance extends Insurance<TravelInsuranceDetailResponse> {
 
     private SafetyRank safetyRank;
 
@@ -21,4 +24,8 @@ public class TravelInsurance extends Insurance {
         this.safetyRank = safetyRank;
     }
 
+    @Override
+    public TravelInsuranceDetailResponse toDetailResponse() {
+        return null;
+    }
 }

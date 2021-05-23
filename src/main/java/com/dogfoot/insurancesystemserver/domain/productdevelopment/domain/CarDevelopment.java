@@ -2,17 +2,19 @@ package com.dogfoot.insurancesystemserver.domain.productdevelopment.domain;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.CarInsurance;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.CarProductDesignRequest;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.time.LocalDate;
 
-@SuppressWarnings("JpaObjectClassSignatureInspection")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DiscriminatorValue("Car")
 @Entity
 public class CarDevelopment extends ProductDevelopment {
 
@@ -56,4 +58,13 @@ public class CarDevelopment extends ProductDevelopment {
                 .build();
     }
 
+    @Override
+    public ProductPlanDevelopmentResponse toResponse() {
+        return ProductPlanDevelopmentResponse.builder()
+                .id(this.getId())
+                .name(this.getName())
+                .payment(this.getPayment())
+                .state(this.getState())
+                .build();
+    }
 }

@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Builder(access = AccessLevel.PRIVATE)
@@ -20,7 +20,7 @@ public class ConsultingAnswerResponse {
     private final String title;
     private final String contents;
     private final String writer;
-    private final LocalDateTime CreationDate;
+    private final LocalDate CreationDate;
 
     public static ConsultingAnswerResponse from(ConsultingAnswer answer) {
         return ConsultingAnswerResponse.builder()
@@ -28,7 +28,7 @@ public class ConsultingAnswerResponse {
                 .title(answer.getTitle())
                 .contents(answer.getContents())
                 .writer("관리자")
-                .CreationDate(answer.getCreatedDate().toLocalDateTime())
+                .CreationDate(answer.getCreatedDate().toLocalDateTime().toLocalDate())
                 .build();
     }
 

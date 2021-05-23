@@ -12,6 +12,7 @@ import com.dogfoot.insurancesystemserver.global.mail.repository.EmailAuthCodeRep
 import com.dogfoot.insurancesystemserver.global.mail.util.EmailAuthCodeGenerator;
 import com.dogfoot.insurancesystemserver.global.mail.util.EmailUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +43,12 @@ public class UserServiceImpl implements UserService {
         emailUtil.sendEmail(dto.getEmail(), EmailSubject.EMAIL_AUTH_REQUEST, message);
 
         return userRepository.save(dto.toEntity(passwordEncoder));
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return this.userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        UserExceptionMessage.USERNAME_NOT_FOUND_EXCEPTION_MESSAGE.getMessage()));
     }
 }

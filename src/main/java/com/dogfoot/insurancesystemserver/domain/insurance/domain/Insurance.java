@@ -10,36 +10,41 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
+@DiscriminatorColumn(name = "dtype")
 @Entity
-public abstract class Insurance {
+public abstract class Insurance<DetailRes> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="dtype", insertable = false, updatable = false)
+    private String dtype;
+
     @Column(unique = true, nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private Long payment;
 
+    @Column(nullable = false)
     private int expirationDate;
 
     @OneToOne
     private CapacityPolicy capacityPolicy;
 
-    private boolean isAvailableSale;
+    private boolean availableSale;
 
     public Insurance(String name, Long payment, int expirationDate) {
         this.name = name;
         this.payment = payment;
         this.expirationDate = expirationDate;
-        this.isAvailableSale = false;
+        this.availableSale = false;
     }
 
     public void setCapacityPolicy(CapacityPolicy capacityPolicy) {
         this.capacityPolicy = capacityPolicy;
-        this.isAvailableSale = true;
+        this.availableSale = true;
     }
 
     public boolean hasCapacityPolicy() {
@@ -48,6 +53,9 @@ public abstract class Insurance {
 
     public void removeCapacityPolicy() {
         this.capacityPolicy = null;
-        this.isAvailableSale = false;
+        this.availableSale = false;
     }
+
+    public abstract DetailRes toDetailResponse();
+
 }

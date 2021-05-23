@@ -5,11 +5,13 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.Produc
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface ProductDevelopmentRepository<T extends ProductDevelopment> extends JpaRepository<T, Long> {
+public interface DevelopmentRepository<T extends ProductDevelopment> extends JpaRepository<T, Long>, JpaSpecificationExecutor<T> {
 
     boolean existsByName(String string);
 
     Page<T> findAllByState(DevelopmentState state, Pageable pageable);
+//    Page<T> findAllByDtypeState(DevelopmentState state, Pageable pageable);
 
 }

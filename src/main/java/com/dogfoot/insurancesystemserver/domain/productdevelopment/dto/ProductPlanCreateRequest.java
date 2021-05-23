@@ -26,16 +26,6 @@ public class ProductPlanCreateRequest {
     @NotNull
     private int expirationDate;
 
-    public <T extends ProductDevelopment> T toEntity(Class<T> clazz) {
-        T t = null;
-        try {
-            t = clazz.getConstructor(String.class, Long.class).newInstance(name, payment);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return t;
-    }
-
     public CarDevelopment toCarProductDevelopmentEntity() {
         return CarDevelopment.builder()
                 .name(this.name)
