@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.contract.api;
 
+import com.dogfoot.insurancesystemserver.domain.contract.dto.CalculatePaymentResponse;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +13,11 @@ import javax.validation.Valid;
 //public interface ContractApiController<Req, Res, DetailRes> {
 public interface ContractApiController<CreateReq> {
 
-    @PostMapping
-    ResponseEntity<DefaultResponseDto> create(@AuthenticationPrincipal PrincipalDetails principal, @Valid @RequestBody CreateReq dto);
+    @PostMapping("apply")
+    ResponseEntity<DefaultResponseDto> apply(@AuthenticationPrincipal PrincipalDetails principal, @Valid @RequestBody CreateReq dto);
 
+    @PostMapping("calculate")
+    ResponseEntity<CalculatePaymentResponse> calculatePayment(@AuthenticationPrincipal PrincipalDetails principal, @Valid @RequestBody CreateReq dto);
 //    ResponseEntity<DetailRes> read(Long id);
 
 //    ResponseEntity<Pagination<List<Res>>> list(Pageable pageable);

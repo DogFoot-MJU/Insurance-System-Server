@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.contract.service;
 
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
+import com.dogfoot.insurancesystemserver.domain.contract.dto.CalculatePaymentResponse;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.contract.repository.ContractRepository;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
@@ -12,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public abstract class ContractServiceImpl<C extends Contract, DetailRes, I extends Insurance, CreateReq extends ContractCreateRequest<C, I>>
-        implements ContractService<I, CreateReq>{
+public abstract class ContractServiceImpl<C extends Contract, DetailRes, I extends Insurance,
+        CreateReq extends ContractCreateRequest<C, I>> implements ContractService<I, CreateReq>{
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -32,6 +33,12 @@ public abstract class ContractServiceImpl<C extends Contract, DetailRes, I exten
         I insurance = insuranceService.findById(dto.getInsuranceId());
         Long payment = calculatePayment(dto, insurance);
         this.contractRepository.save(dto.toEntity(user, insurance, payment));
+    }
+
+    @Override
+    public CalculatePaymentResponse calculateRequest(PrincipalDetails principal, CreateReq dto) {
+        I insurance = insuranceService.findById(dto.getInsuranceId());
+        return CalculatePaymentResponse.from(calculatePayment(dto, insurance));
     }
 
 }
