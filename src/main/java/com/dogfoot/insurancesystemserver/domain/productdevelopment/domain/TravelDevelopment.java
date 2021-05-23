@@ -2,19 +2,25 @@ package com.dogfoot.insurancesystemserver.domain.productdevelopment.domain;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.SafetyRank;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.TravelInsurance;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.TravelProductDesignRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DiscriminatorValue("Travel")
 @Entity
 public class TravelDevelopment extends ProductDevelopment {
 
+    @Enumerated(EnumType.STRING)
     private SafetyRank safetyRank;
 
     @Builder
@@ -45,4 +51,15 @@ public class TravelDevelopment extends ProductDevelopment {
                 .safetyRank(this.safetyRank)
                 .build();
     }
+
+    @Override
+    public ProductPlanDevelopmentResponse toResponse() {
+        return ProductPlanDevelopmentResponse.builder()
+                .id(this.getId())
+                .name(this.getName())
+                .payment(this.getPayment())
+                .state(this.getState())
+                .build();
+    }
+
 }

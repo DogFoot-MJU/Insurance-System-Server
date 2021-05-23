@@ -1,6 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.compensation.domain;
 
-import com.dogfoot.insurancesystemserver.domain.contract.domain.InsuranceContract;
+import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,7 +17,7 @@ public class Compensation {
     private Long compensationAmount;
 
     @ManyToOne
-    private InsuranceContract insuranceContract;
+    private Contract contract;
 
     @CreationTimestamp
     private Timestamp createdDate;

@@ -19,6 +19,7 @@ public class TravelProductDevelopmentDetailResponse {
     private final Long id;
     private final String name;
     private final Long payment;
+    private final int expirationDate;
     private final DevelopmentState state;
     private final SafetyRank safetyRank;
 
@@ -27,6 +28,7 @@ public class TravelProductDevelopmentDetailResponse {
                 .id(travelDevelopment.getId())
                 .name(travelDevelopment.getName())
                 .payment(travelDevelopment.getPayment())
+                .expirationDate(travelDevelopment.getExpirationDate())
                 .state(travelDevelopment.getState())
                 .safetyRank(travelDevelopment.getSafetyRank())
                 .build();

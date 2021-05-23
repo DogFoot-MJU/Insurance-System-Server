@@ -1,15 +1,18 @@
 package com.dogfoot.insurancesystemserver.domain.insurance.domain;
 
 
+import com.dogfoot.insurancesystemserver.domain.insurance.dto.TravelInsuranceDetailResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DiscriminatorValue("Travel")
 @Entity
 public class TravelInsurance extends Insurance {
 
@@ -21,4 +24,18 @@ public class TravelInsurance extends Insurance {
         this.safetyRank = safetyRank;
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public TravelInsuranceDetailResponse toDetailResponse() {
+        return TravelInsuranceDetailResponse.builder()
+                .id(this.getId())
+                .name(this.getName())
+                .payment(this.getPayment())
+                .physical(this.getCapacityPolicy().getPhysical())
+                .economical(this.getCapacityPolicy().getEconomical())
+                .environmental(this.getCapacityPolicy().getEnvironmental())
+                .isAvailableSale(this.isAvailableSale())
+                .safetyRank(this.safetyRank)
+                .build();
+    }
 }

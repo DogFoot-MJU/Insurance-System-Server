@@ -20,6 +20,7 @@ public class FireProductDevelopmentDetailResponse {
     private final Long id;
     private final String name;
     private final Long payment;
+    private final int expirationDate;
     private final DevelopmentState state;
     private final Long buildingPrice;
     private final LocalDate constructionDate;
@@ -31,6 +32,7 @@ public class FireProductDevelopmentDetailResponse {
                 .id(fireDevelopment.getId())
                 .name(fireDevelopment.getName())
                 .payment(fireDevelopment.getPayment())
+                .expirationDate(fireDevelopment.getExpirationDate())
                 .state(fireDevelopment.getState())
                 .buildingPrice(fireDevelopment.getBuildingPrice())
                 .constructionDate(fireDevelopment.getConstructionDate())

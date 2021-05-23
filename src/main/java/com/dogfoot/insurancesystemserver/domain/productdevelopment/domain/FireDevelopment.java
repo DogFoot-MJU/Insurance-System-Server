@@ -2,16 +2,19 @@ package com.dogfoot.insurancesystemserver.domain.productdevelopment.domain;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.FireInsurance;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.FireProductDesignRequest;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DiscriminatorValue("Fire")
 @Entity
 public class FireDevelopment extends ProductDevelopment {
 
@@ -57,4 +60,15 @@ public class FireDevelopment extends ProductDevelopment {
                 .numberOfFloors(this.numberOfFloors)
                 .build();
     }
+
+    @Override
+    public ProductPlanDevelopmentResponse toResponse() {
+        return ProductPlanDevelopmentResponse.builder()
+                .id(this.getId())
+                .name(this.getName())
+                .payment(this.getPayment())
+                .state(this.getState())
+                .build();
+    }
+
 }

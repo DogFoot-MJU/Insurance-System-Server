@@ -9,11 +9,13 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPl
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.TravelProductDesignRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.TravelProductDevelopmentDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.ProductDevelopmentRepository;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.DevelopmentRepository;
+import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,14 +25,15 @@ import java.util.stream.Collectors;
 @Service
 public class TravelDevelopmentServiceImpl implements DevelopmentService<TravelProductDesignRequest, TravelProductDevelopmentDetailResponse, TravelDevelopment> {
 
-    private final ProductDevelopmentRepository<TravelDevelopment> productDevelopmentRepository;
+    private final DevelopmentRepository<TravelDevelopment> developmentRepository;
     private final InsuranceRepository<TravelInsurance> travelInsuranceRepository;
+    private final ListSpecification<TravelDevelopment> specification;
 
     @Override
     public void plan(ProductPlanCreateRequest dto) {
-        if (productDevelopmentRepository.existsByName(dto.getName()))
+        if (developmentRepository.existsByName(dto.getName()))
             throw new DuplicateInsuranceNameException("이름 중복.");
-        productDevelopmentRepository.save(dto.toTravelProductDevelopmentEntity());
+        developmentRepository.save(dto.toTravelProductDevelopmentEntity());
     }
 
     @Override
@@ -50,26 +53,29 @@ public class TravelDevelopmentServiceImpl implements DevelopmentService<TravelPr
 
     @Override
     public Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Page<TravelDevelopment> page = productDevelopmentRepository.findAllByState(state, pageable);
-        List<ProductPlanDevelopmentResponse> list = page.stream().map(ProductPlanDevelopmentResponse::from)
+        Specification<TravelDevelopment> spec = Specification.where(specification.equalToType("Fire"))
+                .and(specification.equalToState(state));
+        Page<TravelDevelopment> page = developmentRepository.findAll(spec, pageable);
+        List<ProductPlanDevelopmentResponse> list = page.get()
+                .map(TravelDevelopment::toResponse)
                 .collect(Collectors.toList());
         return Pagination.of(page, list);
     }
 
     @Override
     public TravelProductDevelopmentDetailResponse read(Long id) {
-        return TravelProductDevelopmentDetailResponse.from(productDevelopmentRepository.findById(id)
+        return TravelProductDevelopmentDetailResponse.from(developmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다.")));
     }
 
     @Override
     public void delete(Long id) {
-        this.productDevelopmentRepository.delete(findById(id));
+        this.developmentRepository.delete(findById(id));
     }
 
     @Override
     public TravelDevelopment findById(Long id) {
-        return productDevelopmentRepository.findById(id)
+        return developmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."));
     }
 }

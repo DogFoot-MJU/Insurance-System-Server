@@ -20,6 +20,7 @@ public class CarProductDevelopmentDetailResponse {
     private final Long id;
     private final String name;
     private final Long payment;
+    private final int expirationDate;
     private final DevelopmentState state;
     private final Long carPrice;
     private final LocalDate carReleaseDate;
@@ -30,6 +31,7 @@ public class CarProductDevelopmentDetailResponse {
                 .id(carDevelopment.getId())
                 .name(carDevelopment.getName())
                 .payment(carDevelopment.getPayment())
+                .expirationDate(carDevelopment.getExpirationDate())
                 .state(carDevelopment.getState())
                 .carPrice(carDevelopment.getCarPrice())
                 .carReleaseDate(carDevelopment.getCarReleaseDate())

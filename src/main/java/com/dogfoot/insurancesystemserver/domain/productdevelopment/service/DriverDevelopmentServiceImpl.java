@@ -9,11 +9,13 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.DriverPro
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.ProductDevelopmentRepository;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.DevelopmentRepository;
+import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,14 +25,15 @@ import java.util.stream.Collectors;
 @Service
 public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverProductDesignRequest, DriverProductDevelopmentDetailResponse, DriverDevelopment> {
 
-    private final ProductDevelopmentRepository<DriverDevelopment> productDevelopmentRepository;
+    private final DevelopmentRepository<DriverDevelopment> developmentRepository;
     private final InsuranceRepository<DriverInsurance> driverInsuranceRepository;
+    private final ListSpecification<DriverDevelopment> specification;
 
     @Override
     public void plan(ProductPlanCreateRequest dto) {
-        if (productDevelopmentRepository.existsByName(dto.getName()))
+        if (developmentRepository.existsByName(dto.getName()))
             throw new DuplicateInsuranceNameException("이름 중복.");
-        productDevelopmentRepository.save(dto.toDriverProductDevelopmentEntity());
+        developmentRepository.save(dto.toDriverProductDevelopmentEntity());
     }
 
     @Override
@@ -50,8 +53,11 @@ public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverPr
 
     @Override
     public Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Page<DriverDevelopment> page = productDevelopmentRepository.findAllByState(state, pageable);
-        List<ProductPlanDevelopmentResponse> list = page.stream().map(ProductPlanDevelopmentResponse::from)
+        Specification<DriverDevelopment> spec = Specification.where(specification.equalToType("Driver"))
+                .and(specification.equalToState(state));
+        Page<DriverDevelopment> page = developmentRepository.findAll(spec, pageable);
+        List<ProductPlanDevelopmentResponse> list = page.get()
+                .map(DriverDevelopment::toResponse)
                 .collect(Collectors.toList());
         return Pagination.of(page, list);
     }
@@ -63,12 +69,12 @@ public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverPr
 
     @Override
     public void delete(Long id) {
-        this.productDevelopmentRepository.delete(findById(id));
+        this.developmentRepository.delete(findById(id));
     }
 
     @Override
     public DriverDevelopment findById(Long id) {
-        return productDevelopmentRepository.findById(id)
+        return developmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."));
     }
 }

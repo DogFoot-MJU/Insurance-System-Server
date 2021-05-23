@@ -7,7 +7,7 @@ import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolic
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyUpdateRequest;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.repository.CapacityPolicyRepository;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
-import com.dogfoot.insurancesystemserver.domain.insurance.service.InsuranceService;
+import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,11 +22,13 @@ import java.util.stream.Collectors;
 public class CapacityPolicyServiceImpl implements CapacityPolicyService {
 
     private final CapacityPolicyRepository capacityPolicyRepository;
-    private final InsuranceService<Insurance> insuranceService;
+    //    private final InsuranceService<?, Insurance<?>> insuranceService;
+    private final InsuranceRepository<Insurance> insuranceRepository;
 
     @Override
     public void create(CapacityPolicyCreationRequest dto) {
-        Insurance insurance = this.insuranceService.findById(dto.getInsuranceId());
+        Insurance insurance = this.insuranceRepository.findById(dto.getInsuranceId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 보험을 찾을 수 없습니다."));
         if (insurance.hasCapacityPolicy())
             throw new IllegalArgumentException("해당 보험 상품은 이미 인수 정책을 가지고 있습니다.");
         insurance.setCapacityPolicy(this.capacityPolicyRepository.save(dto.toEntity()));

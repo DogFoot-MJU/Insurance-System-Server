@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.domain;
 
 
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,13 +14,16 @@ import java.sql.Timestamp;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
+@DiscriminatorColumn(name = "dtype")
 @Entity
 public abstract class ProductDevelopment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name="dtype", insertable = false, updatable = false)
+    private String dtype;
 
     @Column(nullable = false, unique = true)
     private String name;
@@ -56,4 +60,7 @@ public abstract class ProductDevelopment {
     protected void changeApproveSate(ApproveState approveState) {
         this.approveState = approveState;
     }
+
+    public abstract ProductPlanDevelopmentResponse toResponse();
+
 }
