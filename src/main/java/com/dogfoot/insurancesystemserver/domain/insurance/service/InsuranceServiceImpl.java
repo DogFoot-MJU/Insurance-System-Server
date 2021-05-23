@@ -28,7 +28,17 @@ public abstract class InsuranceServiceImpl<DetailRes, T extends Insurance> imple
 
     @Override
     public Pagination<List<InsuranceResponse>> listByAvailableSale(Pageable pageable) {
-        Specification<T> spec = getSpecification();
+        Specification<T> spec = getAvailableSpecification();
+        return getListPagination(pageable, spec);
+    }
+
+    @Override
+    public Pagination<List<InsuranceResponse>> listByUnAvailableSale(Pageable pageable) {
+        Specification<T> spec = getUnAvailableSpecification();
+        return getListPagination(pageable, spec);
+    }
+
+    private Pagination<List<InsuranceResponse>> getListPagination(Pageable pageable, Specification<T> spec) {
         Page<T> page = this.insuranceRepository.findAll(spec, pageable);
         List<InsuranceResponse> data = page.get().map(InsuranceResponse::from).collect(Collectors.toList());
         return Pagination.of(page, data);

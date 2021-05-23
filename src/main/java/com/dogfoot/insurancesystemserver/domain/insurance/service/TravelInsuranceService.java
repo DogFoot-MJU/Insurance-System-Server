@@ -9,7 +9,13 @@ import org.springframework.stereotype.Service;
 public class TravelInsuranceService extends InsuranceServiceImpl<TravelInsuranceDetailResponse, TravelInsurance> {
 
     @Override
-    public Specification<TravelInsurance> getSpecification() {
-        return specification.equalToType("Travel").and(specification.equalToIsAvailableTrue());
+    public Specification<TravelInsurance> getAvailableSpecification() {
+        return specification.equalToType("Travel").and(specification.equalToAvailable());
     }
+
+    @Override
+    public Specification<TravelInsurance> getUnAvailableSpecification() {
+        return specification.equalToType("Travel").and(specification.equalToUnAvailable());
+    }
+
 }

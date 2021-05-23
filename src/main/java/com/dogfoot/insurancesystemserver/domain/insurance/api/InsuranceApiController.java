@@ -15,6 +15,9 @@ public interface InsuranceApiController<DetailReq> {
     @GetMapping("insurance/available/list")
     ResponseEntity<Pagination<List<InsuranceResponse>>> listByAvailableSale(@PageableDefault Pageable pageable);
 
+    @GetMapping("insurance/unavailable/list")
+    ResponseEntity<Pagination<List<InsuranceResponse>>> listByUnAvailableSale(@PageableDefault Pageable pageable);
+
     @GetMapping("insurance/{id}")
     ResponseEntity<DetailReq> detail(@PathVariable Long id);
 

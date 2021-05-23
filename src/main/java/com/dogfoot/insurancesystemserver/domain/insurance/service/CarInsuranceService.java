@@ -2,7 +2,6 @@ package com.dogfoot.insurancesystemserver.domain.insurance.service;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.CarInsurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.dto.CarInsuranceDetailResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +9,13 @@ import org.springframework.stereotype.Service;
 public class CarInsuranceService extends InsuranceServiceImpl<CarInsuranceDetailResponse, CarInsurance> {
 
     @Override
-    public Specification<CarInsurance> getSpecification() {
-        return specification.equalToType("Car").and(specification.equalToIsAvailableTrue());
+    public Specification<CarInsurance> getAvailableSpecification() {
+        return specification.equalToType("Car").and(specification.equalToAvailable());
     }
+
+    @Override
+    public Specification<CarInsurance> getUnAvailableSpecification() {
+        return specification.equalToType("Car").and(specification.equalToUnAvailable());
+    }
+
 }

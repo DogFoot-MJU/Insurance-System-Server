@@ -15,8 +15,12 @@ public class ListSpecification<T> {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("state"), state);
     }
 
-    public Specification<T> equalToIsAvailableTrue() {
+    public Specification<T> equalToAvailable() {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("availableSale"), true);
+    }
+
+    public Specification<T> equalToUnAvailable() {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("availableSale"), false);
     }
 
 }

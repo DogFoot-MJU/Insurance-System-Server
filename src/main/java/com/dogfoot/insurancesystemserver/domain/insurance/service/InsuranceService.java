@@ -12,10 +12,14 @@ public interface InsuranceService<DetailRes, T extends Insurance> {
 
     Pagination<List<InsuranceResponse>> listByAvailableSale(Pageable pageable);
 
+    Pagination<List<InsuranceResponse>> listByUnAvailableSale(Pageable pageable);
+
     DetailRes read(Long id);
 
     T findById(Long id);
 
-    Specification<T> getSpecification();
+    Specification<T> getAvailableSpecification();
+
+    Specification<T> getUnAvailableSpecification();
 
 }
