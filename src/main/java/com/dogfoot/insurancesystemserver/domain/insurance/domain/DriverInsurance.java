@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue("Driver")
 @Entity
-public class DriverInsurance extends Insurance<DriverInsuranceDetailResponse> {
+public class DriverInsurance extends Insurance {
 
     private LocalDate dateOfLicenseAcquisition;
     private DriverLicence driverLicence;
@@ -27,6 +27,7 @@ public class DriverInsurance extends Insurance<DriverInsuranceDetailResponse> {
         this.driverLicence = driverLicence;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public DriverInsuranceDetailResponse toDetailResponse() {
         return DriverInsuranceDetailResponse.builder()

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue("Fire")
 @Entity
-public class FireInsurance extends Insurance<FireInsuranceDetailResponse> {
+public class FireInsurance extends Insurance {
 
     private Long buildingPrice;
     private LocalDate constructionDate;
@@ -31,8 +31,21 @@ public class FireInsurance extends Insurance<FireInsuranceDetailResponse> {
         this.numberOfFloors = numberOfFloors;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public FireInsuranceDetailResponse toDetailResponse() {
-        return null;
+        return FireInsuranceDetailResponse.builder()
+                .id(this.getId())
+                .name(this.getName())
+                .payment(this.getPayment())
+                .physical(this.getCapacityPolicy().getPhysical())
+                .economical(this.getCapacityPolicy().getEconomical())
+                .environmental(this.getCapacityPolicy().getEnvironmental())
+                .isAvailableSale(this.isAvailableSale())
+                .buildingPrice(this.buildingPrice)
+                .constructionDate(this.constructionDate)
+                .siteArea(this.siteArea)
+                .numberOfFloors(this.numberOfFloors)
+                .build();
     }
 }

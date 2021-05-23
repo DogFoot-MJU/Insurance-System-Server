@@ -31,7 +31,7 @@ public abstract class Contract {
     private User user;
 
     @OneToOne
-    private Insurance<?> insurance;
+    private Insurance insurance;
 
     private String customerPhysical;
 
@@ -55,7 +55,7 @@ public abstract class Contract {
     @UpdateTimestamp
     private Timestamp updatedDate;
 
-    public Contract(User user, Insurance<?> insurance, String customerPhysical, String customerEconomical,
+    public Contract(User user, Insurance insurance, String customerPhysical, String customerEconomical,
                     String customerEnvironmental, Long calculatedPayment, LocalDate expirationDate) {
         this.user = user;
         this.insurance = insurance;

@@ -20,7 +20,7 @@ public class CarContract extends Contract {
     private Long customerDrivingDistance;
 
     @Builder
-    public CarContract(User user, Insurance<?> insurance, String customerPhysical, String customerEconomical,
+    public CarContract(User user, Insurance insurance, String customerPhysical, String customerEconomical,
                        String customerEnvironmental, Long calculatedPayment, LocalDate expirationDate,
                        Long customerCarPrice, LocalDate customerCarReleaseDate, Long customerDrivingDistance) {
         super(user, insurance, customerPhysical, customerEconomical, customerEnvironmental, calculatedPayment, expirationDate);

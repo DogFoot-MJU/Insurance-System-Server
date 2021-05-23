@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue("Travel")
 @Entity
-public class TravelInsurance extends Insurance<TravelInsuranceDetailResponse> {
+public class TravelInsurance extends Insurance {
 
     private SafetyRank safetyRank;
 
@@ -24,8 +24,18 @@ public class TravelInsurance extends Insurance<TravelInsuranceDetailResponse> {
         this.safetyRank = safetyRank;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public TravelInsuranceDetailResponse toDetailResponse() {
-        return null;
+        return TravelInsuranceDetailResponse.builder()
+                .id(this.getId())
+                .name(this.getName())
+                .payment(this.getPayment())
+                .physical(this.getCapacityPolicy().getPhysical())
+                .economical(this.getCapacityPolicy().getEconomical())
+                .environmental(this.getCapacityPolicy().getEnvironmental())
+                .isAvailableSale(this.isAvailableSale())
+                .safetyRank(this.safetyRank)
+                .build();
     }
 }

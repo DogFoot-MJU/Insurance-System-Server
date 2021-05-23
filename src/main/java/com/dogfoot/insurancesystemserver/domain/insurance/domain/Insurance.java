@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "dtype")
 @Entity
-public abstract class Insurance<DetailRes> {
+public abstract class Insurance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +56,7 @@ public abstract class Insurance<DetailRes> {
         this.availableSale = false;
     }
 
-    public abstract DetailRes toDetailResponse();
+//    public abstract DetailRes toDetailResponse();
+    public abstract <T> T toDetailResponse();
 
 }

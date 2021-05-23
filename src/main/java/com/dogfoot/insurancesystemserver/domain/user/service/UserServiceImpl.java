@@ -1,11 +1,13 @@
 package com.dogfoot.insurancesystemserver.domain.user.service;
 
+import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
 import com.dogfoot.insurancesystemserver.domain.user.exception.EmailDuplicateException;
 import com.dogfoot.insurancesystemserver.domain.user.exception.EmailNotVerifiedException;
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
 import com.dogfoot.insurancesystemserver.domain.user.repository.UserRepository;
+import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import com.dogfoot.insurancesystemserver.global.mail.domain.EmailAuthCode;
 import com.dogfoot.insurancesystemserver.global.mail.domain.EmailSubject;
 import com.dogfoot.insurancesystemserver.global.mail.repository.EmailAuthCodeRepository;
@@ -43,6 +45,14 @@ public class UserServiceImpl implements UserService {
         emailUtil.sendEmail(dto.getEmail(), EmailSubject.EMAIL_AUTH_REQUEST, message);
 
         return userRepository.save(dto.toEntity(passwordEncoder));
+    }
+
+    @Override
+    public Insurance findAllMyInsurance(PrincipalDetails principal) {
+        User user = findByEmail(principal.getUsername());
+        System.out.println(user.getContractList().size());
+        System.out.println(user.getContractList().size());
+        return null;
     }
 
     @Override

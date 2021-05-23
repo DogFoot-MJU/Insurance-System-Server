@@ -4,6 +4,7 @@ import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.dto.InsuranceResponse;
 import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
 import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,19 +15,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public abstract class InsuranceServiceImpl<DetailRes, T extends Insurance<DetailRes>> implements InsuranceService<DetailRes, T> {
+public abstract class InsuranceServiceImpl<DetailRes, T extends Insurance> implements InsuranceService<DetailRes, T> {
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private InsuranceRepository<T> insuranceRepository;
+
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    protected ListSpecification<T> specification;
+
 
     @Override
     public Pagination<List<InsuranceResponse>> listByAvailableSale(Pageable pageable) {
         Specification<T> spec = getSpecification();
         Page<T> page = this.insuranceRepository.findAll(spec, pageable);
         List<InsuranceResponse> data = page.get().map(InsuranceResponse::from).collect(Collectors.toList());
-//        Page<T> page = this.insuranceRepository.findAllByIsAvailableSale(true, pageable);
-//        List<InsuranceResponse> data = page.getContent().stream().map(InsuranceResponse::from).collect(Collectors.toList());
         return Pagination.of(page, data);
     }
 

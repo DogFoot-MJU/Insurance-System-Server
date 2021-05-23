@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
 
 //public interface ContractApiController<Req, Res, DetailRes> {
-public interface ContractApiController<Req> {
+public interface ContractApiController<CreateReq> {
 
     @PostMapping
-    ResponseEntity<DefaultResponseDto> create(@AuthenticationPrincipal PrincipalDetails principal, @Valid @RequestBody Req dto);
+    ResponseEntity<DefaultResponseDto> create(@AuthenticationPrincipal PrincipalDetails principal, @Valid @RequestBody CreateReq dto);
 
 //    ResponseEntity<DetailRes> read(Long id);
 

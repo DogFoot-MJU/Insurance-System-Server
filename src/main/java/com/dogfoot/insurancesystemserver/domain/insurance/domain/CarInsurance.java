@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue("Car")
 @Entity
-public class CarInsurance extends Insurance<CarInsuranceDetailResponse> {
+public class CarInsurance extends Insurance {
 
     private Long carPrice;
     private LocalDate carReleaseDate;
@@ -29,6 +29,7 @@ public class CarInsurance extends Insurance<CarInsuranceDetailResponse> {
         this.drivingDistance = drivingDistance;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public CarInsuranceDetailResponse toDetailResponse() {
         return CarInsuranceDetailResponse.builder()
@@ -44,4 +45,20 @@ public class CarInsurance extends Insurance<CarInsuranceDetailResponse> {
                 .drivingDistance(this.drivingDistance)
                 .build();
     }
+
+    //    @Override
+//    public CarInsuranceDetailResponse toDetailResponse() {
+//        return CarInsuranceDetailResponse.builder()
+//                .id(this.getId())
+//                .name(this.getName())
+//                .payment(this.getPayment())
+//                .physical(this.getCapacityPolicy().getPhysical())
+//                .economical(this.getCapacityPolicy().getEconomical())
+//                .environmental(this.getCapacityPolicy().getEnvironmental())
+//                .isAvailableSale(this.isAvailableSale())
+//                .carPrice(this.carPrice)
+//                .carReleaseDate(this.carReleaseDate)
+//                .drivingDistance(this.drivingDistance)
+//                .build();
+//    }
 }

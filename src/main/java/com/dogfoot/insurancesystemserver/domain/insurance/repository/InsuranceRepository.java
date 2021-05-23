@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface InsuranceRepository<T extends Insurance<?>> extends JpaRepository<T, Long>, JpaSpecificationExecutor<T> {
+public interface InsuranceRepository<T extends Insurance> extends JpaRepository<T, Long>, JpaSpecificationExecutor<T> {
 
     Page<T> findAllByAvailableSale(boolean availableSale, Pageable pageable);
 

@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class CarContractCreateCreateRequest extends ContractCreateRequest<CarContract, CarInsurance> {
+public class CarContractCreateRequest extends ContractCreateRequest<CarContract, CarInsurance> {
 
     @NotNull private Long insuranceId;
     @NotBlank private String customerPhysical;

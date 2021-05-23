@@ -8,7 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
-public interface InsuranceService<DetailRes, T extends Insurance<DetailRes>> {
+public interface InsuranceService<DetailRes, T extends Insurance> {
 
     Pagination<List<InsuranceResponse>> listByAvailableSale(Pageable pageable);
 

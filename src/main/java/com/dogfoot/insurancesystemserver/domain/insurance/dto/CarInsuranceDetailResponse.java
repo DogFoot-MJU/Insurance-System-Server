@@ -26,19 +26,4 @@ public class CarInsuranceDetailResponse {
     private final LocalDate carReleaseDate;
     private final Long drivingDistance;
 
-//    public static CarInsuranceDetailResponse from(CarInsurance insurance) {
-//        return CarInsuranceDetailResponse.builder()
-//                .id(insurance.getId())
-//                .name(insurance.getName())
-//                .payment(insurance.getPayment())
-//                .physical(insurance.getCapacityPolicy().getPhysical())
-//                .economical(insurance.getCapacityPolicy().getEconomical())
-//                .environmental(insurance.getCapacityPolicy().getEnvironmental())
-//                .isAvailableSale(insurance.isAvailableSale())
-//                .carPrice(insurance.getCarPrice())
-//                .carReleaseDate(insurance.getCarReleaseDate())
-//                .drivingDistance(insurance.getDrivingDistance())
-//                .build();
-//    }
-
 }

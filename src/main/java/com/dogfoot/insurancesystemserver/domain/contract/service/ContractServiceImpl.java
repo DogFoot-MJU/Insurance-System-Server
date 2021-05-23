@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public abstract class ContractServiceImpl<C extends Contract, DetailRes, I extends Insurance<DetailRes>, CreateReq extends ContractCreateRequest<C, I>>
+public abstract class ContractServiceImpl<C extends Contract, DetailRes, I extends Insurance, CreateReq extends ContractCreateRequest<C, I>>
         implements ContractService<I, CreateReq>{
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")

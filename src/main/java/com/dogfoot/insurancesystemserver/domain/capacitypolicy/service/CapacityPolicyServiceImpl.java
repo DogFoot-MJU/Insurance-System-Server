@@ -23,11 +23,11 @@ public class CapacityPolicyServiceImpl implements CapacityPolicyService {
 
     private final CapacityPolicyRepository capacityPolicyRepository;
     //    private final InsuranceService<?, Insurance<?>> insuranceService;
-    private final InsuranceRepository<Insurance<?>> insuranceRepository;
+    private final InsuranceRepository<Insurance> insuranceRepository;
 
     @Override
     public void create(CapacityPolicyCreationRequest dto) {
-        Insurance<?> insurance = this.insuranceRepository.findById(dto.getInsuranceId())
+        Insurance insurance = this.insuranceRepository.findById(dto.getInsuranceId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 보험을 찾을 수 없습니다."));
         if (insurance.hasCapacityPolicy())
             throw new IllegalArgumentException("해당 보험 상품은 이미 인수 정책을 가지고 있습니다.");
