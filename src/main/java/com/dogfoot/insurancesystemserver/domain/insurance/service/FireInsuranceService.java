@@ -8,7 +8,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class FireInsuranceService extends InsuranceServiceImpl<FireInsuranceDetailResponse, FireInsurance> {
     @Override
-    public Specification<FireInsurance> getSpecification() {
-        return specification.equalToType("Fire").and(specification.equalToIsAvailableTrue());
+    public Specification<FireInsurance> getAvailableSpecification() {
+        return specification.equalToType("Fire").and(specification.equalToAvailable());
     }
+
+    @Override
+    public Specification<FireInsurance> getUnAvailableSpecification() {
+        return specification.equalToType("Fire").and(specification.equalToUnAvailable());
+    }
+
 }

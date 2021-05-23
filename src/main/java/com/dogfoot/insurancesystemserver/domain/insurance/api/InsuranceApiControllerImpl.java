@@ -24,6 +24,11 @@ public abstract class InsuranceApiControllerImpl<DetailReq, I extends Insurance>
     }
 
     @Override
+    public ResponseEntity<Pagination<List<InsuranceResponse>>> listByUnAvailableSale(Pageable pageable) {
+        return ResponseEntity.ok(this.insuranceService.listByUnAvailableSale(pageable));
+    }
+
+    @Override
     public ResponseEntity<DetailReq> detail(Long id) {
         return ResponseEntity.ok(this.insuranceService.read(id));
     }
