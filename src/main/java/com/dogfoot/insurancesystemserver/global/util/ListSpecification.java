@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.global.util;
 
+import com.dogfoot.insurancesystemserver.domain.contract.domain.UwDueProcessType;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,10 @@ public class ListSpecification<T> {
 
     public Specification<T> equalToUnAvailable() {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("availableSale"), false);
+    }
+
+    public Specification<T> equalUwDueProcessWait() {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("uwDueProcessType"), UwDueProcessType.WAIT);
     }
 
 }

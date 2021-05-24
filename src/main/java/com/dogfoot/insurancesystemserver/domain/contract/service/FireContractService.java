@@ -2,15 +2,19 @@ package com.dogfoot.insurancesystemserver.domain.contract.service;
 
 import com.dogfoot.insurancesystemserver.domain.contract.domain.FireContract;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.FireContractCreateRequest;
+import com.dogfoot.insurancesystemserver.domain.contract.dto.FireContractResponse;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.FireInsurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.dto.FireInsuranceDetailResponse;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDate;
 
 @Service
-public class FireContractService extends ContractServiceImpl<FireContract, FireInsuranceDetailResponse, FireInsurance, FireContractCreateRequest> {
+public class FireContractService extends
+        ContractServiceImpl<FireContract, FireInsuranceDetailResponse, FireInsurance,
+                FireContractCreateRequest, FireContractResponse> {
 
     @Override
     public Long calculatePayment(FireContractCreateRequest dto, FireInsurance fireInsurance) {
@@ -37,5 +41,10 @@ public class FireContractService extends ContractServiceImpl<FireContract, FireI
         else if (area < fireInsurance.getNumberOfFloors() + 30) rate += 0.3;
         else rate += 0.4;
         return (long) Math.round(fireInsurance.getPayment() * rate);
+    }
+
+    @Override
+    public Specification<FireContract> getUwDueProcessNoneSpecification() {
+        return Specification.where(specification.equalToType("Fire").and(specification.equalUwDueProcessWait()));
     }
 }

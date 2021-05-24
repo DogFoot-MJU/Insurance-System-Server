@@ -2,15 +2,19 @@ package com.dogfoot.insurancesystemserver.domain.contract.service;
 
 import com.dogfoot.insurancesystemserver.domain.contract.domain.CarContract;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.CarContractCreateRequest;
+import com.dogfoot.insurancesystemserver.domain.contract.dto.CarContractResponse;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.CarInsurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.dto.CarInsuranceDetailResponse;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDate;
 
 @Service
-public class CarContractService extends ContractServiceImpl<CarContract, CarInsuranceDetailResponse, CarInsurance, CarContractCreateRequest> {
+public class CarContractService extends
+        ContractServiceImpl<CarContract, CarInsuranceDetailResponse, CarInsurance,
+                CarContractCreateRequest, CarContractResponse> {
 
     @Override
     public Long calculatePayment(CarContractCreateRequest dto, CarInsurance insurance) {
@@ -34,4 +38,8 @@ public class CarContractService extends ContractServiceImpl<CarContract, CarInsu
         return (long) Math.round(insurance.getPayment() * rate);
     }
 
+    @Override
+    public Specification<CarContract> getUwDueProcessNoneSpecification() {
+        return Specification.where(specification.equalToType("Car").and(specification.equalUwDueProcessWait()));
+    }
 }

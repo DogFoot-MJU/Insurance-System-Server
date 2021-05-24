@@ -19,13 +19,16 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
+@DiscriminatorColumn(name = "dtype")
 @Entity
-public abstract class Contract {
+public abstract class Contract<Res> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name="dtype", insertable = false, updatable = false)
+    private String dtype;
 
     @ManyToOne
     private User user;
@@ -41,13 +44,16 @@ public abstract class Contract {
 
     private Long calculatedPayment;
 
+    private LocalDate expirationDate;
+
+    @Enumerated(EnumType.STRING)
+    private UwDueProcessType uwDueProcessType;
+
     @OneToMany(mappedBy = "contract")
     private List<Accident> accidentList;
 
     @OneToMany(mappedBy = "contract")
     private List<Compensation> compensationList;
-
-    private LocalDate expirationDate;
 
     @CreationTimestamp
     private Timestamp createdDate;
@@ -63,9 +69,22 @@ public abstract class Contract {
         this.customerEconomical = customerEconomical;
         this.customerEnvironmental = customerEnvironmental;
         this.calculatedPayment = calculatedPayment;
-        this.expirationDate = expirationDate;
+        this.expirationDate = LocalDate.now().plusDays(insurance.getExpirationDate());
+        this.uwDueProcessType = UwDueProcessType.WAIT;
         this.accidentList = new ArrayList<>();
         this.compensationList = new ArrayList<>();
     }
+
+    public Contract<Res> uwDueProcessApprove() {
+        this.uwDueProcessType = UwDueProcessType.APPROVE;
+        return this;
+    }
+
+    public Contract<Res> uwDueProcessReject() {
+        this.uwDueProcessType = UwDueProcessType.REJECT;
+        return this;
+    }
+
+    public abstract Res toResponse();
 
 }

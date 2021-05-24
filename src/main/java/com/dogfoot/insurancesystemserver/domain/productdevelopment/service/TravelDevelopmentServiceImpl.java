@@ -53,7 +53,7 @@ public class TravelDevelopmentServiceImpl implements DevelopmentService<TravelPr
 
     @Override
     public Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Specification<TravelDevelopment> spec = Specification.where(specification.equalToType("Fire"))
+        Specification<TravelDevelopment> spec = Specification.where(specification.equalToType("Travel"))
                 .and(specification.equalToState(state));
         Page<TravelDevelopment> page = developmentRepository.findAll(spec, pageable);
         List<ProductPlanDevelopmentResponse> list = page.get()
