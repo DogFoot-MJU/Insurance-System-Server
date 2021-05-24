@@ -25,4 +25,8 @@ public interface ContractService<I extends Insurance, CreateReq, Res, C extends 
 
     Specification<C> getUwDueProcessNoneSpecification();
 
+    Res read(PrincipalDetails principal, Long id);
+
+    Contract<Res> findById(Long id);
+
 }

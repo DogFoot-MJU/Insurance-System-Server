@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -25,9 +26,10 @@ public interface ContractApiController<CreateReq, Res> {
 
     @GetMapping("uw/wait/list")
     ResponseEntity<Pagination<List<Res>>> dueProcessWaitList(@PageableDefault Pageable pageable);
-//    ResponseEntity<DetailRes> read(Long id);
 
-//    ResponseEntity<Pagination<List<Res>>> list(Pageable pageable);
+    @GetMapping("uw/wait/{id}")
+    ResponseEntity<Res> read(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable Long id);
+
 
 //    ResponseEntity<DefaultResponseDto> cancel(Long id);
 

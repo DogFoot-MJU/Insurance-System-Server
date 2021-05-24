@@ -56,4 +56,14 @@ public abstract class ContractServiceImpl<C extends Contract<Res>, DetailRes, I 
         List<Res> data = page.get().map(Contract::toResponse).collect(Collectors.toList());
         return Pagination.of(page, data);
     }
+
+    @Override
+    public Res read(PrincipalDetails principal, Long id) {
+        return findById(id).toResponse();
+    }
+
+    @Override
+    public Contract<Res> findById(Long id) {
+        return contractRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 계약이 존재하지 않습니다."));
+    }
 }

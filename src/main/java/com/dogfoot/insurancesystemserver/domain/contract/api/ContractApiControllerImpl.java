@@ -37,4 +37,10 @@ public abstract class ContractApiControllerImpl<I extends Insurance, CreateReq, 
     public ResponseEntity<Pagination<List<Res>>> dueProcessWaitList(Pageable pageable) {
         return ResponseEntity.ok(contractService.dueProcessWaitList(pageable));
     }
+
+    @Override
+    public ResponseEntity<Res> read(PrincipalDetails principal, Long id) {
+        return ResponseEntity.ok(contractService.read(principal, id));
+    }
+
 }

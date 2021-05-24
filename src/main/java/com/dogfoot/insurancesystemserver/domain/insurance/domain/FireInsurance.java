@@ -38,6 +38,7 @@ public class FireInsurance extends Insurance {
                 .id(this.getId())
                 .name(this.getName())
                 .payment(this.getPayment())
+                .expirationDate(this.getExpirationDate())
                 .physical(this.getCapacityPolicy().getPhysical())
                 .economical(this.getCapacityPolicy().getEconomical())
                 .environmental(this.getCapacityPolicy().getEnvironmental())
