@@ -6,17 +6,13 @@ import com.dogfoot.insurancesystemserver.domain.contract.service.ContractService
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public abstract class ContractApiControllerImpl<I extends Insurance, CreateReq, Res, C extends Contract<Res>> implements
-        ContractApiController<CreateReq, Res> {
+        ContractApiController<CreateReq> {
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
@@ -31,16 +27,6 @@ public abstract class ContractApiControllerImpl<I extends Insurance, CreateReq, 
     @Override
     public ResponseEntity<CalculatePaymentResponse> calculatePayment(PrincipalDetails principal, CreateReq dto) {
         return ResponseEntity.ok(contractService.calculateRequest(principal, dto));
-    }
-
-    @Override
-    public ResponseEntity<Pagination<List<Res>>> dueProcessWaitList(Pageable pageable) {
-        return ResponseEntity.ok(contractService.dueProcessWaitList(pageable));
-    }
-
-    @Override
-    public ResponseEntity<Res> read(PrincipalDetails principal, Long id) {
-        return ResponseEntity.ok(contractService.read(principal, id));
     }
 
 }

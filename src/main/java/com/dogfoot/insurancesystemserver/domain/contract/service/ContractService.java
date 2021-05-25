@@ -29,4 +29,6 @@ public interface ContractService<I extends Insurance, CreateReq, Res, C extends 
 
     Contract<Res> findById(Long id);
 
+    @Transactional
+    void uwApprove(PrincipalDetails principal, Long id);
 }

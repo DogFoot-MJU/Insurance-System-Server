@@ -69,19 +69,24 @@ public abstract class Contract<Res> {
         this.customerEconomical = customerEconomical;
         this.customerEnvironmental = customerEnvironmental;
         this.calculatedPayment = calculatedPayment;
-        this.expirationDate = LocalDate.now().plusDays(insurance.getExpirationDate());
         this.uwDueProcessType = UwDueProcessType.WAIT;
         this.accidentList = new ArrayList<>();
         this.compensationList = new ArrayList<>();
     }
 
     public Contract<Res> uwDueProcessApprove() {
+        if (this.uwDueProcessType.equals(UwDueProcessType.APPROVE))
+            throw new IllegalArgumentException("해당 계약은 이미 수락되었습니다.");
         this.uwDueProcessType = UwDueProcessType.APPROVE;
+        this.expirationDate = LocalDate.now().plusDays(insurance.getExpirationDate());
         return this;
     }
 
     public Contract<Res> uwDueProcessReject() {
+        if (this.uwDueProcessType.equals(UwDueProcessType.APPROVE))
+            throw new IllegalArgumentException("해당 계약은 이미 거절되었습니다.");
         this.uwDueProcessType = UwDueProcessType.REJECT;
+        this.expirationDate = null;
         return this;
     }
 

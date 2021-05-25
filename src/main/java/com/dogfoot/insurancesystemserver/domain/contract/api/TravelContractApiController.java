@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RequestMapping("api/v1/contract/travel")
+@RequestMapping("api/v1/user/contract/travel")
 @RestController
 public class TravelContractApiController extends
         ContractApiControllerImpl<TravelInsurance, TravelContractCreateRequest, TravelContractResponse, TravelContract> {

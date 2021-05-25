@@ -1,0 +1,27 @@
+package com.dogfoot.insurancesystemserver.domain.contract.api.uw;
+
+import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
+import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
+import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+
+import java.util.List;
+
+public interface UwContractController<Res> {
+
+    @GetMapping("wait/list")
+    ResponseEntity<Pagination<List<Res>>> dueProcessWaitList(@PageableDefault Pageable pageable);
+
+    @GetMapping("wait/detail/{id}")
+    ResponseEntity<Res> read(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable Long id);
+
+    @PutMapping("approve/{id}")
+    ResponseEntity<DefaultResponseDto> uwApprove(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable Long id);
+
+}

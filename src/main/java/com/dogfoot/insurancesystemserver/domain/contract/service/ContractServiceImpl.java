@@ -63,6 +63,11 @@ public abstract class ContractServiceImpl<C extends Contract<Res>, DetailRes, I 
     }
 
     @Override
+    public void uwApprove(PrincipalDetails principal, Long id) {
+        findById(id).uwDueProcessApprove();
+    }
+
+    @Override
     public Contract<Res> findById(Long id) {
         return contractRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 계약이 존재하지 않습니다."));
     }
