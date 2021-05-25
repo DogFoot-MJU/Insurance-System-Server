@@ -31,7 +31,12 @@ public abstract class UwContractControllerImpl<I extends Insurance, Res, C exten
     @Override
     public ResponseEntity<DefaultResponseDto> uwApprove(PrincipalDetails principal, Long id) {
         this.contractService.uwApprove(principal, id);
-        return ResponseEntity.ok(DefaultResponseDto.from("계약을 승인 완료했습니다."));
+        return ResponseEntity.ok(DefaultResponseDto.from("계약 승인을 완료했습니다."));
     }
 
+    @Override
+    public ResponseEntity<DefaultResponseDto> uwReject(PrincipalDetails principal, Long id) {
+        this.contractService.uwReject(principal, id);
+        return ResponseEntity.ok(DefaultResponseDto.from("계약 거절을 완료했습니다."));
+    }
 }

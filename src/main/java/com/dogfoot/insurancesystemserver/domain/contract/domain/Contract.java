@@ -83,7 +83,7 @@ public abstract class Contract<Res> {
     }
 
     public Contract<Res> uwDueProcessReject() {
-        if (this.uwDueProcessType.equals(UwDueProcessType.APPROVE))
+        if (this.uwDueProcessType.equals(UwDueProcessType.REJECT))
             throw new IllegalArgumentException("해당 계약은 이미 거절되었습니다.");
         this.uwDueProcessType = UwDueProcessType.REJECT;
         this.expirationDate = null;

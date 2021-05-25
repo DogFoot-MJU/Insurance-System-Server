@@ -31,4 +31,7 @@ public interface ContractService<I extends Insurance, CreateReq, Res, C extends 
 
     @Transactional
     void uwApprove(PrincipalDetails principal, Long id);
+
+    @Transactional
+    void uwReject(PrincipalDetails principal, Long id);
 }

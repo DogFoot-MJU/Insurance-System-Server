@@ -24,4 +24,7 @@ public interface UwContractController<Res> {
     @PutMapping("approve/{id}")
     ResponseEntity<DefaultResponseDto> uwApprove(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable Long id);
 
+    @PutMapping("reject/{id}")
+    ResponseEntity<DefaultResponseDto> uwReject(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable Long id);
+
 }
