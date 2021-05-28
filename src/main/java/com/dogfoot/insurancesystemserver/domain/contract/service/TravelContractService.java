@@ -21,6 +21,7 @@ public class TravelContractService extends
         if(safetyRank.equals(SafetyRank.GREEN)) rate += 0.1;
         else if(safetyRank.equals(SafetyRank.BLUE)) rate += 0.2;
         else if(safetyRank.equals(SafetyRank.RED)) rate += 0.3;
+        else rate += 0.4;
         return (long) Math.round(travelInsurance.getPayment() * rate);
     }
 

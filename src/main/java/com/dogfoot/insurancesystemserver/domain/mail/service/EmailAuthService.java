@@ -1,12 +1,12 @@
-package com.dogfoot.insurancesystemserver.global.mail.service;
+package com.dogfoot.insurancesystemserver.domain.mail.service;
 
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.user.domain.UserStateType;
 import com.dogfoot.insurancesystemserver.domain.user.exception.EmailNotFoundException;
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
 import com.dogfoot.insurancesystemserver.domain.user.repository.UserRepository;
-import com.dogfoot.insurancesystemserver.global.mail.domain.EmailAuthCode;
-import com.dogfoot.insurancesystemserver.global.mail.repository.EmailAuthCodeRepository;
+import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailAuthCode;
+import com.dogfoot.insurancesystemserver.domain.mail.repository.EmailAuthCodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

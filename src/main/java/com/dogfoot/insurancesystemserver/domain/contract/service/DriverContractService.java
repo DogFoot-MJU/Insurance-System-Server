@@ -22,13 +22,13 @@ public class DriverContractService extends
         float rate = 1;
         DriverLicence driverLicence = dto.getDriverLicence();
         long day = Duration.between(dto.getDateOfLicenseAcquisition().atStartOfDay(), LocalDate.now().atStartOfDay()).toDays();
-        long criteriaDay = Duration.between(driverInsurance.getDateOfLicenseAcquisition(), LocalDate.now().atStartOfDay()).toDays();
-
+        long criteriaDay = Duration.between(driverInsurance.getDateOfLicenseAcquisition().atStartOfDay(), LocalDate.now().atStartOfDay()).toDays();
         if (driverLicence==DriverLicence.TYPE_1_NORMAL) rate += 0.1;
         else if (driverLicence.equals(DriverLicence.TYPE_2_NORMAL)) rate += 0.2;
-        if (day < criteriaDay-730) rate += 0.1;
-        else if (day < criteriaDay) rate += 0.2;
-        else if (day < criteriaDay+730) rate += 0.3;
+        else rate += 0.3;
+        if (day < criteriaDay + 365) rate += 0.1;
+        else if (day < criteriaDay + 730) rate += 0.2;
+        else if (day < criteriaDay+ 1095) rate += 0.3;
         else rate += 0.4;
         return (long) Math.round(driverInsurance.getPayment() * rate);
     }

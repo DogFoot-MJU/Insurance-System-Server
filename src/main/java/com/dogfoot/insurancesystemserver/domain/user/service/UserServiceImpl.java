@@ -8,11 +8,11 @@ import com.dogfoot.insurancesystemserver.domain.user.exception.EmailNotVerifiedE
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
 import com.dogfoot.insurancesystemserver.domain.user.repository.UserRepository;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
-import com.dogfoot.insurancesystemserver.global.mail.domain.EmailAuthCode;
-import com.dogfoot.insurancesystemserver.global.mail.domain.EmailSubject;
-import com.dogfoot.insurancesystemserver.global.mail.repository.EmailAuthCodeRepository;
-import com.dogfoot.insurancesystemserver.global.mail.util.EmailAuthCodeGenerator;
-import com.dogfoot.insurancesystemserver.global.mail.util.EmailUtil;
+import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailAuthCode;
+import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailSubject;
+import com.dogfoot.insurancesystemserver.domain.mail.repository.EmailAuthCodeRepository;
+import com.dogfoot.insurancesystemserver.domain.mail.util.EmailAuthCodeGenerator;
+import com.dogfoot.insurancesystemserver.domain.mail.util.EmailUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,8 +50,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public Insurance findAllMyInsurance(PrincipalDetails principal) {
         User user = findByEmail(principal.getUsername());
-        System.out.println(user.getContractList().size());
-        System.out.println(user.getContractList().size());
         return null;
     }
 

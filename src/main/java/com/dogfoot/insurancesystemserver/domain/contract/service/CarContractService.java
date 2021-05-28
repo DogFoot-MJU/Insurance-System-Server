@@ -23,17 +23,17 @@ public class CarContractService extends
         Long customerDrivingDistance = dto.getCustomerDrivingDistance();
         long day = Duration.between(dto.getCustomerCarReleaseDate().atStartOfDay(), LocalDate.now().atStartOfDay()).toDays();
         long criteriaDay = Duration.between(insurance.getCarReleaseDate().atStartOfDay(), LocalDate.now().atStartOfDay()).toDays();
-        if (customerCarPrice < insurance.getCarPrice() - 20000000) rate += 0.1;
-        else if (customerCarPrice < insurance.getCarPrice()) rate += 0.2;
+        if (customerCarPrice < insurance.getCarPrice() + 10000000) rate += 0.1;
+        else if (customerCarPrice < insurance.getCarPrice() + 30000000) rate += 0.2;
         else if (customerCarPrice < insurance.getCarPrice() + 50000000) rate += 0.3;
         else rate += 0.4;
-        if (customerDrivingDistance < insurance.getDrivingDistance() - 10000) rate += 0.1;
-        else if (customerDrivingDistance < insurance.getDrivingDistance()) rate += 0.2;
+        if (customerDrivingDistance < insurance.getDrivingDistance() + 10000) rate += 0.1;
+        else if (customerDrivingDistance < insurance.getDrivingDistance() + 50000) rate += 0.2;
         else if (customerDrivingDistance < insurance.getDrivingDistance() + 100000) rate += 0.3;
         else rate += 0.4;
-        if (day < criteriaDay-730) rate += 0.1;
-        else if (day < criteriaDay) rate += 0.2;
-        else if (day < criteriaDay+730) rate += 0.3;
+        if (day < criteriaDay + 365) rate += 0.1;
+        else if (day < criteriaDay + 730) rate += 0.2;
+        else if (day < criteriaDay+ 1095) rate += 0.3;
         else rate += 0.4;
         return (long) Math.round(insurance.getPayment() * rate);
     }

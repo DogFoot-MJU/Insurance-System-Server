@@ -1,6 +1,6 @@
-package com.dogfoot.insurancesystemserver.global.mail.util;
+package com.dogfoot.insurancesystemserver.domain.mail.util;
 
-import com.dogfoot.insurancesystemserver.global.mail.domain.EmailSubject;
+import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailSubject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
