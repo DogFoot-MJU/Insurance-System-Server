@@ -18,6 +18,7 @@ public class CarInsuranceDetailResponse {
     private final Long id;
     private final String name;
     private final Long payment;
+    private final int expirationDate;
     private final String physical;
     private final String economical;
     private final String environmental;

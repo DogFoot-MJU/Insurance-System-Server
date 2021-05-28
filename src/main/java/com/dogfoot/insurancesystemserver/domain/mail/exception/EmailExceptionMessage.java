@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.global.mail.exception;
+package com.dogfoot.insurancesystemserver.domain.mail.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -15,7 +15,6 @@ import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDe
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -25,7 +24,6 @@ public class ConsultingAnswerServiceImpl implements ConsultingAnswerService {
     private final ConsultingRepository consultingRepository;
     private final ConsultingAnswerRepository consultingAnswerRepository;
 
-    @Transactional
     @Override
     public void create(PrincipalDetails principal, ConsultingAnswerSaveRequest dto) {
         Consulting consulting = consultingRepository.findById(dto.getConsultingId())

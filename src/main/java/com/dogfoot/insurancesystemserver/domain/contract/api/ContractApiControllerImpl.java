@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.contract.api;
 
+import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.CalculatePaymentResponse;
 import com.dogfoot.insurancesystemserver.domain.contract.service.ContractService;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
@@ -10,11 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public abstract class ContractApiControllerImpl<I extends Insurance, CreateReq> implements ContractApiController<CreateReq> {
+public abstract class ContractApiControllerImpl<I extends Insurance, CreateReq, Res, C extends Contract<Res>> implements
+        ContractApiController<CreateReq> {
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    private ContractService<I, CreateReq> contractService;
+    private ContractService<I, CreateReq, Res, C> contractService;
 
     @Override
     public ResponseEntity<DefaultResponseDto> apply(PrincipalDetails principal, CreateReq dto) {

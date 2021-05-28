@@ -19,13 +19,16 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
+@DiscriminatorColumn(name = "dtype")
 @Entity
-public abstract class Contract {
+public abstract class Contract<Res> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name="dtype", insertable = false, updatable = false)
+    private String dtype;
 
     @ManyToOne
     private User user;
@@ -41,13 +44,16 @@ public abstract class Contract {
 
     private Long calculatedPayment;
 
+    private LocalDate expirationDate;
+
+    @Enumerated(EnumType.STRING)
+    private UwDueProcessType uwDueProcessType;
+
     @OneToMany(mappedBy = "contract")
     private List<Accident> accidentList;
 
     @OneToMany(mappedBy = "contract")
     private List<Compensation> compensationList;
-
-    private LocalDate expirationDate;
 
     @CreationTimestamp
     private Timestamp createdDate;
@@ -63,9 +69,27 @@ public abstract class Contract {
         this.customerEconomical = customerEconomical;
         this.customerEnvironmental = customerEnvironmental;
         this.calculatedPayment = calculatedPayment;
-        this.expirationDate = expirationDate;
+        this.uwDueProcessType = UwDueProcessType.WAIT;
         this.accidentList = new ArrayList<>();
         this.compensationList = new ArrayList<>();
     }
+
+    public Contract<Res> uwDueProcessApprove() {
+        if (this.uwDueProcessType.equals(UwDueProcessType.APPROVE))
+            throw new IllegalArgumentException("해당 계약은 이미 수락되었습니다.");
+        this.uwDueProcessType = UwDueProcessType.APPROVE;
+        this.expirationDate = LocalDate.now().plusDays(insurance.getExpirationDate());
+        return this;
+    }
+
+    public Contract<Res> uwDueProcessReject() {
+        if (this.uwDueProcessType.equals(UwDueProcessType.REJECT))
+            throw new IllegalArgumentException("해당 계약은 이미 거절되었습니다.");
+        this.uwDueProcessType = UwDueProcessType.REJECT;
+        this.expirationDate = null;
+        return this;
+    }
+
+    public abstract Res toResponse();
 
 }

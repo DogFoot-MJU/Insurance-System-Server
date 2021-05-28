@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.global.mail.util;
+package com.dogfoot.insurancesystemserver.domain.mail.util;
 
 import java.util.Random;
 

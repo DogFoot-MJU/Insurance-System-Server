@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 
-//public interface ContractApiController<Req, Res, DetailRes> {
 public interface ContractApiController<CreateReq> {
 
     @PostMapping("apply")
@@ -18,10 +17,5 @@ public interface ContractApiController<CreateReq> {
 
     @PostMapping("calculate")
     ResponseEntity<CalculatePaymentResponse> calculatePayment(@AuthenticationPrincipal PrincipalDetails principal, @Valid @RequestBody CreateReq dto);
-//    ResponseEntity<DetailRes> read(Long id);
-
-//    ResponseEntity<Pagination<List<Res>>> list(Pageable pageable);
-
-//    ResponseEntity<DefaultResponseDto> cancel(Long id);
 
 }
