@@ -31,6 +31,7 @@ public class TravelContract extends Contract<TravelContractResponse> {
     @Override
     public TravelContractResponse toResponse() {
         return TravelContractResponse.builder()
+                .id(getId())
                 .userName(getUser().getName())
                 .email(getUser().getEmail())
                 .insuranceId(getInsurance().getId())

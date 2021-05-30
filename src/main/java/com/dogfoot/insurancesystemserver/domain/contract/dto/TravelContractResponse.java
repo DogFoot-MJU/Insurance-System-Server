@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class TravelContractResponse {
 
+    private final Long id;
     private final String userName;
     private final String email;
     private final Long insuranceId;

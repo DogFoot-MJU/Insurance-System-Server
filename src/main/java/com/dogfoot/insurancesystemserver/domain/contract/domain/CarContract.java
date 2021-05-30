@@ -35,6 +35,7 @@ public class CarContract extends Contract<CarContractResponse> {
     @Override
     public CarContractResponse toResponse() {
         return CarContractResponse.builder()
+                .id(getId())
                 .userName(getUser().getName())
                 .email(getUser().getEmail())
                 .insuranceId(getInsurance().getId())

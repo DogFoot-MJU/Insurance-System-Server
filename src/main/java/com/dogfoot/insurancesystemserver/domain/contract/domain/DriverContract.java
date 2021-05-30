@@ -34,6 +34,7 @@ public class DriverContract extends Contract<DriverContractResponse> {
     @Override
     public DriverContractResponse toResponse() {
         return DriverContractResponse.builder()
+                .id(getId())
                 .userName(getUser().getName())
                 .email(getUser().getEmail())
                 .insuranceId(getInsurance().getId())

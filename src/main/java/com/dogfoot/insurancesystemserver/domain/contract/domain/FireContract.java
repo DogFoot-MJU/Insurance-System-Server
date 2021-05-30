@@ -37,6 +37,7 @@ public class FireContract extends Contract<FireContractResponse> {
     @Override
     public FireContractResponse toResponse() {
         return FireContractResponse.builder()
+                .id(getId())
                 .userName(getUser().getName())
                 .email(getUser().getEmail())
                 .insuranceId(getInsurance().getId())
