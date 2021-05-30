@@ -1,12 +1,11 @@
 package com.dogfoot.insurancesystemserver.domain.user.api;
 
-import com.dogfoot.insurancesystemserver.domain.insurance.dto.InsuranceResponse;
+import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserResponse;
 import com.dogfoot.insurancesystemserver.domain.user.service.UserServiceImpl;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -33,10 +32,10 @@ public class UserApiController {
                 .build());
     }
 
-    @GetMapping("api/v1/user/my/insurance")
-    public ResponseEntity<Pagination<List<InsuranceResponse>>> findAllMyInsurance(@AuthenticationPrincipal PrincipalDetails principal) {
-        this.userService.findAllMyInsurance(principal);
-        return null;
+    @GetMapping("api/v1/user/my/contract")
+    public ResponseEntity<List<ContractResponse>> findAllMyInsurance(@AuthenticationPrincipal PrincipalDetails principal) {
+        return ResponseEntity.ok(this.userService.findAllMyContract(principal));
     }
+
 
 }

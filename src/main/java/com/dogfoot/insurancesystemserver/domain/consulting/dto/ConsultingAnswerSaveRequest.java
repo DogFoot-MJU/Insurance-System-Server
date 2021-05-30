@@ -34,7 +34,6 @@ public class ConsultingAnswerSaveRequest {
                 .title(this.title)
                 .contents(this.contents)
                 .consulting(consulting)
-                .user(user)
                 .build();
     }
 
