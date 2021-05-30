@@ -54,6 +54,7 @@ public class FireDevelopment extends ProductDevelopment {
         return FireInsurance.builder()
                 .name(getName())
                 .payment(getPayment())
+                .expirationDate(getExpirationDate())
                 .buildingPrice(this.buildingPrice)
                 .constructionDate(this.constructionDate)
                 .siteArea(this.siteArea)

@@ -53,6 +53,7 @@ public class DriverDevelopment extends ProductDevelopment {
         return DriverInsurance.builder()
                 .name(getName())
                 .payment(getPayment())
+                .expirationDate(getExpirationDate())
                 .dateOfLicenseAcquisition(this.dateOfLicenseAcquisition)
                 .driverLicence(this.driverLicence)
                 .build();

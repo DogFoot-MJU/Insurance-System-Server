@@ -52,6 +52,7 @@ public class CarDevelopment extends ProductDevelopment {
         return CarInsurance.builder()
                 .name(getName())
                 .payment(getPayment())
+                .expirationDate(getExpirationDate())
                 .carPrice(this.carPrice)
                 .carReleaseDate(this.carReleaseDate)
                 .drivingDistance(this.drivingDistance)

@@ -48,6 +48,7 @@ public class TravelDevelopment extends ProductDevelopment {
         return TravelInsurance.builder()
                 .name(getName())
                 .payment(getPayment())
+                .expirationDate(getExpirationDate())
                 .safetyRank(this.safetyRank)
                 .build();
     }
