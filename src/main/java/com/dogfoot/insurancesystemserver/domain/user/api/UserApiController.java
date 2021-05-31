@@ -37,5 +37,4 @@ public class UserApiController {
         return ResponseEntity.ok(this.userService.findAllMyContract(principal));
     }
 
-
 }
