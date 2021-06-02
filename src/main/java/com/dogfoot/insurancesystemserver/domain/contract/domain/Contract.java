@@ -1,7 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.contract.domain;
 
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
-import com.dogfoot.insurancesystemserver.domain.compensation.domain.Compensation;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import lombok.AccessLevel;
@@ -52,9 +51,6 @@ public abstract class Contract<Res> {
     @OneToMany(mappedBy = "contract")
     private List<Accident> accidentList;
 
-    @OneToMany(mappedBy = "contract")
-    private List<Compensation> compensationList;
-
     @CreationTimestamp
     private Timestamp createdDate;
 
@@ -62,7 +58,7 @@ public abstract class Contract<Res> {
     private Timestamp updatedDate;
 
     public Contract(User user, Insurance insurance, String customerPhysical, String customerEconomical,
-                    String customerEnvironmental, Long calculatedPayment, LocalDate expirationDate) {
+                    String customerEnvironmental, Long calculatedPayment) {
         this.user = user;
         this.insurance = insurance;
         this.customerPhysical = customerPhysical;
@@ -71,7 +67,6 @@ public abstract class Contract<Res> {
         this.calculatedPayment = calculatedPayment;
         this.uwDueProcessType = UwDueProcessType.WAIT;
         this.accidentList = new ArrayList<>();
-        this.compensationList = new ArrayList<>();
     }
 
     public Contract<Res> uwDueProcessApprove() {

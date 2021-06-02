@@ -24,9 +24,9 @@ public class CarContract extends Contract<CarContractResponse> {
 
     @Builder
     public CarContract(User user, Insurance insurance, String customerPhysical, String customerEconomical,
-                       String customerEnvironmental, Long calculatedPayment, LocalDate expirationDate,
-                       Long customerCarPrice, LocalDate customerCarReleaseDate, Long customerDrivingDistance) {
-        super(user, insurance, customerPhysical, customerEconomical, customerEnvironmental, calculatedPayment, expirationDate);
+                       String customerEnvironmental, Long calculatedPayment, Long customerCarPrice,
+                       LocalDate customerCarReleaseDate, Long customerDrivingDistance) {
+        super(user, insurance, customerPhysical, customerEconomical, customerEnvironmental, calculatedPayment);
         this.customerCarPrice = customerCarPrice;
         this.customerCarReleaseDate = customerCarReleaseDate;
         this.customerDrivingDistance = customerDrivingDistance;
@@ -35,6 +35,7 @@ public class CarContract extends Contract<CarContractResponse> {
     @Override
     public CarContractResponse toResponse() {
         return CarContractResponse.builder()
+                .id(getId())
                 .userName(getUser().getName())
                 .email(getUser().getEmail())
                 .insuranceId(getInsurance().getId())

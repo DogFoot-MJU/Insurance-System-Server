@@ -44,7 +44,7 @@ public class ConsultingAnswerServiceImpl implements ConsultingAnswerService {
                 principal.toEntity().getRole().equals(UserRoleType.ROLE_ADMIN)) {
             return ConsultingAnswerResponse.from(answer);
         }
-        if (!principal.getUsername().equals(answer.getUser().getEmail()))
+        if (!principal.getUsername().equals(answer.getConsulting().getUser().getEmail()))
             throw new IllegalArgumentException("해당 접근 권한이 없습니다.");
         return ConsultingAnswerResponse.from(answer);
     }

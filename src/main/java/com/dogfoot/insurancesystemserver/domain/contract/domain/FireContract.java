@@ -25,9 +25,9 @@ public class FireContract extends Contract<FireContractResponse> {
 
     @Builder
     public FireContract(User user, Insurance insurance, String customerPhysical, String customerEconomical,
-                        String customerEnvironmental, Long calculatedPayment, LocalDate expirationDate,
-                        Long buildingPrice, LocalDate constructionDate, Long siteArea, Integer numberOfFloors) {
-        super(user, insurance, customerPhysical, customerEconomical, customerEnvironmental, calculatedPayment, expirationDate);
+                        String customerEnvironmental, Long calculatedPayment, Long buildingPrice,
+                        LocalDate constructionDate, Long siteArea, Integer numberOfFloors) {
+        super(user, insurance, customerPhysical, customerEconomical, customerEnvironmental, calculatedPayment);
         this.buildingPrice = buildingPrice;
         this.constructionDate = constructionDate;
         this.siteArea = siteArea;
@@ -37,6 +37,7 @@ public class FireContract extends Contract<FireContractResponse> {
     @Override
     public FireContractResponse toResponse() {
         return FireContractResponse.builder()
+                .id(getId())
                 .userName(getUser().getName())
                 .email(getUser().getEmail())
                 .insuranceId(getInsurance().getId())

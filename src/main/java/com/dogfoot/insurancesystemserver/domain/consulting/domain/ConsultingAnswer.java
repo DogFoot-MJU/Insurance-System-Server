@@ -1,6 +1,5 @@
 package com.dogfoot.insurancesystemserver.domain.consulting.domain;
 
-import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,8 +28,8 @@ public class ConsultingAnswer {
     @OneToOne(mappedBy = "consultingAnswer", fetch = FetchType.LAZY)
     private Consulting consulting;
 
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    private User user;
 
     @CreationTimestamp
     private Timestamp createdDate;
@@ -39,11 +38,10 @@ public class ConsultingAnswer {
     private Timestamp updatedDate;
 
     @Builder
-    public ConsultingAnswer(String title, String contents, Consulting consulting, User user) {
+    public ConsultingAnswer(String title, String contents, Consulting consulting) {
         this.title = title;
         this.contents = contents;
         this.consulting = consulting;
-        this.user = user;
     }
 
 }

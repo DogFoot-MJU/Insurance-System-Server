@@ -24,9 +24,8 @@ public class DriverContract extends Contract<DriverContractResponse> {
 
     @Builder
     public DriverContract(User user, Insurance insurance, String customerPhysical, String customerEconomical,
-                          String customerEnvironmental, Long calculatedPayment, LocalDate expirationDate,
-                          LocalDate dateOfLicenseAcquisition, DriverLicence driverLicence) {
-        super(user, insurance, customerPhysical, customerEconomical, customerEnvironmental, calculatedPayment, expirationDate);
+                          String customerEnvironmental, Long calculatedPayment, LocalDate dateOfLicenseAcquisition, DriverLicence driverLicence) {
+        super(user, insurance, customerPhysical, customerEconomical, customerEnvironmental, calculatedPayment);
         this.dateOfLicenseAcquisition = dateOfLicenseAcquisition;
         this.driverLicence = driverLicence;
     }
@@ -34,6 +33,7 @@ public class DriverContract extends Contract<DriverContractResponse> {
     @Override
     public DriverContractResponse toResponse() {
         return DriverContractResponse.builder()
+                .id(getId())
                 .userName(getUser().getName())
                 .email(getUser().getEmail())
                 .insuranceId(getInsurance().getId())

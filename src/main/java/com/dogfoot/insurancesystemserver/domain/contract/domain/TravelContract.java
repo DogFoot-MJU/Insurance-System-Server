@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,14 +22,15 @@ public class TravelContract extends Contract<TravelContractResponse> {
 
     @Builder
     public TravelContract(User user, Insurance insurance, String customerPhysical, String customerEconomical,
-                          String customerEnvironmental, Long calculatedPayment, LocalDate expirationDate, SafetyRank safetyRank) {
-        super(user, insurance, customerPhysical, customerEconomical, customerEnvironmental, calculatedPayment, expirationDate);
+                          String customerEnvironmental, Long calculatedPayment, SafetyRank safetyRank) {
+        super(user, insurance, customerPhysical, customerEconomical, customerEnvironmental, calculatedPayment);
         this.safetyRank = safetyRank;
     }
 
     @Override
     public TravelContractResponse toResponse() {
         return TravelContractResponse.builder()
+                .id(getId())
                 .userName(getUser().getName())
                 .email(getUser().getEmail())
                 .insuranceId(getInsurance().getId())

@@ -1,9 +1,11 @@
 package com.dogfoot.insurancesystemserver.domain.user.service;
 
-import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
+import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -11,6 +13,6 @@ public interface UserService {
 
     User findByEmail(String email);
 
-    Insurance findAllMyInsurance(PrincipalDetails principal);
+    List<ContractResponse> findAllMyContract(PrincipalDetails principal);
 
 }

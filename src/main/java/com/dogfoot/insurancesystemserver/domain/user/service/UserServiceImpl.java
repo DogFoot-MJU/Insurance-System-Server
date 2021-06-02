@@ -1,6 +1,11 @@
 package com.dogfoot.insurancesystemserver.domain.user.service;
 
-import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
+import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
+import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailAuthCode;
+import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailSubject;
+import com.dogfoot.insurancesystemserver.domain.mail.repository.EmailAuthCodeRepository;
+import com.dogfoot.insurancesystemserver.domain.mail.util.EmailAuthCodeGenerator;
+import com.dogfoot.insurancesystemserver.domain.mail.util.EmailUtil;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
 import com.dogfoot.insurancesystemserver.domain.user.exception.EmailDuplicateException;
@@ -8,15 +13,13 @@ import com.dogfoot.insurancesystemserver.domain.user.exception.EmailNotVerifiedE
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
 import com.dogfoot.insurancesystemserver.domain.user.repository.UserRepository;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
-import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailAuthCode;
-import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailSubject;
-import com.dogfoot.insurancesystemserver.domain.mail.repository.EmailAuthCodeRepository;
-import com.dogfoot.insurancesystemserver.domain.mail.util.EmailAuthCodeGenerator;
-import com.dogfoot.insurancesystemserver.domain.mail.util.EmailUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -48,9 +51,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Insurance findAllMyInsurance(PrincipalDetails principal) {
-        User user = findByEmail(principal.getUsername());
-        return null;
+    public List<ContractResponse> findAllMyContract(PrincipalDetails principal) {
+        return findByEmail(principal.getUsername()).getContractList().stream().map(ContractResponse::from).collect(Collectors.toList());
     }
 
     @Override
