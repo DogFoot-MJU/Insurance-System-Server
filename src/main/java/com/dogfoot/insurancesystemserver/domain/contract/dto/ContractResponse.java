@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.contract.dto;
 
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
+import com.dogfoot.insurancesystemserver.domain.contract.domain.UwDueProcessType;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
@@ -17,12 +18,14 @@ import java.time.LocalDate;
 public class ContractResponse {
     private final Long contractId;
     private final String insuranceName;
+    private final UwDueProcessType approveSate;
     private final LocalDate expirationDate;
 
     public static ContractResponse from(Contract<?> contract) {
         return ContractResponse.builder()
                 .contractId(contract.getId())
                 .insuranceName(contract.getInsurance().getName())
+                .approveSate(contract.getUwDueProcessType())
                 .expirationDate(contract.getExpirationDate())
                 .build();
     }

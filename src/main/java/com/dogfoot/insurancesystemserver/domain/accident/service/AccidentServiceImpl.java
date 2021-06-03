@@ -5,12 +5,16 @@ import com.dogfoot.insurancesystemserver.domain.accident.repository.AccidentRepo
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.repository.ContractRepository;
 import com.dogfoot.insurancesystemserver.domain.file.service.FileService;
+import com.dogfoot.insurancesystemserver.domain.user.domain.User;
+import com.dogfoot.insurancesystemserver.domain.user.dto.AccidentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -29,5 +33,16 @@ public class AccidentServiceImpl implements AccidentService {
             accident.addFile(this.fileService.save(file));
         }
         this.accidentRepository.save(accident);
+    }
+
+    @Override
+    public List<AccidentResponse> accidentListFindByUser(User user) {
+        List<AccidentResponse> userAccidentList = new ArrayList<>();
+        List<Contract<?>> contractList = user.getContractList();
+        for (Contract<?> contract : contractList) {
+            userAccidentList.addAll(this.accidentRepository.findByContract(contract).stream()
+                    .map(accident -> AccidentResponse.of(accident, contract)).collect(Collectors.toList()));
+        }
+        return userAccidentList;
     }
 }

@@ -2,6 +2,7 @@ package com.dogfoot.insurancesystemserver.domain.user.api;
 
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
+import com.dogfoot.insurancesystemserver.domain.user.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.UserInfoResponse;
@@ -41,6 +42,11 @@ public class UserApiController {
     @GetMapping("api/v1/user/info")
     public ResponseEntity<UserInfoResponse> userInfo(@AuthenticationPrincipal PrincipalDetails principal) {
         return ResponseEntity.ok(this.userService.userInfo(principal));
+    }
+
+    @GetMapping("api/v1/user/accident/list")
+    public ResponseEntity<List<AccidentResponse>> myAccidentList(@AuthenticationPrincipal PrincipalDetails principal) {
+        return ResponseEntity.ok(this.userService.myAccidentList(principal));
     }
 
 }
