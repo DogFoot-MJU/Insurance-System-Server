@@ -32,6 +32,7 @@ public class Accident {
     @OneToMany(mappedBy = "accident")
     private List<Compensation> compensationList;
 
+    @Enumerated(EnumType.STRING)
     private AccidentState state;
 
     @CreationTimestamp

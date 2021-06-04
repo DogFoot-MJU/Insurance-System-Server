@@ -1,12 +1,14 @@
 package com.dogfoot.insurancesystemserver.domain.accident.service;
 
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
+import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
+import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.accident.repository.AccidentRepository;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.repository.ContractRepository;
 import com.dogfoot.insurancesystemserver.domain.file.service.FileService;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
-import com.dogfoot.insurancesystemserver.domain.user.dto.AccidentResponse;
+import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,11 +40,20 @@ public class AccidentServiceImpl implements AccidentService {
     @Override
     public List<AccidentResponse> accidentListFindByUser(User user) {
         List<AccidentResponse> userAccidentList = new ArrayList<>();
-        List<Contract<?>> contractList = user.getContractList();
-        for (Contract<?> contract : contractList) {
-            userAccidentList.addAll(this.accidentRepository.findByContract(contract).stream()
-                    .map(accident -> AccidentResponse.of(accident, contract)).collect(Collectors.toList()));
-        }
+        user.getContractList().forEach(contract -> userAccidentList.addAll(this.accidentRepository.findByContract(contract)
+                .stream().map(AccidentResponse::from).collect(Collectors.toList())));
         return userAccidentList;
     }
+
+    @Override
+    public List<AccidentResponse> accidentFindByState(AccidentState state) {
+        return this.accidentRepository.findAllByState(state).stream().map(AccidentResponse::from).collect(Collectors.toList());
+    }
+
+    @Override
+    public AccidentDetailResponse findById(Long id) {
+        return AccidentDetailResponse.from(this.accidentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사고 접수 내역을 찾울 수 없습니다.")));
+    }
+
 }

@@ -1,13 +1,13 @@
 package com.dogfoot.insurancesystemserver.domain.accident.api;
 
+import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
+import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.accident.service.AccidentService;
+import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,6 +24,16 @@ public class AccidentApiController {
                                                                 @PathVariable Long id) throws IOException {
         accidentService.save(files, id);
         return ResponseEntity.ok(DefaultResponseDto.from("사고 접수 완료."));
+    }
+
+    @GetMapping("api/v1/compensation-handler/accident/list")
+    public ResponseEntity<List<AccidentResponse>> accidentList(@RequestParam AccidentState state) {
+        return ResponseEntity.ok(this.accidentService.accidentFindByState(state));
+    }
+
+    @GetMapping("api/v1/compensation-handler/accident/detail/{id}")
+    public ResponseEntity<AccidentDetailResponse> accidentDetail(@PathVariable Long id) {
+        return ResponseEntity.ok(this.accidentService.findById(id));
     }
 
 }

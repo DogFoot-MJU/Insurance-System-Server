@@ -1,8 +1,7 @@
-package com.dogfoot.insurancesystemserver.domain.user.dto;
+package com.dogfoot.insurancesystemserver.domain.accident.dto;
 
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
-import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
@@ -22,15 +21,17 @@ public class AccidentResponse {
     private final Long contractId;
     private final String insuranceName;
     private final String userName;
+    private final String email;
     private final AccidentState state;
     private final LocalDateTime accidentApplyDate;
 
-    public static AccidentResponse of(Accident accident, Contract<?> contract) {
+    public static AccidentResponse from(Accident accident) {
         return AccidentResponse.builder()
                 .accidentId(accident.getId())
-                .contractId(contract.getId())
-                .insuranceName(contract.getInsurance().getName())
-                .userName(contract.getUser().getName())
+                .contractId(accident.getContract().getId())
+                .insuranceName(accident.getContract().getInsurance().getName())
+                .userName(accident.getContract().getUser().getName())
+                .email(accident.getContract().getUser().getEmail())
                 .state(accident.getState())
                 .accidentApplyDate(accident.getCreatedDate().toLocalDateTime())
                 .build();

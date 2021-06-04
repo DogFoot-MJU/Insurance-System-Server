@@ -48,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAnyRole("INSURANCE_PLANNER", "ADMIN")
                 .antMatchers("/api/v1/financial/supervisory/**")
                 .hasAnyRole("FINANCIAL_SUPERVISORY_SERVICE", "ADMIN")
+                .antMatchers("/api/v1/compensation-handler/**")
+                .hasAnyRole("INSURANCE_COMPENSATION_HANDLER", "ADMIN")
                 .antMatchers("/api/v1/admin/**")
                 .hasRole("ADMIN")
                 .anyRequest()

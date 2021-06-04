@@ -8,7 +8,7 @@ import com.dogfoot.insurancesystemserver.domain.mail.repository.EmailAuthCodeRep
 import com.dogfoot.insurancesystemserver.domain.mail.util.EmailAuthCodeGenerator;
 import com.dogfoot.insurancesystemserver.domain.mail.util.EmailUtil;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
-import com.dogfoot.insurancesystemserver.domain.user.dto.AccidentResponse;
+import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
 import com.dogfoot.insurancesystemserver.domain.user.dto.UserInfoResponse;
 import com.dogfoot.insurancesystemserver.domain.user.exception.EmailDuplicateException;

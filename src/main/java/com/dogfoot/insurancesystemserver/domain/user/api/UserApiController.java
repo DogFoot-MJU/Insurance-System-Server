@@ -2,7 +2,7 @@ package com.dogfoot.insurancesystemserver.domain.user.api;
 
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
-import com.dogfoot.insurancesystemserver.domain.user.dto.AccidentResponse;
+import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.UserInfoResponse;
