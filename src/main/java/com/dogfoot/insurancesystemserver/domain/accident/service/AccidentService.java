@@ -2,6 +2,7 @@ package com.dogfoot.insurancesystemserver.domain.accident.service;
 
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
+import com.dogfoot.insurancesystemserver.domain.compensation.dto.CompensationApproveRequest;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,5 +22,9 @@ public interface AccidentService {
     Accident findById(Long id);
 
     @Transactional
+    void compensationApprove(CompensationApproveRequest request);
+
+    @Transactional
     void compensationReject(Long id);
+
 }

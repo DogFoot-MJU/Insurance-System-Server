@@ -52,7 +52,13 @@ public class Accident {
         this.files.add(file);
     }
 
+    public void compensationApprove(Compensation compensation) {
+        this.state = AccidentState.APPROVE;
+        this.compensationList.add(compensation);
+    }
+
     public void compensationReject() {
         this.state = AccidentState.REJECT;
     }
+
 }

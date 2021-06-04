@@ -3,6 +3,9 @@ package com.dogfoot.insurancesystemserver.domain.accident.service;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
 import com.dogfoot.insurancesystemserver.domain.accident.repository.AccidentRepository;
+import com.dogfoot.insurancesystemserver.domain.compensation.domain.Compensation;
+import com.dogfoot.insurancesystemserver.domain.compensation.dto.CompensationApproveRequest;
+import com.dogfoot.insurancesystemserver.domain.compensation.repository.CompensationRepository;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.repository.ContractRepository;
 import com.dogfoot.insurancesystemserver.domain.file.service.FileService;
@@ -23,6 +26,7 @@ public class AccidentServiceImpl implements AccidentService {
 
     private final AccidentRepository accidentRepository;
     private final ContractRepository<?> contractRepository;
+    private final CompensationRepository compensationRepository;
     private final FileService fileService;
 
     @Override
@@ -52,6 +56,13 @@ public class AccidentServiceImpl implements AccidentService {
     @Override
     public Accident findById(Long id) {
         return this.accidentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 사고 접수 내역을 찾울 수 없습니다."));
+    }
+
+    @Override
+    public void compensationApprove(CompensationApproveRequest request) {
+        Accident accident = findById(request.getAccidentId());
+        Compensation compensation = this.compensationRepository.save(Compensation.of(request.getCompensationAmount(), accident));
+        accident.compensationApprove(compensation);
     }
 
     @Override
