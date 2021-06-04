@@ -38,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/**")
-                .hasAnyRole("USER", "INSURANCE_SELLER", "ADMIN")
+                .hasAnyRole("USER", "UW", "INSURANCE_PLANNER","INSURANCE_SELLER", "INSURANCE_COMPENSATION_PLANNER",
+                        "INSURANCE_COMPENSATION_HANDLER", "CONTRACT_MANAGER", "FINANCIAL_SUPERVISORY_SERVICE", "ADMIN")
                 .antMatchers("/api/v1/uw/**")
                 .hasAnyRole("UW", "ADMIN")
                 .antMatchers("/api/v1/seller/**")
@@ -47,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAnyRole("INSURANCE_PLANNER", "ADMIN")
                 .antMatchers("/api/v1/financial/supervisory/**")
                 .hasAnyRole("FINANCIAL_SUPERVISORY_SERVICE", "ADMIN")
+                .antMatchers("/api/v1/compensation-handler/**")
+                .hasAnyRole("INSURANCE_COMPENSATION_HANDLER", "ADMIN")
                 .antMatchers("/api/v1/admin/**")
                 .hasRole("ADMIN")
                 .anyRequest()

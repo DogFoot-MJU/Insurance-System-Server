@@ -2,7 +2,9 @@ package com.dogfoot.insurancesystemserver.domain.user.service;
 
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
+import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
+import com.dogfoot.insurancesystemserver.domain.user.dto.UserInfoResponse;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 
 import java.util.List;
@@ -14,5 +16,9 @@ public interface UserService {
     User findByEmail(String email);
 
     List<ContractResponse> findAllMyContract(PrincipalDetails principal);
+
+    UserInfoResponse userInfo(PrincipalDetails principal);
+
+    List<AccidentResponse> myAccidentList(PrincipalDetails principal);
 
 }

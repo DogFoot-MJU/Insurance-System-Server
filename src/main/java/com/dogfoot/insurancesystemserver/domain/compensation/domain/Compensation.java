@@ -1,12 +1,14 @@
 package com.dogfoot.insurancesystemserver.domain.compensation.domain;
 
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@NoArgsConstructor
 @Entity
 public class Compensation {
 
@@ -24,5 +26,14 @@ public class Compensation {
 
     @UpdateTimestamp
     private Timestamp updatedDate;
+
+    private Compensation(Long compensationAmount, Accident accident) {
+        this.compensationAmount = compensationAmount;
+        this.accident = accident;
+    }
+
+    public static Compensation of(Long compensationAmount, Accident accident) {
+        return new Compensation(compensationAmount, accident);
+    }
 
 }

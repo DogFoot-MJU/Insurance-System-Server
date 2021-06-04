@@ -2,8 +2,10 @@ package com.dogfoot.insurancesystemserver.domain.user.api;
 
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
+import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserResponse;
+import com.dogfoot.insurancesystemserver.domain.user.dto.UserInfoResponse;
 import com.dogfoot.insurancesystemserver.domain.user.service.UserServiceImpl;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +37,16 @@ public class UserApiController {
     @GetMapping("api/v1/user/my/contract")
     public ResponseEntity<List<ContractResponse>> findAllMyInsurance(@AuthenticationPrincipal PrincipalDetails principal) {
         return ResponseEntity.ok(this.userService.findAllMyContract(principal));
+    }
+
+    @GetMapping("api/v1/user/info")
+    public ResponseEntity<UserInfoResponse> userInfo(@AuthenticationPrincipal PrincipalDetails principal) {
+        return ResponseEntity.ok(this.userService.userInfo(principal));
+    }
+
+    @GetMapping("api/v1/user/accident/list")
+    public ResponseEntity<List<AccidentResponse>> myAccidentList(@AuthenticationPrincipal PrincipalDetails principal) {
+        return ResponseEntity.ok(this.userService.myAccidentList(principal));
     }
 
 }

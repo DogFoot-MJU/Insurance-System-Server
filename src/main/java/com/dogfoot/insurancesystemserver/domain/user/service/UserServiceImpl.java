@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.user.service;
 
+import com.dogfoot.insurancesystemserver.domain.accident.service.AccidentService;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
 import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailAuthCode;
 import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailSubject;
@@ -7,7 +8,9 @@ import com.dogfoot.insurancesystemserver.domain.mail.repository.EmailAuthCodeRep
 import com.dogfoot.insurancesystemserver.domain.mail.util.EmailAuthCodeGenerator;
 import com.dogfoot.insurancesystemserver.domain.mail.util.EmailUtil;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
+import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
+import com.dogfoot.insurancesystemserver.domain.user.dto.UserInfoResponse;
 import com.dogfoot.insurancesystemserver.domain.user.exception.EmailDuplicateException;
 import com.dogfoot.insurancesystemserver.domain.user.exception.EmailNotVerifiedException;
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
@@ -29,6 +32,14 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final EmailUtil emailUtil;
     private final PasswordEncoder passwordEncoder;
+    private final AccidentService accidentService;
+
+    @Override
+    public User findByEmail(String email) {
+        return this.userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        UserExceptionMessage.USERNAME_NOT_FOUND_EXCEPTION_MESSAGE.getMessage()));
+    }
 
     @Override
     public User saveUser(SignUpUserRequest dto) {
@@ -56,9 +67,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByEmail(String email) {
-        return this.userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(
-                        UserExceptionMessage.USERNAME_NOT_FOUND_EXCEPTION_MESSAGE.getMessage()));
+    public UserInfoResponse userInfo(PrincipalDetails principal) {
+        return UserInfoResponse.from(findByEmail(principal.getUsername()));
     }
+
+    @Override
+    public List<AccidentResponse> myAccidentList(PrincipalDetails principal) {
+        return this.accidentService.accidentListFindByUser(findByEmail(principal.getUsername()));
+    }
+
 }
