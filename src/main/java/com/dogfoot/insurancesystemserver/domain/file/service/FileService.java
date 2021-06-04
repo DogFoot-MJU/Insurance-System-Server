@@ -22,7 +22,7 @@ public class FileService {
         if (files.isEmpty()) throw new IllegalArgumentException("파일이 존재하지 않습니다.");
         String originFilename = files.getOriginalFilename();
         String extension = FilenameUtils.getExtension(Objects.requireNonNull(originFilename)).toLowerCase();
-        String path = System.getProperty("user.dir") + "/image/";
+        String path = System.getProperty("user.dir") + "/images/";
         File saveFile;
         String fileName;
         do {
