@@ -2,7 +2,6 @@ package com.dogfoot.insurancesystemserver.domain.accident.service;
 
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
-import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.accident.repository.AccidentRepository;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.repository.ContractRepository;
@@ -51,9 +50,12 @@ public class AccidentServiceImpl implements AccidentService {
     }
 
     @Override
-    public AccidentDetailResponse findById(Long id) {
-        return AccidentDetailResponse.from(this.accidentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사고 접수 내역을 찾울 수 없습니다.")));
+    public Accident findById(Long id) {
+        return this.accidentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 사고 접수 내역을 찾울 수 없습니다."));
     }
 
+    @Override
+    public void compensationReject(Long id) {
+        findById(id).compensationReject();
+    }
 }

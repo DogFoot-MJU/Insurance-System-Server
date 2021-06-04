@@ -33,7 +33,13 @@ public class AccidentApiController {
 
     @GetMapping("api/v1/compensation-handler/accident/detail/{id}")
     public ResponseEntity<AccidentDetailResponse> accidentDetail(@PathVariable Long id) {
-        return ResponseEntity.ok(this.accidentService.findById(id));
+        return ResponseEntity.ok(AccidentDetailResponse.from(this.accidentService.findById(id)));
+    }
+
+    @PutMapping("api/v1/compensation-handler/accident/reject/{id}")
+    public ResponseEntity<DefaultResponseDto> compensationReject(@PathVariable Long id) {
+        this.accidentService.compensationReject(id);
+        return ResponseEntity.ok(DefaultResponseDto.from("보상을 거절했습니다."));
     }
 
 }

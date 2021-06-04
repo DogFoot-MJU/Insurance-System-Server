@@ -51,4 +51,8 @@ public class Accident {
     public void addFile(MyFile file) {
         this.files.add(file);
     }
+
+    public void compensationReject() {
+        this.state = AccidentState.REJECT;
+    }
 }
