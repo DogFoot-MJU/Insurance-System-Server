@@ -9,7 +9,7 @@ import com.dogfoot.insurancesystemserver.domain.insurance.service.InsuranceServi
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.user.service.UserService;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,10 +51,10 @@ public abstract class ContractServiceImpl<C extends Contract<Res>, DetailRes, I 
     }
 
     @Override
-    public Pagination<List<Res>> dueProcessWaitList(Pageable pageable) {
+    public PaginationDto<List<Res>> dueProcessWaitList(Pageable pageable) {
         Page<C> page = contractRepository.findAll(getUwDueProcessNoneSpecification(), pageable);
         List<Res> data = page.get().map(Contract::toResponse).collect(Collectors.toList());
-        return Pagination.of(page, data);
+        return PaginationDto.of(page, data);
     }
 
     @Override

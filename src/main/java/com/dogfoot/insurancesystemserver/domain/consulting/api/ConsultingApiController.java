@@ -8,7 +8,7 @@ import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingRespons
 import com.dogfoot.insurancesystemserver.domain.consulting.service.ConsultingService;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -42,14 +42,14 @@ public class ConsultingApiController {
     }
 
     @GetMapping("user/consulting/list")
-    public ResponseEntity<Pagination<List<ConsultingResponse>>> readAllForUser(
+    public ResponseEntity<PaginationDto<List<ConsultingResponse>>> readAllForUser(
             @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable,
             @AuthenticationPrincipal PrincipalDetails principal) {
         return ResponseEntity.ok(this.consultingService.readAllForUser(pageable, principal));
     }
 
     @GetMapping("seller/consulting/list")
-    public ResponseEntity<Pagination<List<ConsultingResponse>>> readAllForUw(
+    public ResponseEntity<PaginationDto<List<ConsultingResponse>>> readAllForUw(
             @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam(defaultValue = "WAIT") ConsultingStateType state) {
         return ResponseEntity.ok(this.consultingService.readAllForUw(pageable, state));

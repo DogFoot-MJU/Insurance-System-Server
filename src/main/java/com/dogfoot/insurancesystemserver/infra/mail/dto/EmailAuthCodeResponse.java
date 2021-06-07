@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.domain.mail.dto;
+package com.dogfoot.insurancesystemserver.infra.mail.dto;
 
 import lombok.Builder;
 import lombok.Getter;

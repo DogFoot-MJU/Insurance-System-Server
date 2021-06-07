@@ -11,7 +11,7 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPl
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.DevelopmentRepository;
 import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,14 +52,14 @@ public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverPr
     }
 
     @Override
-    public Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
+    public PaginationDto<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
         Specification<DriverDevelopment> spec = Specification.where(specification.equalToType("Driver"))
                 .and(specification.equalToState(state));
         Page<DriverDevelopment> page = developmentRepository.findAll(spec, pageable);
         List<ProductPlanDevelopmentResponse> list = page.get()
                 .map(DriverDevelopment::toResponse)
                 .collect(Collectors.toList());
-        return Pagination.of(page, list);
+        return PaginationDto.of(page, list);
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPl
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.service.DevelopmentService;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,7 @@ public abstract class DevelopmentApiControllerImpl<DesignReq, DetailRes, Entity>
     }
 
     @Override
-    public ResponseEntity<Pagination<List<ProductPlanDevelopmentResponse>>> list(Pageable pageable, DevelopmentState state) {
+    public ResponseEntity<PaginationDto<List<ProductPlanDevelopmentResponse>>> list(Pageable pageable, DevelopmentState state) {
         return ResponseEntity.ok(this.developmentService.list(pageable, state));
     }
 

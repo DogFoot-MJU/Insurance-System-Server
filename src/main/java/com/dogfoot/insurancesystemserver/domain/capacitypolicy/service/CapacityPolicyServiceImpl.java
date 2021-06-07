@@ -8,7 +8,7 @@ import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolic
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.repository.CapacityPolicyRepository;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,11 +35,11 @@ public class CapacityPolicyServiceImpl implements CapacityPolicyService {
     }
 
     @Override
-    public Pagination<List<CapacityPolicyResponse>> list(Pageable pageable) {
+    public PaginationDto<List<CapacityPolicyResponse>> list(Pageable pageable) {
         Page<CapacityPolicy> page = this.capacityPolicyRepository.findAll(pageable);
         List<CapacityPolicyResponse> data = page.getContent().stream()
                 .map(CapacityPolicyResponse::from).collect(Collectors.toList());
-        return Pagination.of(page, data);
+        return PaginationDto.of(page, data);
     }
 
     @Override

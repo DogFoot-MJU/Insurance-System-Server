@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 @Getter
 @Builder
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class Pagination<T> {
+public class PaginationDto<T> {
 
     private int totalPage;
     private int currentPage;
@@ -20,8 +20,8 @@ public class Pagination<T> {
     private boolean isLast;
     private T data;
 
-    public static <T, U> Pagination<T> of(Page<U> page, T data) {
-        return Pagination.<T>builder()
+    public static <T, U> PaginationDto<T> of(Page<U> page, T data) {
+        return PaginationDto.<T>builder()
                 .totalPage(page.getTotalPages())
                 .currentPage(page.getNumber())
                 .totalElements(page.getTotalElements())

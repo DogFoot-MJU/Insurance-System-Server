@@ -5,7 +5,7 @@ import com.dogfoot.insurancesystemserver.domain.contract.service.ContractService
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public abstract class UwContractControllerImpl<I extends Insurance, Res, C exten
     private ContractService<I, ?, Res, C> contractService;
 
     @Override
-    public ResponseEntity<Pagination<List<Res>>> dueProcessWaitList(Pageable pageable) {
+    public ResponseEntity<PaginationDto<List<Res>>> dueProcessWaitList(Pageable pageable) {
         return ResponseEntity.ok(contractService.dueProcessWaitList(pageable));
     }
 

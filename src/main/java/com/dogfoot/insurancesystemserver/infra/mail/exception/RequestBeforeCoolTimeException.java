@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.domain.mail.exception;
+package com.dogfoot.insurancesystemserver.infra.mail.exception;
 
 public class RequestBeforeCoolTimeException extends IllegalArgumentException {
 

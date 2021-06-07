@@ -1,7 +1,7 @@
-package com.dogfoot.insurancesystemserver.domain.mail.domain;
+package com.dogfoot.insurancesystemserver.infra.mail.domain;
 
-import com.dogfoot.insurancesystemserver.domain.mail.exception.AuthCodeMismatchException;
-import com.dogfoot.insurancesystemserver.domain.mail.exception.EmailExceptionMessage;
+import com.dogfoot.insurancesystemserver.infra.mail.exception.AuthCodeMismatchException;
+import com.dogfoot.insurancesystemserver.infra.mail.exception.EmailExceptionMessage;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

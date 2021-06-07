@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.domain.file.file;
+package com.dogfoot.insurancesystemserver.infra.file.file;
 
 import lombok.AccessLevel;
 import lombok.Builder;

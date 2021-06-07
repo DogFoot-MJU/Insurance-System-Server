@@ -8,7 +8,7 @@ import com.dogfoot.insurancesystemserver.domain.compensation.dto.CompensationApp
 import com.dogfoot.insurancesystemserver.domain.compensation.repository.CompensationRepository;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.repository.ContractRepository;
-import com.dogfoot.insurancesystemserver.domain.file.service.FileService;
+import com.dogfoot.insurancesystemserver.infra.file.service.FileService;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import lombok.RequiredArgsConstructor;

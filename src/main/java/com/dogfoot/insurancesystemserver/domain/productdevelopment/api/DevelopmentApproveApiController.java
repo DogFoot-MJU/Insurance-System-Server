@@ -7,7 +7,7 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.service.Drive
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.service.FireDevelopmentServiceImpl;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.service.TravelDevelopmentServiceImpl;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -27,22 +27,22 @@ public class DevelopmentApproveApiController {
     private final TravelDevelopmentServiceImpl travelDevelopmentService;
 
     @GetMapping("car/product/development/authorize/list")
-    public ResponseEntity<Pagination<List<ProductPlanDevelopmentResponse>>> carListByAuthorize(@PageableDefault Pageable pageable) {
+    public ResponseEntity<PaginationDto<List<ProductPlanDevelopmentResponse>>> carListByAuthorize(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(carDevelopmentService.list(pageable, DevelopmentState.AUTHORIZE));
     }
 
     @GetMapping("driver/product/development/authorize/list")
-    public ResponseEntity<Pagination<List<ProductPlanDevelopmentResponse>>> driverListByAuthorize(@PageableDefault Pageable pageable) {
+    public ResponseEntity<PaginationDto<List<ProductPlanDevelopmentResponse>>> driverListByAuthorize(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(driverDevelopmentService.list(pageable, DevelopmentState.AUTHORIZE));
     }
 
     @GetMapping("fire/product/development/authorize/list")
-    public ResponseEntity<Pagination<List<ProductPlanDevelopmentResponse>>> FireListByAuthorize(@PageableDefault Pageable pageable) {
+    public ResponseEntity<PaginationDto<List<ProductPlanDevelopmentResponse>>> FireListByAuthorize(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(fireDevelopmentService.list(pageable, DevelopmentState.AUTHORIZE));
     }
 
     @GetMapping("travel/product/development/authorize/list")
-    public ResponseEntity<Pagination<List<ProductPlanDevelopmentResponse>>> travelListByAuthorize(@PageableDefault Pageable pageable) {
+    public ResponseEntity<PaginationDto<List<ProductPlanDevelopmentResponse>>> travelListByAuthorize(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(travelDevelopmentService.list(pageable, DevelopmentState.AUTHORIZE));
     }
 

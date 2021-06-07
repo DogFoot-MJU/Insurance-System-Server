@@ -1,6 +1,6 @@
-package com.dogfoot.insurancesystemserver.domain.mail.repository;
+package com.dogfoot.insurancesystemserver.infra.mail.repository;
 
-import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailAuthCode;
+import com.dogfoot.insurancesystemserver.infra.mail.domain.EmailAuthCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

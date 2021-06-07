@@ -1,6 +1,6 @@
-package com.dogfoot.insurancesystemserver.domain.mail.api;
+package com.dogfoot.insurancesystemserver.infra.mail.api;
 
-import com.dogfoot.insurancesystemserver.domain.mail.service.EmailAuthService;
+import com.dogfoot.insurancesystemserver.infra.mail.service.EmailAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

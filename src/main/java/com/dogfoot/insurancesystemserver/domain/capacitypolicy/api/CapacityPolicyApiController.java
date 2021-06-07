@@ -6,7 +6,7 @@ import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolic
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyUpdateRequest;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.service.CapacityPolicyService;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -30,7 +30,7 @@ public class CapacityPolicyApiController {
     }
 
     @GetMapping("list")
-    public ResponseEntity<Pagination<List<CapacityPolicyResponse>>> list(@PageableDefault Pageable pageable) {
+    public ResponseEntity<PaginationDto<List<CapacityPolicyResponse>>> list(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(this.capacityPolicyService.list(pageable));
     }
 

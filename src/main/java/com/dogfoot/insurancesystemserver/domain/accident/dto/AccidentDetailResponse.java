@@ -2,7 +2,7 @@ package com.dogfoot.insurancesystemserver.domain.accident.dto;
 
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
-import com.dogfoot.insurancesystemserver.domain.file.file.MyFile;
+import com.dogfoot.insurancesystemserver.infra.file.file.MyFile;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;

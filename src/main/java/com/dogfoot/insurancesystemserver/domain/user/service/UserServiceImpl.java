@@ -2,11 +2,11 @@ package com.dogfoot.insurancesystemserver.domain.user.service;
 
 import com.dogfoot.insurancesystemserver.domain.accident.service.AccidentService;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
-import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailAuthCode;
-import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailSubject;
-import com.dogfoot.insurancesystemserver.domain.mail.repository.EmailAuthCodeRepository;
-import com.dogfoot.insurancesystemserver.domain.mail.util.EmailAuthCodeGenerator;
-import com.dogfoot.insurancesystemserver.domain.mail.util.EmailUtil;
+import com.dogfoot.insurancesystemserver.infra.mail.domain.EmailAuthCode;
+import com.dogfoot.insurancesystemserver.infra.mail.domain.EmailSubject;
+import com.dogfoot.insurancesystemserver.infra.mail.repository.EmailAuthCodeRepository;
+import com.dogfoot.insurancesystemserver.infra.mail.util.EmailAuthCodeGenerator;
+import com.dogfoot.insurancesystemserver.infra.mail.util.EmailUtil;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;

@@ -3,7 +3,7 @@ package com.dogfoot.insurancesystemserver.domain.insurance.api;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.dto.InsuranceResponse;
 import com.dogfoot.insurancesystemserver.domain.insurance.service.InsuranceService;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +19,12 @@ public abstract class InsuranceApiControllerImpl<DetailReq, I extends Insurance>
     private InsuranceService<DetailReq, I> insuranceService;
 
     @Override
-    public ResponseEntity<Pagination<List<InsuranceResponse>>> listByAvailableSale(Pageable pageable) {
+    public ResponseEntity<PaginationDto<List<InsuranceResponse>>> listByAvailableSale(Pageable pageable) {
         return ResponseEntity.ok(this.insuranceService.listByAvailableSale(pageable));
     }
 
     @Override
-    public ResponseEntity<Pagination<List<InsuranceResponse>>> listByUnAvailableSale(Pageable pageable) {
+    public ResponseEntity<PaginationDto<List<InsuranceResponse>>> listByUnAvailableSale(Pageable pageable) {
         return ResponseEntity.ok(this.insuranceService.listByUnAvailableSale(pageable));
     }
 

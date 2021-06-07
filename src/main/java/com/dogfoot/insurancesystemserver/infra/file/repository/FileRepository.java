@@ -1,7 +1,7 @@
-package com.dogfoot.insurancesystemserver.domain.file.repository;
+package com.dogfoot.insurancesystemserver.infra.file.repository;
 
 
-import com.dogfoot.insurancesystemserver.domain.file.file.MyFile;
+import com.dogfoot.insurancesystemserver.infra.file.file.MyFile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FileRepository extends JpaRepository<MyFile, Long> {
