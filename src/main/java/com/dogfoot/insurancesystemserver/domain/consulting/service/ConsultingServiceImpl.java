@@ -5,11 +5,11 @@ import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingStat
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingResponse;
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingSaveRequest;
-import com.dogfoot.insurancesystemserver.domain.consulting.repository.ConsultingRepository;
+import com.dogfoot.insurancesystemserver.domain.consulting.dao.ConsultingRepository;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.user.domain.UserRoleType;
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
-import com.dogfoot.insurancesystemserver.domain.user.repository.UserRepository;
+import com.dogfoot.insurancesystemserver.domain.user.dao.UserRepository;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;

@@ -6,7 +6,7 @@ import com.dogfoot.insurancesystemserver.domain.user.exception.EmailNotFoundExce
 import com.dogfoot.insurancesystemserver.domain.user.exception.NoLoginException;
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
 import com.dogfoot.insurancesystemserver.domain.user.exception.WithdrawalAccountException;
-import com.dogfoot.insurancesystemserver.domain.user.repository.UserRepository;
+import com.dogfoot.insurancesystemserver.domain.user.dao.UserRepository;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

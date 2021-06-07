@@ -1,7 +1,7 @@
-package com.dogfoot.insurancesystemserver.infra.file.service;
+package com.dogfoot.insurancesystemserver.global.file.service;
 
-import com.dogfoot.insurancesystemserver.infra.file.file.MyFile;
-import com.dogfoot.insurancesystemserver.infra.file.repository.FileRepository;
+import com.dogfoot.insurancesystemserver.global.file.file.MyFile;
+import com.dogfoot.insurancesystemserver.global.file.dao.FileRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.service;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.TravelInsurance;
-import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
+import com.dogfoot.insurancesystemserver.domain.insurance.dao.InsuranceRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.TravelDevelopment;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
@@ -9,7 +9,7 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPl
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.TravelProductDesignRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.TravelProductDevelopmentDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.DevelopmentRepository;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.dao.DevelopmentRepository;
 import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
 import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;

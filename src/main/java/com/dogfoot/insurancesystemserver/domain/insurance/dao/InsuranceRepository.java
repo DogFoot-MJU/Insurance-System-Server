@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.domain.insurance.repository;
+package com.dogfoot.insurancesystemserver.domain.insurance.dao;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import org.springframework.data.domain.Page;

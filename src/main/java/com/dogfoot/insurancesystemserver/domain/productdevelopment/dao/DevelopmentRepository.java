@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.domain.productdevelopment.repository;
+package com.dogfoot.insurancesystemserver.domain.productdevelopment.dao;
 
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.ProductDevelopment;

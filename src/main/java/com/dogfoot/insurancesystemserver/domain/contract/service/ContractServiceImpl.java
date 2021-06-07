@@ -3,7 +3,7 @@ package com.dogfoot.insurancesystemserver.domain.contract.service;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.CalculatePaymentResponse;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractCreateRequest;
-import com.dogfoot.insurancesystemserver.domain.contract.repository.ContractRepository;
+import com.dogfoot.insurancesystemserver.domain.contract.dao.ContractRepository;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.service.InsuranceService;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;

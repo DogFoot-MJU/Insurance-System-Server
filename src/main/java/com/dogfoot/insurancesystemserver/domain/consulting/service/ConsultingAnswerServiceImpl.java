@@ -5,12 +5,12 @@ import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingAnsw
 import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingStateType;
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingAnswerResponse;
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingAnswerSaveRequest;
-import com.dogfoot.insurancesystemserver.domain.consulting.repository.ConsultingAnswerRepository;
-import com.dogfoot.insurancesystemserver.domain.consulting.repository.ConsultingRepository;
+import com.dogfoot.insurancesystemserver.domain.consulting.dao.ConsultingAnswerRepository;
+import com.dogfoot.insurancesystemserver.domain.consulting.dao.ConsultingRepository;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.user.domain.UserRoleType;
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
-import com.dogfoot.insurancesystemserver.domain.user.repository.UserRepository;
+import com.dogfoot.insurancesystemserver.domain.user.dao.UserRepository;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

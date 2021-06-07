@@ -2,13 +2,13 @@ package com.dogfoot.insurancesystemserver.domain.accident.service;
 
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
-import com.dogfoot.insurancesystemserver.domain.accident.repository.AccidentRepository;
+import com.dogfoot.insurancesystemserver.domain.accident.dao.AccidentRepository;
 import com.dogfoot.insurancesystemserver.domain.compensation.domain.Compensation;
 import com.dogfoot.insurancesystemserver.domain.compensation.dto.CompensationApproveRequest;
-import com.dogfoot.insurancesystemserver.domain.compensation.repository.CompensationRepository;
+import com.dogfoot.insurancesystemserver.domain.compensation.dao.CompensationRepository;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
-import com.dogfoot.insurancesystemserver.domain.contract.repository.ContractRepository;
-import com.dogfoot.insurancesystemserver.infra.file.service.FileService;
+import com.dogfoot.insurancesystemserver.domain.contract.dao.ContractRepository;
+import com.dogfoot.insurancesystemserver.global.file.service.FileService;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import lombok.RequiredArgsConstructor;

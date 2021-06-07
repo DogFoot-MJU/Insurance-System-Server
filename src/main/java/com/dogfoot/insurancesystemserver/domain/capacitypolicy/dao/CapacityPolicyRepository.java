@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.domain.capacitypolicy.repository;
+package com.dogfoot.insurancesystemserver.domain.capacitypolicy.dao;
 
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.domain.CapacityPolicy;
 import org.springframework.data.jpa.repository.JpaRepository;

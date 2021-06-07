@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.domain.consulting.repository;
+package com.dogfoot.insurancesystemserver.domain.consulting.dao;
 
 import com.dogfoot.insurancesystemserver.domain.consulting.domain.Consulting;
 import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingStateType;

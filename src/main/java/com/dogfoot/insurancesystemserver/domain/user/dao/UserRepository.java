@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.domain.user.repository;
+package com.dogfoot.insurancesystemserver.domain.user.dao;
 
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;

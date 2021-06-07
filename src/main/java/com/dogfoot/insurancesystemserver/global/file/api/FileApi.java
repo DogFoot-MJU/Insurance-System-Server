@@ -1,6 +1,6 @@
-package com.dogfoot.insurancesystemserver.infra.file.api;
+package com.dogfoot.insurancesystemserver.global.file.api;
 
-import com.dogfoot.insurancesystemserver.infra.file.service.FileService;
+import com.dogfoot.insurancesystemserver.global.file.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;

@@ -2,7 +2,7 @@ package com.dogfoot.insurancesystemserver.domain.insurance.service;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.dto.InsuranceResponse;
-import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
+import com.dogfoot.insurancesystemserver.domain.insurance.dao.InsuranceRepository;
 import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
 import org.springframework.beans.factory.annotation.Autowired;

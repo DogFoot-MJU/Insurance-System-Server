@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.global.exception;
+package com.dogfoot.insurancesystemserver.global.error;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

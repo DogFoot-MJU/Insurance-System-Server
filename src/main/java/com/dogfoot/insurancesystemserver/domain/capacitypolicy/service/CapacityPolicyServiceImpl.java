@@ -5,9 +5,9 @@ import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolic
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyUpdateRequest;
-import com.dogfoot.insurancesystemserver.domain.capacitypolicy.repository.CapacityPolicyRepository;
+import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dao.CapacityPolicyRepository;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
-import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
+import com.dogfoot.insurancesystemserver.domain.insurance.dao.InsuranceRepository;
 import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

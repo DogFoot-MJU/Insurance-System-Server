@@ -1,4 +1,4 @@
-package com.dogfoot.insurancesystemserver.domain.accident.repository;
+package com.dogfoot.insurancesystemserver.domain.accident.dao;
 
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
