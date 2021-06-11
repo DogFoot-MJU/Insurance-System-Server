@@ -53,12 +53,9 @@ public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverPr
 
     @Override
     public PaginationDto<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Specification<DriverDevelopment> spec = Specification.where(specification.equalToType("Driver"))
-                .and(specification.equalToState(state));
+        Specification<DriverDevelopment> spec = Specification.where(specification.equalToType("Driver")).and(specification.equalToState(state));
         Page<DriverDevelopment> page = developmentRepository.findAll(spec, pageable);
-        List<ProductPlanDevelopmentResponse> list = page.get()
-                .map(DriverDevelopment::toResponse)
-                .collect(Collectors.toList());
+        List<ProductPlanDevelopmentResponse> list = page.get().map(DriverDevelopment::toResponse).collect(Collectors.toList());
         return PaginationDto.of(page, list);
     }
 
@@ -77,4 +74,5 @@ public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverPr
         return developmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."));
     }
+
 }

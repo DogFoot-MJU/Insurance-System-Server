@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface AccidentRepository extends JpaRepository<Accident, Long> {
 
-    List<Accident> findByContract(Contract<?> contract);
+    List<Accident> findAllByContract(Contract<?> contract);
 
     List<Accident> findAllByState(AccidentState state);
 

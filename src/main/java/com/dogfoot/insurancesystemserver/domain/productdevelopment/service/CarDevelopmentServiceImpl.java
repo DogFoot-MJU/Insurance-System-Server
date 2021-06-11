@@ -54,12 +54,9 @@ public class CarDevelopmentServiceImpl implements DevelopmentService<CarProductD
 
     @Override
     public PaginationDto<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Specification<CarDevelopment> spec = Specification.where(specification.equalToType("Car"))
-                .and(specification.equalToState(state));
+        Specification<CarDevelopment> spec = Specification.where(specification.equalToType("Car")).and(specification.equalToState(state));
         Page<CarDevelopment> page = developmentRepository.findAll(spec, pageable);
-        List<ProductPlanDevelopmentResponse> list = page.get()
-                .map(CarDevelopment::toResponse)
-                .collect(Collectors.toList());
+        List<ProductPlanDevelopmentResponse> list = page.get().map(CarDevelopment::toResponse).collect(Collectors.toList());
         return PaginationDto.of(page, list);
     }
 

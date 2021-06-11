@@ -53,12 +53,9 @@ public class FireDevelopmentServiceImpl implements DevelopmentService<FireProduc
 
     @Override
     public PaginationDto<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Specification<FireDevelopment> spec = Specification.where(specification.equalToType("Fire"))
-                .and(specification.equalToState(state));
+        Specification<FireDevelopment> spec = Specification.where(specification.equalToType("Fire")).and(specification.equalToState(state));
         Page<FireDevelopment> page = developmentRepository.findAll(spec, pageable);
-        List<ProductPlanDevelopmentResponse> list = page.get()
-                .map(FireDevelopment::toResponse)
-                .collect(Collectors.toList());
+        List<ProductPlanDevelopmentResponse> list = page.get().map(FireDevelopment::toResponse).collect(Collectors.toList());
         return PaginationDto.of(page, list);
     }
 

@@ -53,12 +53,9 @@ public class TravelDevelopmentServiceImpl implements DevelopmentService<TravelPr
 
     @Override
     public PaginationDto<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Specification<TravelDevelopment> spec = Specification.where(specification.equalToType("Travel"))
-                .and(specification.equalToState(state));
+        Specification<TravelDevelopment> spec = Specification.where(specification.equalToType("Travel")).and(specification.equalToState(state));
         Page<TravelDevelopment> page = developmentRepository.findAll(spec, pageable);
-        List<ProductPlanDevelopmentResponse> list = page.get()
-                .map(TravelDevelopment::toResponse)
-                .collect(Collectors.toList());
+        List<ProductPlanDevelopmentResponse> list = page.get().map(TravelDevelopment::toResponse).collect(Collectors.toList());
         return PaginationDto.of(page, list);
     }
 
@@ -78,4 +75,5 @@ public class TravelDevelopmentServiceImpl implements DevelopmentService<TravelPr
         return developmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."));
     }
+
 }

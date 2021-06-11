@@ -3,11 +3,15 @@ package com.dogfoot.insurancesystemserver.domain.accident.service;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
 import com.dogfoot.insurancesystemserver.domain.accident.dao.AccidentRepository;
+import com.dogfoot.insurancesystemserver.domain.accident.exception.AccidentExceptionMessages;
+import com.dogfoot.insurancesystemserver.domain.accident.exception.AccidentNotFoundException;
+import com.dogfoot.insurancesystemserver.domain.contract.exception.ContractNotFoundException;
 import com.dogfoot.insurancesystemserver.domain.compensation.domain.Compensation;
 import com.dogfoot.insurancesystemserver.domain.compensation.dto.CompensationApproveRequest;
 import com.dogfoot.insurancesystemserver.domain.compensation.dao.CompensationRepository;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.dao.ContractRepository;
+import com.dogfoot.insurancesystemserver.domain.contract.exception.ContractExceptionMessages;
 import com.dogfoot.insurancesystemserver.global.file.service.FileService;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
@@ -32,7 +36,7 @@ public class AccidentServiceImpl implements AccidentService {
     @Override
     public void save(List<MultipartFile> files, Long id) throws IOException {
         Contract<?> contract = this.contractRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 계약을 찾을 수 없습니다."));
+                .orElseThrow(() -> new ContractNotFoundException(ContractExceptionMessages.CONTRACT_NOT_FOUND_EXCEPTION));
         Accident accident = new Accident(contract);
         for (MultipartFile file : files) {
             accident.addFile(this.fileService.save(file));
@@ -43,7 +47,7 @@ public class AccidentServiceImpl implements AccidentService {
     @Override
     public List<AccidentResponse> accidentListFindByUser(User user) {
         List<AccidentResponse> userAccidentList = new ArrayList<>();
-        user.getContractList().forEach(contract -> userAccidentList.addAll(this.accidentRepository.findByContract(contract)
+        user.getContractList().forEach(contract -> userAccidentList.addAll(this.accidentRepository.findAllByContract(contract)
                 .stream().map(AccidentResponse::from).collect(Collectors.toList())));
         return userAccidentList;
     }
@@ -55,7 +59,7 @@ public class AccidentServiceImpl implements AccidentService {
 
     @Override
     public Accident findById(Long id) {
-        return this.accidentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 사고 접수 내역을 찾울 수 없습니다."));
+        return this.accidentRepository.findById(id).orElseThrow(() -> new AccidentNotFoundException(AccidentExceptionMessages.ACCIDENT_NOT_FOUND_EXCEPTION));
     }
 
     @Override
