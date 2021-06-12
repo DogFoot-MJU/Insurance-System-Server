@@ -3,16 +3,14 @@ package com.dogfoot.insurancesystemserver.domain.accident.api;
 import com.dogfoot.insurancesystemserver.domain.accident.constant.AccidentConstants;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentDetailResponse;
-import com.dogfoot.insurancesystemserver.domain.accident.service.AccidentService;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
-import com.dogfoot.insurancesystemserver.domain.compensation.dto.CompensationApproveRequest;
+import com.dogfoot.insurancesystemserver.domain.accident.service.AccidentService;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -37,18 +35,6 @@ public class AccidentApiController {
     @GetMapping("api/v1/compensation-handler/accident/detail/{id}")
     public ResponseEntity<AccidentDetailResponse> accidentDetail(@PathVariable Long id) {
         return ResponseEntity.ok(AccidentDetailResponse.from(this.accidentService.findById(id)));
-    }
-
-    @PostMapping("api/v1/compensation-handler/accident/approve")
-    public ResponseEntity<DefaultResponseDto> compensationApprove(@Valid @RequestBody CompensationApproveRequest request) {
-        this.accidentService.compensationApprove(request);
-        return ResponseEntity.ok(DefaultResponseDto.from(AccidentConstants.COMPLETE_COMPENSATION_PAID.getMessage()));
-    }
-
-    @PutMapping("api/v1/compensation-handler/accident/reject/{id}")
-    public ResponseEntity<DefaultResponseDto> compensationReject(@PathVariable Long id) {
-        this.accidentService.compensationReject(id);
-        return ResponseEntity.ok(DefaultResponseDto.from(AccidentConstants.REJECT_COMPENSATION.getMessage()));
     }
 
 }
