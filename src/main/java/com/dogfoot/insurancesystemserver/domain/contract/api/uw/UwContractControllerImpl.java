@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.contract.api.uw;
 
+import com.dogfoot.insurancesystemserver.domain.contract.constant.ContractConstants;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.service.ContractService;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
@@ -31,12 +32,12 @@ public abstract class UwContractControllerImpl<I extends Insurance, Res, C exten
     @Override
     public ResponseEntity<DefaultResponseDto> uwApprove(PrincipalDetails principal, Long id) {
         this.contractService.uwApprove(principal, id);
-        return ResponseEntity.ok(DefaultResponseDto.from("계약 승인을 완료했습니다."));
+        return ResponseEntity.ok(DefaultResponseDto.from(ContractConstants.APPROVE_CONTRACT.getMessage()));
     }
 
     @Override
     public ResponseEntity<DefaultResponseDto> uwReject(PrincipalDetails principal, Long id) {
         this.contractService.uwReject(principal, id);
-        return ResponseEntity.ok(DefaultResponseDto.from("계약 거절을 완료했습니다."));
+        return ResponseEntity.ok(DefaultResponseDto.from(ContractConstants.REJECT_CONTRACT.getMessage()));
     }
 }

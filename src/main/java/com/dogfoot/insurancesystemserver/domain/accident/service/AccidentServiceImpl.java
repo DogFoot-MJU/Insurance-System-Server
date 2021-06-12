@@ -6,7 +6,6 @@ import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.domain.accident.exception.AccidentExceptionMessages;
 import com.dogfoot.insurancesystemserver.domain.accident.exception.AccidentNotFoundException;
-import com.dogfoot.insurancesystemserver.domain.compensation.dao.CompensationRepository;
 import com.dogfoot.insurancesystemserver.domain.contract.dao.ContractRepository;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.exception.ContractExceptionMessages;
@@ -28,7 +27,6 @@ public class AccidentServiceImpl implements AccidentService {
 
     private final AccidentRepository accidentRepository;
     private final ContractRepository<?> contractRepository;
-    private final CompensationRepository compensationRepository;
     private final FileService fileService;
 
     @Override
