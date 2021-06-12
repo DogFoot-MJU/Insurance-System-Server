@@ -2,11 +2,11 @@ package com.dogfoot.insurancesystemserver.domain.user.service;
 
 import com.dogfoot.insurancesystemserver.domain.accident.service.AccidentService;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
-import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailAuthCode;
-import com.dogfoot.insurancesystemserver.domain.mail.domain.EmailSubject;
-import com.dogfoot.insurancesystemserver.domain.mail.repository.EmailAuthCodeRepository;
-import com.dogfoot.insurancesystemserver.domain.mail.util.EmailAuthCodeGenerator;
-import com.dogfoot.insurancesystemserver.domain.mail.util.EmailUtil;
+import com.dogfoot.insurancesystemserver.infra.mail.domain.EmailAuthCode;
+import com.dogfoot.insurancesystemserver.infra.mail.domain.EmailSubject;
+import com.dogfoot.insurancesystemserver.infra.mail.dao.EmailAuthCodeRepository;
+import com.dogfoot.insurancesystemserver.infra.mail.util.EmailAuthCodeGenerator;
+import com.dogfoot.insurancesystemserver.infra.mail.util.EmailUtil;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
@@ -14,7 +14,7 @@ import com.dogfoot.insurancesystemserver.domain.user.dto.UserInfoResponse;
 import com.dogfoot.insurancesystemserver.domain.user.exception.EmailDuplicateException;
 import com.dogfoot.insurancesystemserver.domain.user.exception.EmailNotVerifiedException;
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
-import com.dogfoot.insurancesystemserver.domain.user.repository.UserRepository;
+import com.dogfoot.insurancesystemserver.domain.user.dao.UserRepository;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,8 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return this.userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(
-                        UserExceptionMessage.USERNAME_NOT_FOUND_EXCEPTION_MESSAGE.getMessage()));
+                .orElseThrow(() -> new UsernameNotFoundException(UserExceptionMessage.USERNAME_NOT_FOUND_EXCEPTION_MESSAGE.getMessage()));
     }
 
     @Override

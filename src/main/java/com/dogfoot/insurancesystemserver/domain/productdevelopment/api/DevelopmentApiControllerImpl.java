@@ -1,11 +1,12 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.api;
 
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.constant.ProductDevelopmentConstants;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.service.DevelopmentService;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -23,23 +24,23 @@ public abstract class DevelopmentApiControllerImpl<DesignReq, DetailRes, Entity>
     @Override
     public ResponseEntity<DefaultResponseDto> plan(ProductPlanCreateRequest dto) {
         this.developmentService.plan(dto);
-        return ResponseEntity.ok(DefaultResponseDto.from("기획 작성 완료"));
+        return ResponseEntity.ok(DefaultResponseDto.from(ProductDevelopmentConstants.PLAN_SAVE.getMessage()));
     }
 
     @Override
     public ResponseEntity<DefaultResponseDto> design(DesignReq dto) {
         this.developmentService.design(dto);
-        return ResponseEntity.ok(DefaultResponseDto.from("설계 작성 완료"));
+        return ResponseEntity.ok(DefaultResponseDto.from(ProductDevelopmentConstants.DESIGN_SAVE.getMessage()));
     }
 
     @Override
     public ResponseEntity<DefaultResponseDto> authorize(Long id) {
         this.developmentService.authorize(id);
-        return ResponseEntity.ok(DefaultResponseDto.from("인가 작성 완료"));
+        return ResponseEntity.ok(DefaultResponseDto.from(ProductDevelopmentConstants.COMPLETE_AUTHORIZE.getMessage()));
     }
 
     @Override
-    public ResponseEntity<Pagination<List<ProductPlanDevelopmentResponse>>> list(Pageable pageable, DevelopmentState state) {
+    public ResponseEntity<PaginationDto<List<ProductPlanDevelopmentResponse>>> list(Pageable pageable, DevelopmentState state) {
         return ResponseEntity.ok(this.developmentService.list(pageable, state));
     }
 
@@ -51,6 +52,6 @@ public abstract class DevelopmentApiControllerImpl<DesignReq, DetailRes, Entity>
     @Override
     public ResponseEntity<DefaultResponseDto> delete(Long id) {
         this.developmentService.delete(id);
-        return ResponseEntity.ok(DefaultResponseDto.from("삭제 완료"));
+        return ResponseEntity.ok(DefaultResponseDto.from(ProductDevelopmentConstants.DELETE_PRODUCT_DEVELOPMENT.getMessage()));
     }
 }

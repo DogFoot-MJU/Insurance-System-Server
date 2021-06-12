@@ -2,7 +2,7 @@ package com.dogfoot.insurancesystemserver.domain.contract.api.uw;
 
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.List;
 public interface UwContractController<Res> {
 
     @GetMapping("wait/list")
-    ResponseEntity<Pagination<List<Res>>> dueProcessWaitList(@PageableDefault Pageable pageable);
+    ResponseEntity<PaginationDto<List<Res>>> dueProcessWaitList(@PageableDefault Pageable pageable);
 
     @GetMapping("wait/detail/{id}")
     ResponseEntity<Res> read(@AuthenticationPrincipal PrincipalDetails principal, @PathVariable Long id);

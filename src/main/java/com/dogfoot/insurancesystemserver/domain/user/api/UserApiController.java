@@ -1,6 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.user.api;
 
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractResponse;
+import com.dogfoot.insurancesystemserver.domain.user.constant.UserConstants;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
 import com.dogfoot.insurancesystemserver.domain.user.dto.SignUpUserRequest;
@@ -28,10 +29,7 @@ public class UserApiController {
     @PostMapping("signup")
     public ResponseEntity<SignUpUserResponse> signup(@Valid @RequestBody SignUpUserRequest dto) {
         User saved = userService.saveUser(dto);
-        return ResponseEntity.ok(SignUpUserResponse.builder()
-                .email(saved.getEmail())
-                .message("해당 메일 주소로 이메일 인증 메일을 발송했습니다. 메일 인증을 하시면 회원가입이 완료됩니다.")
-                .build());
+        return ResponseEntity.ok(SignUpUserResponse.of(saved.getEmail(), UserConstants.SUCCESS_SIGN_UP.getMessage()));
     }
 
     @GetMapping("api/v1/user/my/contract")

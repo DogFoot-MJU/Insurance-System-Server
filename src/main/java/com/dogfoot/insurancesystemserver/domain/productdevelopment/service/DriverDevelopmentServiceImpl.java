@@ -1,7 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.service;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.DriverInsurance;
-import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
+import com.dogfoot.insurancesystemserver.domain.insurance.dao.InsuranceRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DriverDevelopment;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.DriverProductDesignRequest;
@@ -9,9 +9,9 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.DriverPro
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.DevelopmentRepository;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.dao.DevelopmentRepository;
 import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,14 +52,11 @@ public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverPr
     }
 
     @Override
-    public Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Specification<DriverDevelopment> spec = Specification.where(specification.equalToType("Driver"))
-                .and(specification.equalToState(state));
+    public PaginationDto<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
+        Specification<DriverDevelopment> spec = Specification.where(specification.equalToType("Driver")).and(specification.equalToState(state));
         Page<DriverDevelopment> page = developmentRepository.findAll(spec, pageable);
-        List<ProductPlanDevelopmentResponse> list = page.get()
-                .map(DriverDevelopment::toResponse)
-                .collect(Collectors.toList());
-        return Pagination.of(page, list);
+        List<ProductPlanDevelopmentResponse> list = page.get().map(DriverDevelopment::toResponse).collect(Collectors.toList());
+        return PaginationDto.of(page, list);
     }
 
     @Override
@@ -77,4 +74,5 @@ public class DriverDevelopmentServiceImpl implements DevelopmentService<DriverPr
         return developmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."));
     }
+
 }

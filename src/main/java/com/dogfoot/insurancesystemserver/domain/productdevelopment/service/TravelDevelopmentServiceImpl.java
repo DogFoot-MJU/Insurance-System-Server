@@ -1,7 +1,7 @@
 package com.dogfoot.insurancesystemserver.domain.productdevelopment.service;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.TravelInsurance;
-import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
+import com.dogfoot.insurancesystemserver.domain.insurance.dao.InsuranceRepository;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.TravelDevelopment;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
@@ -9,9 +9,9 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPl
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.TravelProductDesignRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.TravelProductDevelopmentDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.repository.DevelopmentRepository;
+import com.dogfoot.insurancesystemserver.domain.productdevelopment.dao.DevelopmentRepository;
 import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,14 +52,11 @@ public class TravelDevelopmentServiceImpl implements DevelopmentService<TravelPr
     }
 
     @Override
-    public Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
-        Specification<TravelDevelopment> spec = Specification.where(specification.equalToType("Travel"))
-                .and(specification.equalToState(state));
+    public PaginationDto<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state) {
+        Specification<TravelDevelopment> spec = Specification.where(specification.equalToType("Travel")).and(specification.equalToState(state));
         Page<TravelDevelopment> page = developmentRepository.findAll(spec, pageable);
-        List<ProductPlanDevelopmentResponse> list = page.get()
-                .map(TravelDevelopment::toResponse)
-                .collect(Collectors.toList());
-        return Pagination.of(page, list);
+        List<ProductPlanDevelopmentResponse> list = page.get().map(TravelDevelopment::toResponse).collect(Collectors.toList());
+        return PaginationDto.of(page, list);
     }
 
     @Override
@@ -78,4 +75,5 @@ public class TravelDevelopmentServiceImpl implements DevelopmentService<TravelPr
         return developmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 개발이 존재하지 않습니다."));
     }
+
 }

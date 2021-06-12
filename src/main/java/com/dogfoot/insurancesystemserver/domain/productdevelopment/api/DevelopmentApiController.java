@@ -4,7 +4,7 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.Develo
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public interface DevelopmentApiController<DesignReq, DetailRes> {
     ResponseEntity<DefaultResponseDto> authorize(@PathVariable Long id);
 
     @GetMapping("list")
-    ResponseEntity<Pagination<List<ProductPlanDevelopmentResponse>>> list(@PageableDefault Pageable pageable, @RequestParam DevelopmentState state);
+    ResponseEntity<PaginationDto<List<ProductPlanDevelopmentResponse>>> list(@PageableDefault Pageable pageable, @RequestParam DevelopmentState state);
 
     @GetMapping("{id}")
     ResponseEntity<DetailRes> read(@PathVariable Long id);

@@ -2,8 +2,10 @@ package com.dogfoot.insurancesystemserver.domain.insurance.service;
 
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.dto.InsuranceResponse;
-import com.dogfoot.insurancesystemserver.domain.insurance.repository.InsuranceRepository;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.domain.insurance.dao.InsuranceRepository;
+import com.dogfoot.insurancesystemserver.domain.insurance.exception.InsuranceExceptionMessages;
+import com.dogfoot.insurancesystemserver.domain.insurance.exception.InsuranceNotFoundException;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,21 +29,21 @@ public abstract class InsuranceServiceImpl<DetailRes, T extends Insurance> imple
 
 
     @Override
-    public Pagination<List<InsuranceResponse>> listByAvailableSale(Pageable pageable) {
+    public PaginationDto<List<InsuranceResponse>> listByAvailableSale(Pageable pageable) {
         Specification<T> spec = getAvailableSpecification();
         return getListPagination(pageable, spec);
     }
 
     @Override
-    public Pagination<List<InsuranceResponse>> listByUnAvailableSale(Pageable pageable) {
+    public PaginationDto<List<InsuranceResponse>> listByUnAvailableSale(Pageable pageable) {
         Specification<T> spec = getUnAvailableSpecification();
         return getListPagination(pageable, spec);
     }
 
-    private Pagination<List<InsuranceResponse>> getListPagination(Pageable pageable, Specification<T> spec) {
+    private PaginationDto<List<InsuranceResponse>> getListPagination(Pageable pageable, Specification<T> spec) {
         Page<T> page = this.insuranceRepository.findAll(spec, pageable);
         List<InsuranceResponse> data = page.get().map(InsuranceResponse::from).collect(Collectors.toList());
-        return Pagination.of(page, data);
+        return PaginationDto.of(page, data);
     }
 
     @Override
@@ -52,7 +54,7 @@ public abstract class InsuranceServiceImpl<DetailRes, T extends Insurance> imple
     @Override
     public T findById(Long id) {
         return this.insuranceRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 보험 상품을 찾을 수 없습니다."));
+                .orElseThrow(() -> new InsuranceNotFoundException(InsuranceExceptionMessages.INSURANCE_NOT_FOUND_EXCEPTION_MESSAGE));
     }
 
 }

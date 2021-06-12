@@ -5,13 +5,13 @@ import com.dogfoot.insurancesystemserver.domain.consulting.domain.ConsultingStat
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingResponse;
 import com.dogfoot.insurancesystemserver.domain.consulting.dto.ConsultingSaveRequest;
-import com.dogfoot.insurancesystemserver.domain.consulting.repository.ConsultingRepository;
+import com.dogfoot.insurancesystemserver.domain.consulting.dao.ConsultingRepository;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.user.domain.UserRoleType;
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
-import com.dogfoot.insurancesystemserver.domain.user.repository.UserRepository;
+import com.dogfoot.insurancesystemserver.domain.user.dao.UserRepository;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,17 +38,17 @@ public class ConsultingServiceImpl implements ConsultingService {
     }
 
     @Override
-    public Pagination<List<ConsultingResponse>> readAllForUser(Pageable pageable, PrincipalDetails principal) {
+    public PaginationDto<List<ConsultingResponse>> readAllForUser(Pageable pageable, PrincipalDetails principal) {
         Page<Consulting> page = this.consultingRepository.findAllByUser(principal.toEntity(), pageable);
         List<ConsultingResponse> responses = page.stream().map(ConsultingResponse::from).collect(Collectors.toList());
-        return Pagination.of(page, responses);
+        return PaginationDto.of(page, responses);
     }
 
     @Override
-    public Pagination<List<ConsultingResponse>> readAllForUw(Pageable pageable, ConsultingStateType type) {
+    public PaginationDto<List<ConsultingResponse>> readAllForUw(Pageable pageable, ConsultingStateType type) {
         Page<Consulting> page = this.consultingRepository.findAllByState(type, pageable);
         List<ConsultingResponse> responses = page.stream().map(ConsultingResponse::from).collect(Collectors.toList());
-        return Pagination.of(page, responses);
+        return PaginationDto.of(page, responses);
     }
 
     @Override

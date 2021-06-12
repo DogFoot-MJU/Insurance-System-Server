@@ -3,7 +3,7 @@ package com.dogfoot.insurancesystemserver.domain.productdevelopment.service;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.domain.DevelopmentState;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +22,7 @@ public interface DevelopmentService<DesignReq, DetailRes, Entity> {
     @Transactional
     void approve(Long id);
 
-    Pagination<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state);
+    PaginationDto<List<ProductPlanDevelopmentResponse>> list(Pageable pageable, DevelopmentState state);
 
     DetailRes read(Long id);
 

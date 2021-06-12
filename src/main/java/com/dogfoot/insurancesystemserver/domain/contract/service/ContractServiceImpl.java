@@ -3,13 +3,15 @@ package com.dogfoot.insurancesystemserver.domain.contract.service;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.CalculatePaymentResponse;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.ContractCreateRequest;
-import com.dogfoot.insurancesystemserver.domain.contract.repository.ContractRepository;
+import com.dogfoot.insurancesystemserver.domain.contract.dao.ContractRepository;
+import com.dogfoot.insurancesystemserver.domain.contract.exception.ContractExceptionMessages;
+import com.dogfoot.insurancesystemserver.domain.contract.exception.ContractNotFoundException;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.service.InsuranceService;
 import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.user.service.UserService;
 import com.dogfoot.insurancesystemserver.global.config.security.auth.PrincipalDetails;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,10 +53,10 @@ public abstract class ContractServiceImpl<C extends Contract<Res>, DetailRes, I 
     }
 
     @Override
-    public Pagination<List<Res>> dueProcessWaitList(Pageable pageable) {
+    public PaginationDto<List<Res>> dueProcessWaitList(Pageable pageable) {
         Page<C> page = contractRepository.findAll(getUwDueProcessNoneSpecification(), pageable);
         List<Res> data = page.get().map(Contract::toResponse).collect(Collectors.toList());
-        return Pagination.of(page, data);
+        return PaginationDto.of(page, data);
     }
 
     @Override
@@ -74,6 +76,6 @@ public abstract class ContractServiceImpl<C extends Contract<Res>, DetailRes, I 
 
     @Override
     public Contract<Res> findById(Long id) {
-        return contractRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 계약이 존재하지 않습니다."));
+        return contractRepository.findById(id).orElseThrow(() -> new ContractNotFoundException(ContractExceptionMessages.CONTRACT_NOT_FOUND_EXCEPTION));
     }
 }

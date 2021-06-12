@@ -2,7 +2,7 @@ package com.dogfoot.insurancesystemserver.domain.accident.domain;
 
 import com.dogfoot.insurancesystemserver.domain.compensation.domain.Compensation;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
-import com.dogfoot.insurancesystemserver.domain.file.file.MyFile;
+import com.dogfoot.insurancesystemserver.global.file.file.MyFile;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,12 +1,13 @@
 package com.dogfoot.insurancesystemserver.domain.capacitypolicy.api;
 
+import com.dogfoot.insurancesystemserver.domain.capacitypolicy.constant.CapacityPolicyConstants;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyCreationRequest;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyUpdateRequest;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.service.CapacityPolicyService;
 import com.dogfoot.insurancesystemserver.global.dto.DefaultResponseDto;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -26,11 +27,11 @@ public class CapacityPolicyApiController {
     @PostMapping
     public ResponseEntity<DefaultResponseDto> create(@Valid @RequestBody CapacityPolicyCreationRequest dto) {
         this.capacityPolicyService.create(dto);
-        return ResponseEntity.ok(DefaultResponseDto.from("인수정책 등록 완료"));
+        return ResponseEntity.ok(DefaultResponseDto.from(CapacityPolicyConstants.COMPLETE_SAVE_CAPACITY_POLICY.getMessage()));
     }
 
     @GetMapping("list")
-    public ResponseEntity<Pagination<List<CapacityPolicyResponse>>> list(@PageableDefault Pageable pageable) {
+    public ResponseEntity<PaginationDto<List<CapacityPolicyResponse>>> list(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(this.capacityPolicyService.list(pageable));
     }
 
@@ -42,13 +43,13 @@ public class CapacityPolicyApiController {
     @PutMapping
     public ResponseEntity<DefaultResponseDto> update(@Valid @RequestBody CapacityPolicyUpdateRequest dto) {
         this.capacityPolicyService.update(dto);
-        return ResponseEntity.ok(DefaultResponseDto.from("인수정책 수정 완료"));
+        return ResponseEntity.ok(DefaultResponseDto.from(CapacityPolicyConstants.COMPLETE_UPDATE_CAPACITY_POLICY.getMessage()));
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<DefaultResponseDto> delete(@PathVariable Long id) {
         this.capacityPolicyService.delete(id);
-        return ResponseEntity.ok(DefaultResponseDto.from("인수정책 삭제 완료"));
+        return ResponseEntity.ok(DefaultResponseDto.from(CapacityPolicyConstants.COMPLETE_DELETE_CAPACITY_POLICY.getMessage()));
     }
 
 }

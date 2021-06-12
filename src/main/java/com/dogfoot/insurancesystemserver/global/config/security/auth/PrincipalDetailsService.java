@@ -2,7 +2,7 @@ package com.dogfoot.insurancesystemserver.global.config.security.auth;
 
 import com.dogfoot.insurancesystemserver.domain.user.exception.EmailNotFoundException;
 import com.dogfoot.insurancesystemserver.domain.user.exception.UserExceptionMessage;
-import com.dogfoot.insurancesystemserver.domain.user.repository.UserRepository;
+import com.dogfoot.insurancesystemserver.domain.user.dao.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

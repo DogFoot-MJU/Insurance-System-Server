@@ -2,10 +2,8 @@ package com.dogfoot.insurancesystemserver.domain.accident.service;
 
 import com.dogfoot.insurancesystemserver.domain.accident.domain.Accident;
 import com.dogfoot.insurancesystemserver.domain.accident.domain.AccidentState;
-import com.dogfoot.insurancesystemserver.domain.compensation.dto.CompensationApproveRequest;
-import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import com.dogfoot.insurancesystemserver.domain.accident.dto.AccidentResponse;
-import org.springframework.transaction.annotation.Transactional;
+import com.dogfoot.insurancesystemserver.domain.user.domain.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,11 +18,5 @@ public interface AccidentService {
     List<AccidentResponse> accidentFindByState(AccidentState state);
 
     Accident findById(Long id);
-
-    @Transactional
-    void compensationApprove(CompensationApproveRequest request);
-
-    @Transactional
-    void compensationReject(Long id);
 
 }

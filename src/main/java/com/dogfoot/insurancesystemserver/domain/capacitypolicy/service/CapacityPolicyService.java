@@ -4,7 +4,7 @@ import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolic
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyResponse;
 import com.dogfoot.insurancesystemserver.domain.capacitypolicy.dto.CapacityPolicyUpdateRequest;
-import com.dogfoot.insurancesystemserver.global.dto.Pagination;
+import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +15,7 @@ public interface CapacityPolicyService {
     @Transactional
     void create(CapacityPolicyCreationRequest dto);
 
-    Pagination<List<CapacityPolicyResponse>> list(Pageable pageable);
+    PaginationDto<List<CapacityPolicyResponse>> list(Pageable pageable);
 
     CapacityPolicyDetailResponse read(Long id);
 

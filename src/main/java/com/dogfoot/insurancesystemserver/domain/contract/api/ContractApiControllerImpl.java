@@ -1,5 +1,6 @@
 package com.dogfoot.insurancesystemserver.domain.contract.api;
 
+import com.dogfoot.insurancesystemserver.domain.contract.constant.ContractConstants;
 import com.dogfoot.insurancesystemserver.domain.contract.domain.Contract;
 import com.dogfoot.insurancesystemserver.domain.contract.dto.CalculatePaymentResponse;
 import com.dogfoot.insurancesystemserver.domain.contract.service.ContractService;
@@ -21,7 +22,7 @@ public abstract class ContractApiControllerImpl<I extends Insurance, CreateReq, 
     @Override
     public ResponseEntity<DefaultResponseDto> apply(PrincipalDetails principal, CreateReq dto) {
         contractService.create(principal, dto);
-        return ResponseEntity.ok(DefaultResponseDto.from("보험 신청이 완료되었습니다."));
+        return ResponseEntity.ok(DefaultResponseDto.from(ContractConstants.COMPLETE_APPLY_INSURANCE_CONTRACT.getMessage()));
     }
 
     @Override
