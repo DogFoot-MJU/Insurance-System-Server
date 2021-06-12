@@ -47,19 +47,4 @@ public class CarInsurance extends Insurance {
                 .build();
     }
 
-    //    @Override
-//    public CarInsuranceDetailResponse toDetailResponse() {
-//        return CarInsuranceDetailResponse.builder()
-//                .id(this.getId())
-//                .name(this.getName())
-//                .payment(this.getPayment())
-//                .physical(this.getCapacityPolicy().getPhysical())
-//                .economical(this.getCapacityPolicy().getEconomical())
-//                .environmental(this.getCapacityPolicy().getEnvironmental())
-//                .isAvailableSale(this.isAvailableSale())
-//                .carPrice(this.carPrice)
-//                .carReleaseDate(this.carReleaseDate)
-//                .drivingDistance(this.drivingDistance)
-//                .build();
-//    }
 }

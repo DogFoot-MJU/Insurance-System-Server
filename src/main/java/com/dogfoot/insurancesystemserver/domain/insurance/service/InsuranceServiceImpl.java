@@ -3,6 +3,8 @@ package com.dogfoot.insurancesystemserver.domain.insurance.service;
 import com.dogfoot.insurancesystemserver.domain.insurance.domain.Insurance;
 import com.dogfoot.insurancesystemserver.domain.insurance.dto.InsuranceResponse;
 import com.dogfoot.insurancesystemserver.domain.insurance.dao.InsuranceRepository;
+import com.dogfoot.insurancesystemserver.domain.insurance.exception.InsuranceExceptionMessages;
+import com.dogfoot.insurancesystemserver.domain.insurance.exception.InsuranceNotFoundException;
 import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
 import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +54,7 @@ public abstract class InsuranceServiceImpl<DetailRes, T extends Insurance> imple
     @Override
     public T findById(Long id) {
         return this.insuranceRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 보험 상품을 찾을 수 없습니다."));
+                .orElseThrow(() -> new InsuranceNotFoundException(InsuranceExceptionMessages.INSURANCE_NOT_FOUND_EXCEPTION_MESSAGE));
     }
 
 }
