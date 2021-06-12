@@ -59,7 +59,7 @@ public class AccidentServiceImpl implements AccidentService {
 
     @Override
     public Accident findById(Long id) {
-        return this.accidentRepository.findById(id).orElseThrow(() -> new AccidentNotFoundException(AccidentExceptionMessages.ACCIDENT_NOT_FOUND_EXCEPTION));
+        return this.accidentRepository.findById(id).orElseThrow(() -> new AccidentNotFoundException(AccidentExceptionMessages.ACCIDENT_NOT_FOUND_EXCEPTION_MESSAGE));
     }
 
     @Override
