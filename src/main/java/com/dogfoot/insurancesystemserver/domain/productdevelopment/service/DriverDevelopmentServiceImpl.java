@@ -8,7 +8,7 @@ import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.DriverPro
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.DriverProductDevelopmentDetailResponse;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanCreateRequest;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dto.ProductPlanDevelopmentResponse;
-import com.dogfoot.insurancesystemserver.domain.productdevelopment.exception.DuplicateInsuranceNameException;
+import com.dogfoot.insurancesystemserver.domain.insurance.exception.DuplicateInsuranceNameException;
 import com.dogfoot.insurancesystemserver.domain.productdevelopment.dao.DevelopmentRepository;
 import com.dogfoot.insurancesystemserver.global.util.ListSpecification;
 import com.dogfoot.insurancesystemserver.global.dto.PaginationDto;
